@@ -7,9 +7,10 @@ public class App {
 
 		System.out.println("ddol82");
 
-		System.out.println("안녕~");
 
-
+		for(int i = 1; i <= 123; i++) {
+			System.out.println("안녕하삼 * " + i);
+		}
 	}
 
 }
