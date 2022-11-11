@@ -9,8 +9,6 @@ public class App {
 		
 
 
-		System.out.println("ddol82");
-
 
 	}
 
