@@ -36,17 +36,13 @@
 		
 		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
 	 -->
-  <select id = "selectAllMenu" resultMap = "memberResultMap">
+  <select id = "login" resultMap = "memberResultMap">
   
   	SELECT
-	  		A.MENU_CODE,
-	  		A.MENU_NAME,
-	  		A.MENU_PRICE,
-	  		A.CATEGORY_CODE,
-	  		A.ORDERABLE_STATUS
-  		 FROM TBL_MENU A
-  		WHERE A.ORDERABLE_STATUS = 'Y'
-  		ORDER BY A.MENU_CODE
+	  	USER_ID,
+	  	USER_PWD
+	  FROM MEMBER
+	  WHERE USER_ID = # {}
   
   </select>
   
