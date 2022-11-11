@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-<mapper namespace= "MenuMapper">
+<mapper namespace= "Mapper">
 
-	<resultMap type = "com.uni.section01.xmlconfig.MenuDTO" id = "menuResultMap">
+	<resultMap type = "com.uni.model.dto.MemberDTO" id = "memberResultMap">
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
-		<id property="code" column = "MENU_CODE"/>
+		<id property="code" column = "USER_NO"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="name" column="MENU_NAME"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
-		<result property ="price" column="MENU_PRICE"/>
-		<result property ="categoryCode" column="CATEGORY_CODE"/>
-		<result property ="orderableStatus" column="ORDERABLE_STATUS"/>
+		<result property ="userId" column="USER_ID"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
+		<result property ="userPwd" column="USER_PWD"/>
+		<result property ="userName" column="USERNAME"/>
+		<result property ="phone" column="PHONE"/>
+		<result property ="height" column="HEIGHT"/>
+		<result property ="weight" column="WEIGHT"/>
+		<result property ="gender" column="GENDER"/>
+		<result property ="regDate" column="REG_DATE"/>
+		<result property ="status" column="STATUS"/>
+		<result property ="managerYN" column="MANAGER_YN"/>
 
 	</resultMap>
 	
@@ -30,7 +36,7 @@
 		
 		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
 	 -->
-  <select id = "selectAllMenu" resultMap = "menuResultMap">
+  <select id = "selectAllMenu" resultMap = "memberResultMap">
   
   	SELECT
 	  		A.MENU_CODE,
@@ -44,7 +50,7 @@
   
   </select>
   
-  <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
+  <select id="selectMenuByCode" parameterType="_int" resultMap="memberResultMap">
         SELECT
                A.MENU_CODE
              , A.MENU_NAME
@@ -61,7 +67,7 @@
 	<!-- 파라미터 타입도 생략이 가능하다. 	-->
 	
 	
-	<insert id="insertMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
+	<insert id="insertMenu" parameterType="com.uni.model.dto.MemberDTO">
         INSERT
           INTO TBL_MENU A
         (
@@ -81,7 +87,7 @@
         )
 	</insert>
 	
-	<update id="updateMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
+	<update id="updateMenu" parameterType="com.uni.model.dto.MemberDTO">
 		UPDATE
 		       TBL_MENU A
 		   SET A.MENU_NAME = #{ name }

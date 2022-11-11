@@ -2,7 +2,7 @@ package com.uni.model.dto;
 
 import java.sql.Date;
 
-public class DTO {
+public class MemberDTO {
 	private int userNo;
 	private String userID;
 	private String userPwd;
@@ -15,16 +15,16 @@ public class DTO {
 	private String status;
 	private String managerYN;
 	
-	public DTO() {}
+	public MemberDTO() {}
 
-	public DTO(int userNo, String userID, String userPwd, String userName, String phone, String height, String weight,
+	public MemberDTO(int userNo, String userID, String userPwd, String userName, String phone, String height, String weight,
 			String gender, Date regDate, String status, String managerYN) {
 		super();
 		this.userNo = userNo;
 		this.userID = userID;
 		this.userPwd = userPwd;
 		this.userName = userName;
-		this.phone = phone;
+		this.phone = phone;   
 		this.height = height;
 		this.weight = weight;
 		this.gender = gender;
