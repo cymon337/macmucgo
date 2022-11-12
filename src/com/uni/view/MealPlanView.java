@@ -1,17 +1,20 @@
 package com.uni.view;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.uni.controller.MealPlanController;
 
 public class MealPlanView {
 
-    Scanner sc = new Scanner(System.in);
-	MealPlanController mealPlanController = new MealPlanController();
+    MealPlanController mealPlanController = new MealPlanController();
 	private static int printlnNum = 30;
 
 	//  식단일정 main
     public void mealPlanView() {
+
+		Scanner sc = new Scanner(System.in);
 
 		do {
 			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
@@ -44,21 +47,14 @@ public class MealPlanView {
     //1.식단일정 등록
     private void insertMealPlanView() {
 
+		Scanner sc = new Scanner(System.in);
+
         do {
 			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
 			System.out.println("====================이번주 식단일정 조회====================");
-            // 오늘부터 7일간 식단일정 출력 아래 예시//
-
-            // 22-11-03
-            //     아침 : 식단을 등록해주세요
-            //     점심 : 식단을 등록해주세요
-            //     저녁 : 식단을 등록해주세요
-            // 22-11-04
-            //     아침 : 식단을 등록해주세요
-            //     점심 : 식단을 등록해주세요
-            //     저녁 : 식단을 등록해주세요
+            mealPlanController.selectMealPlanDay(inputDate());
 
             System.out.println("====================식단일정 등록====================");
 			System.out.println("1. 일간 등록");
@@ -83,8 +79,22 @@ public class MealPlanView {
     }
 
 	
+	private static Map<String, String> inputDate() {
+
+		Scanner sc = new Scanner(System.in);
+		System.out.print("식단일정 날짜를 입력하세요 : ");
+		String mpDate = sc.nextLine(); 	//"RR-MM-DD"
+
+		Map<String, String> parameter = new HashMap<>();
+		parameter.put("mpDate", mpDate);
+
+		return null;
+	}
+
 	// 1.1 식단일정 일간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록
 	private void insertMealPlanViewDay() {
+
+		Scanner sc = new Scanner(System.in);
 		
 		String mealWhen = "아침"; 
 
@@ -147,6 +157,8 @@ public class MealPlanView {
 
 	// 1.2 식단일정 주간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록
 	private void insertMealPlanViewMonth() {
+
+		Scanner sc = new Scanner(System.in);
 
 		do {
 			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum

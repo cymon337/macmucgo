@@ -10,7 +10,7 @@ public class cymonTestApp {
 
         mpView.mealPlanView();
 
-
+        // 로그인 할때 맵퍼에서 한번에 USER_NO 입력 쿼리 작성
 
 
     }

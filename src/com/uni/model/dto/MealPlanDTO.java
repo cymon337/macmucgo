@@ -1,9 +1,11 @@
 package com.uni.model.dto;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class MealPlanDTO {
+import org.apache.ibatis.javassist.SerialVersionUID;
 
+public class MealPlanDTO implements Serializable{
+    
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table
     private String mpDate;    // MP_DATE meal plan date (RR-MM-DD)
