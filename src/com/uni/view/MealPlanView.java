@@ -110,16 +110,19 @@ public class MealPlanView {
 			if( no == 1 || no == 2 || no == 0 )	{
 				switch(mealWhen) {
 					case "아침" :
+						// 
 						System.out.println(mealWhen + "등록완료!");
 						mealWhen = "점심"; 						
 					break;
 
 					case "점심" : 
+
 						System.out.println(mealWhen + "등록완료!"); 
 						mealWhen = "저녁";						
 					break;
 
 					case "저녁" : 
+
 						System.out.println(mealWhen + "등록완료!");
 						mealWhen = "아침"; 		
 
