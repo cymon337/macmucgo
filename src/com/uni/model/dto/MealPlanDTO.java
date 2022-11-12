@@ -25,6 +25,8 @@ public class MealPlanDTO {
     private int dinner5;
     private int dinner6;
 
+    
+
     public MealPlanDTO() {}
 	
 	public MealPlanDTO(int mpNo, int userNo, String mpDate, int breakfast1, int breakfast2, int breakfast4,
@@ -212,7 +214,15 @@ public class MealPlanDTO {
         this.dinner6 = dinner6;
     }
 
-    
+    @Override
+    public String toString() {
+        return "MealPlanDTO [mpNo=" + mpNo + ", userNo=" + userNo + ", mpDate=" + mpDate + ", breakfast1=" + breakfast1
+                + ", breakfast2=" + breakfast2 + ", breakfast4=" + breakfast4 + ", breakfast5=" + breakfast5
+                + ", breakfast6=" + breakfast6 + ", lunch1=" + lunch1 + ", lunch2=" + lunch2 + ", lunch3=" + lunch3
+                + ", lunch4=" + lunch4 + ", lunch5=" + lunch5 + ", lunch6=" + lunch6 + ", dinner1=" + dinner1
+                + ", dinner2=" + dinner2 + ", dinner3=" + dinner3 + ", dinner4=" + dinner4 + ", dinner5=" + dinner5
+                + ", dinner6=" + dinner6 + "]";
+    }
 
 	
 

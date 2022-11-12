@@ -8,12 +8,13 @@ public class MealPlanView {
 
     Scanner sc = new Scanner(System.in);
 	MealPlanController mealPlanController = new MealPlanController();
+	private static int printlnNum = 30;
 
 	//  식단일정 main
     public void mealPlanView() {
 
 		do {
-			for (int i = 0; i <= 20; i++) {		// 페이지넘기기 10줄
+			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
 			System.out.println("====================식단일정 메인====================");
@@ -44,7 +45,7 @@ public class MealPlanView {
     private void insertMealPlanView() {
 
         do {
-			for (int i = 0; i <= 20; i++) {		// 페이지넘기기 10줄
+			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
 			System.out.println("====================이번주 식단일정 조회====================");
@@ -71,7 +72,7 @@ public class MealPlanView {
 			switch(no) {
 				case 1 : insertMealPlanViewDay(); break;
 
-				case 2 : insertMealPlanViewMonth(); break;
+				// case 2 : insertMealPlanViewMonth(); break;
 
 				case 0 : mealPlanView(); break;
 								
@@ -91,7 +92,7 @@ public class MealPlanView {
 		String mpDate = sc.nextLine();
 
 		do {
-			for (int i = 0; i <= 20; i++) {		// 페이지넘기기 10줄
+			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
 			System.out.println("====================(" + mpDate + ")" + mealWhen + "식단 등록====================");
@@ -141,11 +142,11 @@ public class MealPlanView {
 
 	}
 
-	// 1.2 식단일정 주간등록
+	// 1.2 식단일정 주간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록
 	private void insertMealPlanViewMonth() {
 
 		do {
-			for (int i = 0; i <= 20; i++) {		// 페이지넘기기 10줄
+			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
 			System.out.println();
