@@ -1,5 +1,5 @@
 package com.uni.model.dao;
 
-public class Dao {
+public class FavoriteDao {
 
 }

@@ -1,5 +1,5 @@
 package com.uni.model.dto;
 
-public class DTO {
+public class FavoriteDTO {
 
 }

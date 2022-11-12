@@ -1,8 +1,6 @@
 package com.uni.printResult;
 
-import java.util.List;
-
-public class PrintResult {
+public class FavoritePrintResult {
 	
 	// public void printMenuList(List<MenuDTO> menuList) {
 		
