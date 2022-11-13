@@ -14,7 +14,7 @@
 		</environment>
 	</environments>
 	<mappers>		
-		
+		<!-- <mapper resource="com/uni/resources/menu-mapper.xml"/> -->
 		<mapper resource="com/uni/resources/mealPlan-mapper.xml"/>
 	</mappers>
 </configuration>

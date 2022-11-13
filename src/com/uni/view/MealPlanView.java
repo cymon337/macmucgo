@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.uni.controller.MealPlanController;
-import com.uni.model.dto.MealPlanDTO;
+
 
 public class MealPlanView {
 
@@ -57,7 +57,8 @@ public class MealPlanView {
 			}
 			System.out.println("====================이번주 식단일정 조회====================");
             mealPlanController.selectMealPlanDay(inputDate());
-			
+			System.out.println("7일함수출력");
+			// mealPlanController.selectMealPlanWeek(inputDate());
             System.out.println("====================식단일정 등록====================");
 			System.out.println("1. 일간 등록");
 			System.out.println("2. 주간 등록");
@@ -86,10 +87,6 @@ public class MealPlanView {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("식단일정 날짜를 입력하세요 (yyyy-MM-dd): ");
 		String mpDate = sc.nextLine();
-
-		
-		// public void setMpDate(String mpDate) {      // 입력시 "yyyy-MM-dd" 형식으로
-        // this.mpDate = Date.valueOf(mpDate);
 
 		Map<String, Date> parameter = new HashMap<>();
 		parameter.put("mpDate", Date.valueOf(mpDate));

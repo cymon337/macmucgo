@@ -32,47 +32,24 @@
 
 	</resultMap>
 	
-	<!-- 
-		한행에 대한 반환타입을 반드시  설정해야함(둘중한가지는 필수로 작성, 둘다 사용은 안됨)
-		
-		resultMap : 위에서 생성한 resultMap을 리턴 타입으로 이용하는 경우
-		resultType : 이미 정의되어 있는 타입을 이용하여 리턴 타입으로 이용하는 경우
-		
-		파라미터가 한 개인 경우 바인딩 되는 이름은 상관 없다. 파라미터 타입도 지정하지 않아도 된다. 
-		parameterType : 파라미터로 전달되는 값의 타입을 작성(생략해도 상관없음)
-		
-		# 파라미터 타입이 스트링인경우 '' 자동으로 붙여줌
-		$ 사용자가 넘긴값 그대로를 넣어줌 -  컬럼명이 유동적으로 바뀌는경우 사용가능. 하지만 추천하는 코드 스타일은아니다. 
-		
-		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
-	 -->
-  <!-- <select id = "selectAllMenu" resultMap = "menuResultMap">
-  
-  	SELECT
-	  		A.MENU_CODE,
-	  		A.MENU_NAME,
-	  		A.MENU_PRICE,
-	  		A.CATEGORY_CODE,
-	  		A.ORDERABLE_STATUS
-  		 FROM TBL_MENU A
-  		WHERE A.ORDERABLE_STATUS = 'Y'
-  		ORDER BY A.MENU_CODE
-  
-  </select> -->
-  
-  <select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+   	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
         SELECT
             A.*
-         FROM MEALPLAN A
+        FROM MEALPLAN A
         WHERE A.MP_DATE = #{ mpDate }
 	</select>
 	
-	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
-	<!-- 파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 에러가 발생한다. -->
-	<!-- 파라미터 타입도 생략이 가능하다. 	-->
-
+	<!-- <select id="selectMealPlanWeek" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+        SELECT
+			A.*
+		FROM MEALPLAN A
+		WHERE USER_NO = 1
+		AND MP_DATE >= #{ mpDate }
+		AND MP_DATE <= TO_DATE(#{ mpDate },'RRRR-MM-DD') + INTERVAL '7' DAY        
+	</select> -->
 
 	</mapper>
+
 
 
 	

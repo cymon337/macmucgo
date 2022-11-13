@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import static com.uni.template.Template.*;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.uni.model.dao.MealPlanDAO;
 import com.uni.model.dto.MealPlanDTO;
@@ -28,6 +29,18 @@ public class MealPlanService {
 				
 		return mealPlan;
     }
+	
+	public List<MealPlanDTO> selectMealPlanWeek(Date mpDate) {
+		SqlSession sqlSession = getSqlSession();
+		
+		System.out.println(sqlSession);
+		
+		List<MealPlanDTO> mealPlanList = mealPlanDAO.selectMealPlanWeek(sqlSession, mpDate);
+		
+		sqlSession.close();
+				
+		return mealPlanList;
+	}
 
     public void printSuccessMessage(String successCode) {
 		
@@ -54,5 +67,7 @@ public class MealPlanService {
 		
 		System.out.println(errorMessage);
 	}
+
+	
 
 }

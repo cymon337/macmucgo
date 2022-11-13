@@ -6,12 +6,12 @@ import com.uni.model.dto.MealPlanDTO;
 
 public class MealPlanPrintResult {
 	
-	public void printMealPlanDay(List<MealPlanDTO> mealPlanDayList) {
-		for (MealPlanDTO mealPlan : mealPlanDayList) {
+	public void printMealPlanList(List<MealPlanDTO> mealPlanList) {
+		for (MealPlanDTO mealPlan : mealPlanList) {
 			System.out.println(mealPlan);
 		}
 		
-	}
+	}	
 
 	public void printMealPlan(MealPlanDTO mealPlan) {
 		System.out.println(mealPlan);
@@ -42,5 +42,7 @@ public class MealPlanPrintResult {
 		
 		System.out.println(errorMessage);
 	}
+
+    
 	
 }

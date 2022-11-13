@@ -1,6 +1,7 @@
 package com.uni.controller;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.uni.model.dto.MealPlanDTO;
@@ -29,6 +30,19 @@ public class MealPlanController {
 			mealPlanPrintResult.printErrorMessage("selectOne");
 		}
     }
+
+	public void selectMealPlanWeek(Map<String, Date> parameter) {
+		Date mpDate = parameter.get("mpDate");		
+		
+		List<MealPlanDTO> mealPlanList = mealPlanService.selectMealPlanWeek(mpDate);		
+		
+		if(mealPlanList != null) {
+			mealPlanPrintResult.printMealPlanList(mealPlanList);
+		} else {
+			mealPlanPrintResult.printErrorMessage("selectList");
+		}
+    }
+
 
     
 

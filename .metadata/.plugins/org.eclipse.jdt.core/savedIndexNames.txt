@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+D:\DEVTRAINING\macmucgo\.metadata\.plugins\org.eclipse.jdt.core
+2230169276.index
+1865797976.index
+985898265.index
+3326268409.index
