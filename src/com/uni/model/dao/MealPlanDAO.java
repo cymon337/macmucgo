@@ -1,6 +1,7 @@
 package com.uni.model.dao;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,6 +16,11 @@ public class MealPlanDAO {
 		
 		
 		return sqlSession.selectOne("MealPlanMapper.selectMealPlanDay", mpDate);
+	}
+
+	public List<MealPlanDTO> selectMealPlanWeek(SqlSession sqlSession, Date mpDate) {
+		
+		return sqlSession.selectList("MealPlanMapper.selectMealPlanWeek", mpDate);
 	}
 
 

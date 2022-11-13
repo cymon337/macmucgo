@@ -39,16 +39,28 @@
         WHERE A.MP_DATE = #{ mpDate }
 	</select>
 	
-	<!-- <select id="selectMealPlanWeek" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+	
+	<select id="selectMealPlanWeek" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
         SELECT
 			A.*
 		FROM MEALPLAN A
 		WHERE USER_NO = 1
-		AND MP_DATE >= #{ mpDate }
-		AND MP_DATE <= TO_DATE(#{ mpDate },'RRRR-MM-DD') + INTERVAL '7' DAY        
-	</select> -->
+		AND MP_DATE >= #{ mpDate } + INTERVAL '6' DAY
+        AND MP_DATE <![CDATA[<]]>= #{ mpDate }                     
+        
+         <!-- 비교연산자 부등호 그냥쓰면 오류   
+         
+         				1.   <![CDATA["부등호"]]> 
+         								
+         				2.   <  대체  lt          ex) salary &lt; 10000
+         					 >  대체  gt			ex) salary &gt; 10000
+         					 <= 대체  lte     	 ex) salary &lte; 10000
+        		             >= 대체  gte         ex) salary &gte; 10000     -->
+        
+	</select>
+	
 
-	</mapper>
+</mapper>
 
 
 
