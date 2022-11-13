@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-<mapper namespace= "MenuMapper">
+<mapper namespace= "FoodMapper">
 
-	<resultMap type = "com.uni.section01.xmlconfig.MenuDTO" id = "menuResultMap">
+	<resultMap type = "com.uni.model.dto.FoodDTO" id = "foodResultMap">
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
-		<id property="code" column = "MENU_CODE"/>
+		<id property="food_id" column = "FOOD_ID"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="name" column="MENU_NAME"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
-		<result property ="price" column="MENU_PRICE"/>
-		<result property ="categoryCode" column="CATEGORY_CODE"/>
-		<result property ="orderableStatus" column="ORDERABLE_STATUS"/>
+		<result property ="food_name" column="FOOD_NAME"/>  <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
+		<result property ="info_eng" column="INFO_ENG"/>
+		<result property ="info_na" column="INFO_NA"/>
+		<result property ="info_car" column="INFO_CAR"/>
+		<result property ="info_pro" column="INFO_PRO"/>
+		<result property ="info_fat" column="INFO_FAT"/>
+		<result property ="manual01" column="MANUAL01"/>
+		<result property ="manual02" column="MANUAL02"/>
+		<result property ="manual03" column="MANUAL03"/>
+		<result property ="manual04" column="MANUAL04"/>
+		<result property ="manual05" column="MANUAL05"/>
+		<result property ="manual06" column="MANUAL06"/>
+		<result property ="ban_yn" column="BAN_YN"/>
 
 	</resultMap>
 	
@@ -30,7 +39,7 @@
 		
 		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
 	 -->
-  <select id = "selectAllMenu" resultMap = "menuResultMap">
+  <select id = "selectAllMenu" resultMap = "foodResultMap">
   
   	SELECT
 	  		A.MENU_CODE,
@@ -44,16 +53,19 @@
   
   </select>
   
-  <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
+  <select id="selectFood" parameterType="string" resultMap = "foodResultMap">
         SELECT
-               A.MENU_CODE
-             , A.MENU_NAME
-             , A.MENU_PRICE
-             , A.CATEGORY_CODE
-             , A.ORDERABLE_STATUS
-         FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y' 
-          AND A.MENU_CODE = #{ code }	
+			A.FOOD_NAME ,
+			A.RCP_PAT ,
+			A.INFO_ENG ,
+			A.INFO_NA ,
+			A.INFO_CAR ,
+			A.INFO_PRO ,
+			A.INFO_FAT 
+			
+         FROM MASTERFOODTABLE A
+        WHERE A.BAN_YN = 'N' 
+        AND A.FOOD_NAME LIKE '%'|| #{food_name}||'%'
 	</select>
 	
 	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
@@ -61,7 +73,7 @@
 	<!-- 파라미터 타입도 생략이 가능하다. 	-->
 	
 	
-	<insert id="insertMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
+	<insert id="insertMenu" parameterType="com.uni.model.dto.FoodDTO">
         INSERT
           INTO TBL_MENU A
         (
@@ -81,7 +93,7 @@
         )
 	</insert>
 	
-	<update id="updateMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
+	<update id="updateMenu" parameterType="com.uni.model.dto.FoodDTO">
 		UPDATE
 		       TBL_MENU A
 		   SET A.MENU_NAME = #{ name }
