@@ -6,12 +6,13 @@ import java.sql.Date;
 import org.apache.ibatis.javassist.SerialVersionUID;
 
 public class MealPlanDTO implements Serializable{
-    
+    // TB MEALPLAN 
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table
     private Date mpDate;    // MP_DATE meal plan date (RR-MM-DD)
     private int breakfast1;
     private int breakfast2;
+	private int breakfast3;
     private int breakfast4;
     private int breakfast5;
     private int breakfast6;
@@ -27,12 +28,33 @@ public class MealPlanDTO implements Serializable{
     private int dinner4;
     private int dinner5;
     private int dinner6;
-
     
+    // TB FOOD
+    private String foodName;
+    private int foodID;
+    
+    
+    public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public int getFoodID() {
+		return foodID;
+	}
+
+	public void setFoodID(int foodID) {
+		this.foodID = foodID;
+	}
+
+	
 
     public MealPlanDTO() {}
 	
-	public MealPlanDTO(int mpNo, int userNo, Date mpDate, int breakfast1, int breakfast2, int breakfast4,
+	public MealPlanDTO(int mpNo, int userNo, Date mpDate, int breakfast1, int breakfast2, int breakfast3, int breakfast4,
             int breakfast5, int breakfast6, int lunch1, int lunch2, int lunch3, int lunch4, int lunch5, int lunch6,
             int dinner1, int dinner2, int dinner3, int dinner4, int dinner5, int dinner6) {
         this.mpNo = mpNo;
@@ -40,6 +62,7 @@ public class MealPlanDTO implements Serializable{
         this.mpDate = mpDate;
         this.breakfast1 = breakfast1;
         this.breakfast2 = breakfast2;
+        this.breakfast3 = breakfast3;
         this.breakfast4 = breakfast4;
         this.breakfast5 = breakfast5;
         this.breakfast6 = breakfast6;
@@ -97,6 +120,13 @@ public class MealPlanDTO implements Serializable{
     public void setBreakfast2(int breakfast2) {
         this.breakfast2 = breakfast2;
     }
+    public int getBreakfast3() {
+		return breakfast3;
+	}
+
+	public void setBreakfast3(int breakfast3) {
+		this.breakfast3 = breakfast3;
+	}
 
     public int getBreakfast4() {
         return breakfast4;
@@ -218,15 +248,17 @@ public class MealPlanDTO implements Serializable{
         this.dinner6 = dinner6;
     }
 
-    @Override
-    public String toString() {
-        return "MealPlanDTO [mpNo=" + mpNo + ", userNo=" + userNo + ", mpDate=" + mpDate + ", breakfast1=" + breakfast1
-                + ", breakfast2=" + breakfast2 + ", breakfast4=" + breakfast4 + ", breakfast5=" + breakfast5
-                + ", breakfast6=" + breakfast6 + ", lunch1=" + lunch1 + ", lunch2=" + lunch2 + ", lunch3=" + lunch3
-                + ", lunch4=" + lunch4 + ", lunch5=" + lunch5 + ", lunch6=" + lunch6 + ", dinner1=" + dinner1
-                + ", dinner2=" + dinner2 + ", dinner3=" + dinner3 + ", dinner4=" + dinner4 + ", dinner5=" + dinner5
-                + ", dinner6=" + dinner6 + "]";
-    }
+    
+	@Override
+	public String toString() {
+		return "MealPlanDTO [mpNo=" + mpNo + ", userNo=" + userNo + ", mpDate=" + mpDate + ", breakfast1=" + breakfast1
+				+ ", breakfast2=" + breakfast2 + ", breakfast3=" + breakfast3 + ", breakfast4=" + breakfast4
+				+ ", breakfast5=" + breakfast5 + ", breakfast6=" + breakfast6 + ", lunch1=" + lunch1 + ", lunch2="
+				+ lunch2 + ", lunch3=" + lunch3 + ", lunch4=" + lunch4 + ", lunch5=" + lunch5 + ", lunch6=" + lunch6
+				+ ", dinner1=" + dinner1 + ", dinner2=" + dinner2 + ", dinner3=" + dinner3 + ", dinner4=" + dinner4
+				+ ", dinner5=" + dinner5 + ", dinner6=" + dinner6 + ", foodName=" + foodName + ", foodID=" + foodID
+				+ "]";
+	}
 
 	
 

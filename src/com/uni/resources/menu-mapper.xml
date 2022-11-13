@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace= "MenuMapper">
 
-	<resultMap type = "com.uni.section01.xmlconfig.MenuDTO" id = "menuResultMap">
+	<resultMap type = "com.uni.resource.DTO" id = "menuResultMap">
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
 		<id property="code" column = "MENU_CODE"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="name" column="MENU_NAME"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
+		<result property ="name" column="MENU_NAME"/>                      <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
 		<result property ="price" column="MENU_PRICE"/>
 		<result property ="categoryCode" column="CATEGORY_CODE"/>
 		<result property ="orderableStatus" column="ORDERABLE_STATUS"/>

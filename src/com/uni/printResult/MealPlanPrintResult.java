@@ -7,6 +7,8 @@ import com.uni.model.dto.MealPlanDTO;
 public class MealPlanPrintResult {
 	
 	public void printMealPlanList(List<MealPlanDTO> mealPlanList) {
+		
+		System.out.println("mealPlanList.length : " + mealPlanList.size());
 		for (MealPlanDTO mealPlan : mealPlanList) {
 			System.out.println(mealPlan);
 		}
@@ -31,7 +33,7 @@ public class MealPlanPrintResult {
 	
 	public void printErrorMessage(String errorCode) {// 각 메소드에서 호출시케이스마다 추가하면서 하자
 		
-		String errorMessage = "";
+		String errorMessage = ""; 
 		switch(errorCode) {
 			case "selectList" : errorMessage = "메뉴 목록 조회에 실패하셨습니다."; break;
 			case "selectOne" : errorMessage = "메뉴 조회에 실패하셨습니다."; break;

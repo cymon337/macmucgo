@@ -8,11 +8,12 @@
 		<!-- DB에서의 기본키 --> 
 		<id property="mpNo" column = "MP_NO"/>
 		
-		<!-- DB에서의 일반컬럼들 --> 
+		<!-- DB에서의 일반컬럼들 MEALPLAN TABLE --> 
 		<result property="userNo" column="USER_NO"/>
 		<result property="mpDate" column="MP_DATE"/>
 		<result property="breakfast1" column="BREAKFAST1"/>
 		<result property="breakfast2" column="BREAKFAST2"/>
+		<result property="breakfast3" column="BREAKFAST3"/>
 		<result property="breakfast4" column="BREAKFAST4"/>
 		<result property="breakfast5" column="BREAKFAST5"/>
 		<result property="breakfast6" column="BREAKFAST6"/>
@@ -28,6 +29,10 @@
 		<result property="dinner4" column="DINNER4"/>
 		<result property="dinner5" column="DINNER5"/>
 		<result property="dinner6" column="DINNER6"/>
+		
+		<!-- DB에서의 일반컬럼들 FOOD TABLE --> 
+		<result property="foodName" column="FOOD_NAME"/>
+		<result property="foodID" column="FOOD_ID"/>
 
 
 	</resultMap>
@@ -40,15 +45,16 @@
 	</select>
 	
 	
-	<select id="selectMealPlanWeek" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+	<select id="selectMealPlanWeek2" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+     
         SELECT
-			A.*
-		FROM MEALPLAN A
+		    *
+		FROM MEALPLAN
 		WHERE USER_NO = 1
-		AND MP_DATE >= #{ mpDate } + INTERVAL '6' DAY
-        AND MP_DATE <![CDATA[<]]>= #{ mpDate }                     
-        
-         <!-- 비교연산자 부등호 그냥쓰면 오류   
+		AND MP_DATE <![CDATA[>]]>= #{ mpDate }		
+		AND MP_DATE <![CDATA[<]]>= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
+
+       <!-- 비교연산자 부등호 그냥쓰면 오류   
          
          				1.   <![CDATA["부등호"]]> 
          								
@@ -57,6 +63,33 @@
          					 <= 대체  lte     	 ex) salary &lte; 10000
         		             >= 대체  gte         ex) salary &gte; 10000     -->
         
+	</select>
+	
+	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+        SELECT
+		    MP_DATE
+		    , FN_GET_FOOD_NAME(BREAKFAST1)
+		    , FN_GET_FOOD_NAME(BREAKFAST2)
+		    , FN_GET_FOOD_NAME(BREAKFAST3)
+		    , FN_GET_FOOD_NAME(BREAKFAST4)
+		    , FN_GET_FOOD_NAME(BREAKFAST5)
+		    , FN_GET_FOOD_NAME(BREAKFAST6)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(LUNCH1)
+		    , FN_GET_FOOD_NAME(DINNER1)
+		    , FN_GET_FOOD_NAME(DINNER1)
+		    , FN_GET_FOOD_NAME(DINNER1)
+		    , FN_GET_FOOD_NAME(DINNER1)
+		    , FN_GET_FOOD_NAME(DINNER1)
+		    , FN_GET_FOOD_NAME(DINNER1)    
+		FROM MEALPLAN
+		WHERE USER_NO = 1
+		AND MP_DATE <![CDATA[>]]>= #{ mpDate }		
+		AND MP_DATE <![CDATA[<]]>= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
 	</select>
 	
 
