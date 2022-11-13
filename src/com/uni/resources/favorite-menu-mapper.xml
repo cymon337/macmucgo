@@ -45,6 +45,7 @@
   </select>
   
   <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
+<!--   <select id="selectMenuByCode" parameterType="String" resultMap="menuResultMap"> -->
         SELECT
                A.MENU_CODE
              , A.MENU_NAME

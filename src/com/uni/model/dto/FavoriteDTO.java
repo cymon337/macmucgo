@@ -10,6 +10,7 @@ public class FavoriteDTO {
 		this.userId = userId;
 		this.favFoodList = favFoodList.clone();
 	}
+	
 	public int getFavId() {
 		return favId;
 	}
@@ -28,4 +29,5 @@ public class FavoriteDTO {
 	public void setFavFoodList(int[] favFoodList) {
 		this.favFoodList = favFoodList;
 	}
+	
 }
