@@ -1,6 +1,7 @@
 package com.uni.model.dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class MemberDTO {
 	private int userNo;
@@ -11,14 +12,14 @@ public class MemberDTO {
 	private String height;
 	private String weight;
 	private String gender;
-	private Date regDate;
+	private LocalDateTime regDate;
 	private String status;
 	private String managerYN;
 	
 	public MemberDTO() {}
 
 	public MemberDTO(int userNo, String userID, String userPwd, String userName, String phone, String height, String weight,
-			String gender, Date regDate, String status, String managerYN) {
+			String gender) {
 		super();
 		this.userNo = userNo;
 		this.userID = userID;
@@ -28,9 +29,9 @@ public class MemberDTO {
 		this.height = height;
 		this.weight = weight;
 		this.gender = gender;
-		this.regDate = regDate;
-		this.status = status;
-		this.managerYN = managerYN;
+		this.regDate = LocalDateTime.now();
+		this.status = "Y";
+		this.managerYN = "N";
 	}
 
 	public int getUserNo() {
@@ -97,11 +98,11 @@ public class MemberDTO {
 		this.gender = gender;
 	}
 
-	public Date getRegDate() {
+	public LocalDateTime getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(Date regDate) {
+	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
 

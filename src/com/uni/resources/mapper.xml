@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-<mapper namespace= "Mapper">
+<mapper namespace= "com.uni.model.dao.Dao">
 
 	<resultMap type = "com.uni.model.dto.MemberDTO" id = "memberResultMap">
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
-		<id property="code" column = "USER_NO"/>
+		<id property="userNo" column = "USER_NO"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
 		<result property ="userId" column="USER_ID"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
@@ -42,28 +42,31 @@
 	  	USER_ID,
 	  	USER_PWD
 	  FROM MEMBER
-	  WHERE USER_ID = # {}
+	  WHERE USER_ID = # {userId}
+	  AND USER_PWD = #{userPwd}
   
   </select>
   
-  <select id="selectMenuByCode" parameterType="_int" resultMap="memberResultMap">
-        SELECT
-               A.MENU_CODE
-             , A.MENU_NAME
-             , A.MENU_PRICE
-             , A.CATEGORY_CODE
-             , A.ORDERABLE_STATUS
-         FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y' 
-          AND A.MENU_CODE = #{ code }	
-	</select>
+  <insert id="addMember" parameterType="memberResultMap" useGeneratedKeys="true" keyProperty="userNo">
+    INSERT INTO MEMBER(
+ 		
+		USER_ID,
+		USER_PWD,
+		USER_NAME,
+		PHONE,
+		HEIGHT,
+		WEIGHT,
+		GENDER
+		)	
+		VALUES(#{USER_NO},#{USER_ID},#{USER_PWD},#{USER_NAME},#{PHONE},#{HEIGHT},#{WEIGHT},#{GENDER})
+	</insert>
 	
 	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
 	<!-- 파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 에러가 발생한다. -->
 	<!-- 파라미터 타입도 생략이 가능하다. 	-->
 	
 	
-	<insert id="insertMenu" parameterType="com.uni.model.dto.MemberDTO">
+	<insert id="insertMenu" parameterType="memberResultMap" useGeneratedKeys="true" keyProperty="userNo">
         INSERT
           INTO TBL_MENU A
         (
@@ -99,6 +102,5 @@
 	</delete>
 
 	
-	
-	
+
 </mapper>
