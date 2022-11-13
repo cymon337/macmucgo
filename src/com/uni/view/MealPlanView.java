@@ -1,10 +1,12 @@
 package com.uni.view;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.uni.controller.MealPlanController;
+import com.uni.model.dto.MealPlanDTO;
 
 public class MealPlanView {
 
@@ -55,7 +57,7 @@ public class MealPlanView {
 			}
 			System.out.println("====================이번주 식단일정 조회====================");
             mealPlanController.selectMealPlanDay(inputDate());
-
+			
             System.out.println("====================식단일정 등록====================");
 			System.out.println("1. 일간 등록");
 			System.out.println("2. 주간 등록");
@@ -79,16 +81,20 @@ public class MealPlanView {
     }
 
 	
-	private static Map<String, String> inputDate() {
+	private static Map<String, Date> inputDate() {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.print("식단일정 날짜를 입력하세요 : ");
-		String mpDate = sc.nextLine(); 	//"RR-MM-DD"
+		System.out.print("식단일정 날짜를 입력하세요 (yyyy-MM-dd): ");
+		String mpDate = sc.nextLine();
 
-		Map<String, String> parameter = new HashMap<>();
-		parameter.put("mpDate", mpDate);
+		
+		// public void setMpDate(String mpDate) {      // 입력시 "yyyy-MM-dd" 형식으로
+        // this.mpDate = Date.valueOf(mpDate);
 
-		return null;
+		Map<String, Date> parameter = new HashMap<>();
+		parameter.put("mpDate", Date.valueOf(mpDate));
+
+		return parameter;
 	}
 
 	// 1.1 식단일정 일간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록

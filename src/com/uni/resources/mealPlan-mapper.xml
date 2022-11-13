@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-<mapper namespace= "MealPlan">
+<mapper namespace= "MealPlanMapper">
 
 	<resultMap type = "com.uni.model.dto.MealPlanDTO" id = "mealPlanResultMap">
 	
@@ -9,25 +9,25 @@
 		<id property="mpNo" column = "MP_NO"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="userNo" column="USER_NO"/>
-		<result property ="mpDate" column="MP_DATE"/>
-		<result property ="breakfast1" column="BREAKFAST1"/>
-		<result property ="breakfast2" column="BREAKFAST2"/>
-		<result property ="breakfast4" column="BREAKFAST4"/>
-		<result property ="breakfast5" column="BREAKFAST5"/>
-		<result property ="breakfast6" column="BREAKFAST6"/>
-		<result property ="lunch1" column="LUNCH1"/>
-		<result property ="lunch2" column="LUNCH2"/>
-		<result property ="lunch3" column="LUNCH3"/>
-		<result property ="lunch4" column="LUNCH4"/>
-		<result property ="lunch5" column="LUNCH5"/>
-		<result property ="lunch6" column="LUNCH6"/>
-		<result property ="dinner1" column="DINNER1"/>
-		<result property ="dinner2" column="DINNER2"/>
-		<result property ="dinner3" column="DINNER3"/>
-		<result property ="dinner4" column="DINNER4"/>
-		<result property ="dinner5" column="DINNER5"/>
-		<result property ="dinner6" column="DINNER6"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="mpDate" column="MP_DATE"/>
+		<result property="breakfast1" column="BREAKFAST1"/>
+		<result property="breakfast2" column="BREAKFAST2"/>
+		<result property="breakfast4" column="BREAKFAST4"/>
+		<result property="breakfast5" column="BREAKFAST5"/>
+		<result property="breakfast6" column="BREAKFAST6"/>
+		<result property="lunch1" column="LUNCH1"/>
+		<result property="lunch2" column="LUNCH2"/>
+		<result property="lunch3" column="LUNCH3"/>
+		<result property="lunch4" column="LUNCH4"/>
+		<result property="lunch5" column="LUNCH5"/>
+		<result property="lunch6" column="LUNCH6"/>
+		<result property="dinner1" column="DINNER1"/>
+		<result property="dinner2" column="DINNER2"/>
+		<result property="dinner3" column="DINNER3"/>
+		<result property="dinner4" column="DINNER4"/>
+		<result property="dinner5" column="DINNER5"/>
+		<result property="dinner6" column="DINNER6"/>
 
 
 	</resultMap>
@@ -46,7 +46,7 @@
 		
 		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
 	 -->
-  <select id = "selectAllMenu" resultMap = "menuResultMap">
+  <!-- <select id = "selectAllMenu" resultMap = "menuResultMap">
   
   	SELECT
 	  		A.MENU_CODE,
@@ -58,161 +58,22 @@
   		WHERE A.ORDERABLE_STATUS = 'Y'
   		ORDER BY A.MENU_CODE
   
-  </select>
+  </select> -->
   
-  <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
+  <select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
         SELECT
-               A.MENU_CODE
-             , A.MENU_NAME
-             , A.MENU_PRICE
-             , A.CATEGORY_CODE
-             , A.ORDERABLE_STATUS
-         FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y' 
-          AND A.MENU_CODE = #{ code }	
+            A.*
+         FROM MEALPLAN A
+        WHERE A.MP_DATE = #{ mpDate }
 	</select>
 	
 	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
 	<!-- 파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 에러가 발생한다. -->
 	<!-- 파라미터 타입도 생략이 가능하다. 	-->
-	
-	
-	<insert id="insertMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
-        INSERT
-          INTO TBL_MENU A
-        (
-          A.MENU_CODE
-        , A.MENU_NAME
-        , A.MENU_PRICE
-        , A.CATEGORY_CODE
-        , A.ORDERABLE_STATUS
-        )
-        VALUES
-        (
-          SEQ_MENU_CODE.NEXTVAL
-        , #{ name }
-        , #{ price }
-        , #{ categoryCode }
-        , 'Y'
-        )
-	</insert>
-	
-	<update id="updateMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
-		UPDATE
-		       TBL_MENU A
-		   SET A.MENU_NAME = #{ name }
-		     , A.MENU_PRICE = #{ price }
-		     , A.CATEGORY_CODE = #{ categoryCode }
-		 WHERE A.MENU_CODE = #{ code }
-	</update>
-	
-	<delete id="deleteMenu" parameterType="_int">
-        DELETE
-          FROM TBL_MENU A
-         WHERE A.MENU_CODE = #{ code }
-	</delete>
+
+
+	</mapper>
+
 
 	
 	
-	
-</mapper>
-<mapper namespace= "MenuMapper">
-
-	<resultMap type = "com.uni.section01.xmlconfig.MenuDTO" id = "menuResultMap">
-	
-		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
-		<!-- DB에서의 기본키 --> 
-		<id property="code" column = "MENU_CODE"/>
-		
-		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="name" column="MENU_NAME"/> <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
-		<result property ="price" column="MENU_PRICE"/>
-		<result property ="categoryCode" column="CATEGORY_CODE"/>
-		<result property ="orderableStatus" column="ORDERABLE_STATUS"/>
-
-	</resultMap>
-	
-	<!-- 
-		한행에 대한 반환타입을 반드시  설정해야함(둘중한가지는 필수로 작성, 둘다 사용은 안됨)
-		
-		resultMap : 위에서 생성한 resultMap을 리턴 타입으로 이용하는 경우
-		resultType : 이미 정의되어 있는 타입을 이용하여 리턴 타입으로 이용하는 경우
-		
-		파라미터가 한 개인 경우 바인딩 되는 이름은 상관 없다. 파라미터 타입도 지정하지 않아도 된다. 
-		parameterType : 파라미터로 전달되는 값의 타입을 작성(생략해도 상관없음)
-		
-		# 파라미터 타입이 스트링인경우 '' 자동으로 붙여줌
-		$ 사용자가 넘긴값 그대로를 넣어줌 -  컬럼명이 유동적으로 바뀌는경우 사용가능. 하지만 추천하는 코드 스타일은아니다. 
-		
-		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
-	 -->
-  <select id = "selectAllMenu" resultMap = "menuResultMap">
-  
-  	SELECT
-	  		A.MENU_CODE,
-	  		A.MENU_NAME,
-	  		A.MENU_PRICE,
-	  		A.CATEGORY_CODE,
-	  		A.ORDERABLE_STATUS
-  		 FROM TBL_MENU A
-  		WHERE A.ORDERABLE_STATUS = 'Y'
-  		ORDER BY A.MENU_CODE
-  
-  </select>
-  
-  <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
-        SELECT
-               A.MENU_CODE
-             , A.MENU_NAME
-             , A.MENU_PRICE
-             , A.CATEGORY_CODE
-             , A.ORDERABLE_STATUS
-         FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y' 
-          AND A.MENU_CODE = #{ code }	
-	</select>
-	
-	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
-	<!-- 파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 에러가 발생한다. -->
-	<!-- 파라미터 타입도 생략이 가능하다. 	-->
-	
-	
-	<insert id="insertMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
-        INSERT
-          INTO TBL_MENU A
-        (
-          A.MENU_CODE
-        , A.MENU_NAME
-        , A.MENU_PRICE
-        , A.CATEGORY_CODE
-        , A.ORDERABLE_STATUS
-        )
-        VALUES
-        (
-          SEQ_MENU_CODE.NEXTVAL
-        , #{ name }
-        , #{ price }
-        , #{ categoryCode }
-        , 'Y'
-        )
-	</insert>
-	
-	<update id="updateMenu" parameterType="com.uni.section01.xmlconfig.MenuDTO">
-		UPDATE
-		       TBL_MENU A
-		   SET A.MENU_NAME = #{ name }
-		     , A.MENU_PRICE = #{ price }
-		     , A.CATEGORY_CODE = #{ categoryCode }
-		 WHERE A.MENU_CODE = #{ code }
-	</update>
-	
-	<delete id="deleteMenu" parameterType="_int">
-        DELETE
-          FROM TBL_MENU A
-         WHERE A.MENU_CODE = #{ code }
-	</delete>
-
-	
-	
-	
-</mapper>

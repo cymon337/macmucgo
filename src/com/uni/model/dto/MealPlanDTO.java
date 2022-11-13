@@ -1,6 +1,7 @@
 package com.uni.model.dto;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import org.apache.ibatis.javassist.SerialVersionUID;
 
@@ -8,7 +9,7 @@ public class MealPlanDTO implements Serializable{
     
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table
-    private String mpDate;    // MP_DATE meal plan date (RR-MM-DD)
+    private Date mpDate;    // MP_DATE meal plan date (RR-MM-DD)
     private int breakfast1;
     private int breakfast2;
     private int breakfast4;
@@ -31,7 +32,7 @@ public class MealPlanDTO implements Serializable{
 
     public MealPlanDTO() {}
 	
-	public MealPlanDTO(int mpNo, int userNo, String mpDate, int breakfast1, int breakfast2, int breakfast4,
+	public MealPlanDTO(int mpNo, int userNo, Date mpDate, int breakfast1, int breakfast2, int breakfast4,
             int breakfast5, int breakfast6, int lunch1, int lunch2, int lunch3, int lunch4, int lunch5, int lunch6,
             int dinner1, int dinner2, int dinner3, int dinner4, int dinner5, int dinner6) {
         this.mpNo = mpNo;
@@ -72,11 +73,12 @@ public class MealPlanDTO implements Serializable{
         this.userNo = userNo;
     }
 
-    public String getMpDate() {      // MP_DATE meal plan date (RR-MM-DD) String으로
+    public Date getMpDate() {   
+     
         return mpDate;
     }
 
-    public void setMpDate(String mpDate) {      // MP_DATE meal plan date (RR-MM-DD) String으로
+    public void setMpDate(Date mpDate) {      // 입력시 "yyyy-MM-dd" 형식으로
         this.mpDate = mpDate;
     }
 
