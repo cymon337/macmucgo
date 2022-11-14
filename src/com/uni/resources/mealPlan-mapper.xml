@@ -30,11 +30,36 @@
 		<result property="dinner5" column="DINNER5"/>
 		<result property="dinner6" column="DINNER6"/>
 		
-		<!-- DB에서의 일반컬럼들 FOOD TABLE --> 
-		<result property="foodName" column="FOOD_NAME"/>
-		<result property="foodID" column="FOOD_ID"/>
-
-
+	</resultMap>
+	
+	<resultMap type = "com.uni.model.dto.MealPlanNameDTO" id = "mealPlanNameResultMap">
+	
+		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
+		<!-- DB에서의 기본키 --> 
+		<id property="mpNo" column = "MP_NO"/>
+		
+		<!-- DB에서의 일반컬럼들 MEALPLAN TABLE --> 
+		<result property="userNo" column="USER_NO"/>
+		<result property="mpDate" column="MP_DATE"/>
+		<result property="breakfast1" column="BREAKFAST1"/>
+		<result property="breakfast2" column="BREAKFAST2"/>
+		<result property="breakfast3" column="BREAKFAST3"/>
+		<result property="breakfast4" column="BREAKFAST4"/>
+		<result property="breakfast5" column="BREAKFAST5"/>
+		<result property="breakfast6" column="BREAKFAST6"/>
+		<result property="lunch1" column="LUNCH1"/>
+		<result property="lunch2" column="LUNCH2"/>
+		<result property="lunch3" column="LUNCH3"/>
+		<result property="lunch4" column="LUNCH4"/>
+		<result property="lunch5" column="LUNCH5"/>
+		<result property="lunch6" column="LUNCH6"/>
+		<result property="dinner1" column="DINNER1"/>
+		<result property="dinner2" column="DINNER2"/>
+		<result property="dinner3" column="DINNER3"/>
+		<result property="dinner4" column="DINNER4"/>
+		<result property="dinner5" column="DINNER5"/>
+		<result property="dinner6" column="DINNER6"/>
+		
 	</resultMap>
 	
    	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
@@ -65,7 +90,7 @@
         
 	</select>
 	
-	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanNameResultMap">
         SELECT
 		    MP_DATE
 		    , FN_GET_FOOD_NAME(BREAKFAST1)
