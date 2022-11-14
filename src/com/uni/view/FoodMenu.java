@@ -7,10 +7,8 @@ import java.util.Scanner;
 import com.uni.controller.FoodController;
 
 public class FoodMenu {
-	
-	
-	public static void foodMenu() {
 
+	public static void foodMenu() {
 
 		Scanner sc = new Scanner(System.in);
 		FoodController menuController = new FoodController();
@@ -28,22 +26,22 @@ public class FoodMenu {
 
 			switch (no) {
 			case 1:
-				menuController.insertOne(inputFood()); //음식추가 메소드
+				menuController.insertOne(inputFood()); // 음식추가 메소드
 				break;
 			case 2:
 				menuController.selectFood(inputFoodName()); // 음식명으로 검색 메소드
 				break;
 			case 3:
-				//menuController.updateFood(inputUpdateFood()); // 음식 수정 메소드
+				menuController.updateFood(inputUpdateFood()); // 음식 수정 메소드
 				break;
 			case 4:
-				//menuController.deleteFood(inputFoodName()); // 음식 삭제 메소드
+				menuController.deleteFood(inputFoodId()); // 음식 삭제 메소드
 				break;
 			case 5:
-				//menuController.banFood(banFood()); // 음식 블랙리스트관리 페이지 메소드
+				// menuController.banFood(banFood()); // 음식 블랙리스트관리 페이지 메소드
 				break;
 			case 6:
-				//menuController.shotdown(shotdown()); // 프로그램 종료 메소드
+				// menuController.shotdown(shotdown()); // 프로그램 종료 메소드
 				break;
 			default:
 				System.out.println("잘못된 메뉴를 선택하셨습니다.");
@@ -54,19 +52,83 @@ public class FoodMenu {
 
 	}
 
-	private static Object shotdown() {
-		// TODO Auto-generated method stub
-		return null;
+	private static Map<String, String> inputFoodId() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("삭제할 음식아이디를 입력하세요 : ");
+		String id = sc.nextLine();
+
+		Map<String, String> parameter = new HashMap<>();
+		parameter.put("foodId", id);
+
+		return parameter;
 	}
 
-	private static Object banFood() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private static Map<String, String> inputUpdateFood() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("수정할 음식아이디를 입력하세요 : ");
+		String id = sc.nextLine();
 
-	private static Object inputUpdateFood() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.print("음식명을 입력하세요 : ");
+		String name = sc.nextLine();
+
+		System.out.print("음식종류를 입력하세요 : ");
+		String pat = sc.nextLine();
+
+		System.out.print("음식의 열량을 입력하세요 : ");
+		String eng = sc.nextLine();
+
+		System.out.print("나트륨 함량을 입력하세요 : ");
+		String na = sc.nextLine();
+
+		System.out.print("탄수화물 함량을 입력하세요 : ");
+		String car = sc.nextLine();
+
+		System.out.print("탄백질 함량을 입력하세요 : ");
+		String pro = sc.nextLine();
+
+		System.out.print("지방 함량을 입력하세요 : ");
+		String fat = sc.nextLine();
+
+		System.out.print("메뉴얼01 입력하세요 : ");
+		String man1 = sc.nextLine();
+
+		System.out.print("메뉴얼02 입력하세요 : ");
+		String man2 = sc.nextLine();
+
+		System.out.print("메뉴얼03 입력하세요 : ");
+		String man3 = sc.nextLine();
+
+		System.out.print("메뉴얼04 입력하세요 : ");
+		String man4 = sc.nextLine();
+
+		System.out.print("메뉴얼05 입력하세요 : ");
+		String man5 = sc.nextLine();
+
+		System.out.print("메뉴얼06 입력하세요 : ");
+		String man6 = sc.nextLine();
+
+		System.out.print("블랙리스트 여부(Y,N)를 입력하세요 : ");
+		String ban = sc.nextLine().toUpperCase();
+
+		Map<String, String> parameter = new HashMap<>();
+		parameter.put("foodId", id);
+		parameter.put("foodName", name);
+		parameter.put("rcpPat", pat);
+		parameter.put("infoEng", eng);
+		parameter.put("infoNa", na);
+		parameter.put("infoCar", car);
+		parameter.put("infoPro", pro);
+		parameter.put("infoFat", fat);
+		parameter.put("manual01", man1);
+		parameter.put("manual02", man2);
+		parameter.put("manual03", man3);
+		parameter.put("manual04", man4);
+		parameter.put("manual05", man5);
+		parameter.put("manual06", man6);
+		parameter.put("banYN", ban);
+
+		return parameter;
 	}
 
 	private static Map<String, String> inputFoodName() {
@@ -82,50 +144,49 @@ public class FoodMenu {
 
 	private static Map<String, String> inputFood() {
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.print("음식명을 입력하세요 : ");
 		String name = sc.nextLine();
-		
+
 		System.out.print("음식종류를 입력하세요 : ");
 		String pat = sc.nextLine();
-		
+
 		System.out.print("음식의 열량을 입력하세요 : ");
 		String eng = sc.nextLine();
-		
+
 		System.out.print("나트륨 함량을 입력하세요 : ");
 		String na = sc.nextLine();
-		
+
 		System.out.print("탄수화물 함량을 입력하세요 : ");
 		String car = sc.nextLine();
-		
+
 		System.out.print("탄백질 함량을 입력하세요 : ");
 		String pro = sc.nextLine();
-		
+
 		System.out.print("지방 함량을 입력하세요 : ");
 		String fat = sc.nextLine();
-		
+
 		System.out.print("메뉴얼01 입력하세요 : ");
 		String man1 = sc.nextLine();
-		
+
 		System.out.print("메뉴얼02 입력하세요 : ");
 		String man2 = sc.nextLine();
-		
+
 		System.out.print("메뉴얼03 입력하세요 : ");
 		String man3 = sc.nextLine();
-		
+
 		System.out.print("메뉴얼04 입력하세요 : ");
 		String man4 = sc.nextLine();
-		
+
 		System.out.print("메뉴얼05 입력하세요 : ");
 		String man5 = sc.nextLine();
-		
+
 		System.out.print("메뉴얼06 입력하세요 : ");
 		String man6 = sc.nextLine();
-		
+
 		System.out.print("블랙리스트 여부(Y,N)를 입력하세요 : ");
 		String ban = sc.nextLine().toUpperCase();
-		
-		
+
 		Map<String, String> parameter = new HashMap<>();
 		parameter.put("foodName", name);
 		parameter.put("rcpPat", pat);
@@ -140,8 +201,8 @@ public class FoodMenu {
 		parameter.put("manual04", man4);
 		parameter.put("manual05", man5);
 		parameter.put("manual06", man6);
-		parameter.put("ban_YN", ban);
-		
+		parameter.put("banYN", ban);
+
 		return parameter;
 	}
 

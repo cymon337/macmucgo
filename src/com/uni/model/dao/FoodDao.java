@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.uni.model.dto.FoodDTO;
 
 public class FoodDao {
-	
+
 //	public List<FoodDao> selectAllMenu(SqlSession sqlSession) {
 //
 //		return sqlSession.selectList("FoodMapper.selectAllMenu");
@@ -23,14 +23,14 @@ public class FoodDao {
 		return sqlSession.insert("FoodMapper.insertMenu", menu);
 	}
 
-	public int updateMenu(SqlSession sqlSession, FoodDTO menu) {
+	public int updateFood(SqlSession sqlSession, FoodDTO food) {
 
-		return sqlSession.update("FoodMapper.updateMenu", menu);
+		return sqlSession.update("FoodMapper.updateFood", food);
 	}
 
-	public int deleteMenu(SqlSession sqlSession, int code) {
+	public int deleteFood(SqlSession sqlSession, int code) {
 
-		return sqlSession.delete("FoodMapper.deleteMenu", code);
+		return sqlSession.delete("FoodMapper.deleteFood", code);
 	}
 
 }

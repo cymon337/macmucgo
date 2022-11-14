@@ -22,8 +22,6 @@ public class FoodService {
 
 		SqlSession sqlSession = getSqlSession();
 
-		
-
 		List<FoodDTO> foodList = foodDao.selectFood(sqlSession, foodName);
 
 		sqlSession.close();
@@ -33,11 +31,11 @@ public class FoodService {
 
 	public boolean insertOne(FoodDTO food) {
 		SqlSession sqlSession = getSqlSession();
-		
+
 		int result = foodDao.insertMenu(sqlSession, food);
-		
-		if(result > 0 ) {
-			
+
+		if (result > 0) {
+
 			sqlSession.commit();
 
 		} else {
@@ -48,7 +46,41 @@ public class FoodService {
 
 		return result > 0 ? true : false;
 	}
-	
-	
+
+	public boolean updateFood(FoodDTO food) {
+		SqlSession sqlSession = getSqlSession();
+
+		int result = foodDao.updateFood(sqlSession, food);
+
+		if (result > 0) {
+
+			sqlSession.commit();
+
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return result > 0 ? true : false;
+	}
+
+	public boolean deleteFood(int id) {
+		SqlSession sqlSession = getSqlSession();
+
+		int result = foodDao.deleteFood(sqlSession, id);
+
+		if (result > 0) {
+
+			sqlSession.commit();
+
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return result > 0 ? true : false;
+	}
 
 }
