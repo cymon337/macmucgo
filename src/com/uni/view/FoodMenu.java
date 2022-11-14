@@ -75,7 +75,7 @@ public class FoodMenu {
 		String name = sc.nextLine();
 
 		Map<String, String> parameter = new HashMap<>();
-		parameter.put("food_name", name);
+		parameter.put("foodName", name);
 
 		return parameter;
 	}

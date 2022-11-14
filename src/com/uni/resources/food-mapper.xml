@@ -6,22 +6,23 @@
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
-		<id property="food_id" column = "FOOD_ID"/>
+		<id property="foodId" column = "FOOD_ID"/>
 		
 		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="food_name" column="FOOD_NAME"/>  <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
-		<result property ="info_eng" column="INFO_ENG"/>
-		<result property ="info_na" column="INFO_NA"/>
-		<result property ="info_car" column="INFO_CAR"/>
-		<result property ="info_pro" column="INFO_PRO"/>
-		<result property ="info_fat" column="INFO_FAT"/>
+		<result property ="foodName" column="FOOD_NAME"/>  <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
+		<result property ="rcpPat" column="RCP_PAT"/>
+		<result property ="infoEng" column="INFO_ENG"/>
+		<result property ="infoNa" column="INFO_NA"/>
+		<result property ="infoCar" column="INFO_CAR"/>
+		<result property ="infoPro" column="INFO_PRO"/>
+		<result property ="infoFat" column="INFO_FAT"/>
 		<result property ="manual01" column="MANUAL01"/>
 		<result property ="manual02" column="MANUAL02"/>
 		<result property ="manual03" column="MANUAL03"/>
 		<result property ="manual04" column="MANUAL04"/>
 		<result property ="manual05" column="MANUAL05"/>
 		<result property ="manual06" column="MANUAL06"/>
-		<result property ="ban_yn" column="BAN_YN"/>
+		<result property ="banYN" column="BAN_YN"/>
 
 	</resultMap>
 	
@@ -62,10 +63,9 @@
 			A.INFO_CAR ,
 			A.INFO_PRO ,
 			A.INFO_FAT 
-			
          FROM MASTERFOODTABLE A
         WHERE A.BAN_YN = 'N' 
-        AND A.FOOD_NAME LIKE '%'|| #{food_name}||'%'
+        AND A.FOOD_NAME LIKE '%'|| #{foodName}||'%'
 	</select>
 	
 	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
@@ -111,7 +111,6 @@
         , #{ manual04 }
         , #{ manual05 }
         , #{ manual06 }
-        , #{ info_na }
         , 'N'
         )
 	</insert>

@@ -13,9 +13,9 @@ public class FoodDao {
 //		return sqlSession.selectList("FoodMapper.selectAllMenu");
 //	}
 
-	public List<FoodDTO> selectFood(SqlSession sqlSession, String food_name) {
+	public List<FoodDTO> selectFood(SqlSession sqlSession, String foodName) {
 
-		return sqlSession.selectList("FoodMapper.selectFood", food_name);
+		return sqlSession.selectList("FoodMapper.selectFood", foodName);
 	}
 
 	public int insertMenu(SqlSession sqlSession, FoodDTO menu) {
