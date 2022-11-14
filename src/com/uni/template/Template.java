@@ -16,7 +16,7 @@ public class Template {
 		
 		if(sqlSessionFactory == null) {
 			
-			String resource = "com/uni/section01/xmlconfig/mybatis-config.xml";
+			String resource = "com/uni/resources/mybatis-config.xml";
 			InputStream inputStream;
 			
 			try {
@@ -34,8 +34,6 @@ public class Template {
 		}
 		SqlSession sqlSession = sqlSessionFactory.openSession(false);
 		
-		System.out.println(sqlSessionFactory.hashCode());
-		System.out.println(sqlSession.hashCode());
 		
 		return sqlSession;
 		
