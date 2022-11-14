@@ -2,6 +2,7 @@ package com.uni.printResult;
 
 import java.util.List;
 
+import com.uni.model.dto.MealPlanAndFoodDTO;
 import com.uni.model.dto.MealPlanDTO;
 
 public class MealPlanPrintResult {
@@ -15,8 +16,8 @@ public class MealPlanPrintResult {
 		
 	}	
 
-	public void printMealPlan(MealPlanDTO mealPlan) {
-		System.out.println(mealPlan);
+	public void printMealPlan(MealPlanAndFoodDTO mealPlanAndFood) {
+		System.out.println(mealPlanAndFood);
 	}
 	
 	public void printSuccessMessage(String successCode) {

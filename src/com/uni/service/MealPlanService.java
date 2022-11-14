@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.uni.model.dao.MealPlanDAO;
+import com.uni.model.dto.MealPlanAndFoodDTO;
 import com.uni.model.dto.MealPlanDTO;
 
 public class MealPlanService {
@@ -18,12 +19,12 @@ public class MealPlanService {
         mealPlanDAO = new MealPlanDAO();    //  mealPlanDAO 초기화
     }
 
-    public MealPlanDTO selectMealPlanDay(Date mpDate) {
+    public MealPlanAndFoodDTO selectMealPlanDay(Date mpDate) {
         SqlSession sqlSession = getSqlSession();
 		
 		System.out.println(sqlSession);
 		
-		MealPlanDTO mealPlan = mealPlanDAO.selectMealPlanDay(sqlSession, mpDate);
+		MealPlanAndFoodDTO mealPlan = mealPlanDAO.selectMealPlanDay(sqlSession, mpDate);
 		
 		sqlSession.close();
 				
