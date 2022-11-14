@@ -10,8 +10,16 @@ public class FavoriteDAO {
 	public FavoriteDAO() {
 	}
 	
-	public static List<FavoriteDTO> favoriteSelectAll(SqlSession mySession) {
+	public List<FavoriteDTO> favoriteSelectAll(SqlSession mySession) {
 		return mySession.selectList("FavoriteMenuMapper.selectAllMenu");
+	}
+
+	public int insertFav(SqlSession mySession, FavoriteDTO favoriteDTO) {
+		return mySession.insert("FavoriteMenuMapper.insertFavorite", favoriteDTO);
+	}
+
+	public String getMenu(SqlSession mySession, int favFoodCode) {
+		return mySession.selectOne("FavoriteMenuMapper.getMenu", favFoodCode);
 	}
 
 }

@@ -16,9 +16,31 @@ public class FavoriteService {
 	}
 	public List<FavoriteDTO> favoriteSelectAll() {
 		SqlSession mySession = getSqlSession();
-		List<FavoriteDTO> list = FavoriteDAO.favoriteSelectAll(mySession);
+		List<FavoriteDTO> list = myDAO.favoriteSelectAll(mySession);
 		mySession.close();
 		return list;
+	}
+	public boolean insertFav(FavoriteDTO favoriteDTO) {
+		SqlSession mySession = getSqlSession();
+		List<FavoriteDTO> list = myDAO.favoriteSelectAll(mySession);
+		
+		int result = myDAO.insertFav(mySession, favoriteDTO);
+		System.out.println(result);
+		if(result > 0) {
+			mySession.commit();
+		} else {
+			mySession.rollback();
+		}
+		
+		mySession.close();
+		return result > 0 ? true : false;
+	}
+	public String getMenu(int favFoodCode) {
+		SqlSession mySession = getSqlSession();
+		String result = myDAO.getMenu(mySession, favFoodCode);
+		
+		mySession.close();
+		return result;
 	}
 
 }
