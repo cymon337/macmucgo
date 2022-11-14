@@ -169,7 +169,7 @@ public class FoodDTO implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return foodId + ", " + foodName + ", " + rcpPat + ", " + infoEng
+		return foodName + ", " + rcpPat + ", " + infoEng
 				+ ", " + infoNa + ", " + infoCar + ", " + infoPro + ", " + infoFat
 				+ ", " + manual01 + ", " + manual02 + ", " + manual03 + ", "
 				+ manual04 + ", " + manual05 + ", " + manual06 + ", " + banYN;
