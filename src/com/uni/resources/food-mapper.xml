@@ -40,19 +40,7 @@
 		
 		 #{ code2 } 로 바꿔서 해도 잘됨. 1개인경우는 이름이 중요한 것이 아니다.
 	 -->
-  <select id = "selectAllMenu" resultMap = "foodResultMap">
-  
-  	SELECT
-	  		A.MENU_CODE,
-	  		A.MENU_NAME,
-	  		A.MENU_PRICE,
-	  		A.CATEGORY_CODE,
-	  		A.ORDERABLE_STATUS
-  		 FROM TBL_MENU A
-  		WHERE A.ORDERABLE_STATUS = 'Y'
-  		ORDER BY A.MENU_CODE
-  
-  </select>
+
   
   <select id="selectFood" parameterType="string" resultMap = "foodResultMap">
         SELECT
@@ -115,19 +103,31 @@
         )
 	</insert>
 	
-	<update id="updateMenu" parameterType="com.uni.model.dto.FoodDTO">
+	<update id="updateFood" parameterType="com.uni.model.dto.FoodDTO">
 		UPDATE
-		       TBL_MENU A
-		   SET A.MENU_NAME = #{ name }
-		     , A.MENU_PRICE = #{ price }
-		     , A.CATEGORY_CODE = #{ categoryCode }
-		 WHERE A.MENU_CODE = #{ code }
+		       MASTERFOODTABLE A
+		   SET 
+			A.FOOD_NAME = #{foodName},
+			A.RCP_PAT = #{rcpPat},
+			A.INFO_ENG = #{infoEng},
+			A.INFO_NA = #{infoNa},
+			A.INFO_CAR = #{infoCar},
+			A.INFO_PRO = #{infoPro},
+			A.INFO_FAT = #{infoFat},
+			A.MANUAL01 = #{manual01},
+			A.MANUAL02 = #{manual02},
+			A.MANUAL03 = #{manual03},
+			A.MANUAL04 = #{manual04},
+			A.MANUAL05 = #{manual05},
+			A.MANUAL06 = #{manual06},
+			A.BAN_YN = #{banYN}
+		 WHERE A.FOOD_ID = #{ foodId }
 	</update>
 	
-	<delete id="deleteMenu" parameterType="_int">
+	<delete id="deleteFood" parameterType="_int">
         DELETE
-          FROM TBL_MENU A
-         WHERE A.MENU_CODE = #{ code }
+          FROM MASTERFOODTABLE A
+         WHERE A.FOOD_ID = #{ foodId }
 	</delete>
 
 	
