@@ -18,12 +18,12 @@ public class FoodDao {
 		return sqlSession.selectList("FoodMapper.selectFood", food_name);
 	}
 
-	public int insertMenu(SqlSession sqlSession, FoodDao menu) {
+	public int insertMenu(SqlSession sqlSession, FoodDTO menu) {
 
 		return sqlSession.insert("FoodMapper.insertMenu", menu);
 	}
 
-	public int updateMenu(SqlSession sqlSession, FoodDao menu) {
+	public int updateMenu(SqlSession sqlSession, FoodDTO menu) {
 
 		return sqlSession.update("FoodMapper.updateMenu", menu);
 	}

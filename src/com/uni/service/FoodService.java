@@ -18,17 +18,37 @@ public class FoodService {
 		foodDao = new FoodDao();
 	}
 
-	public List<FoodDTO> selectFood(String food_name) {
+	public List<FoodDTO> selectFood(String foodName) {
 
 		SqlSession sqlSession = getSqlSession();
 
 		
 
-		List<FoodDTO> foodList = foodDao.selectFood(sqlSession, food_name);
+		List<FoodDTO> foodList = foodDao.selectFood(sqlSession, foodName);
 
 		sqlSession.close();
 
 		return foodList;
 	}
+
+	public boolean insertOne(FoodDTO food) {
+		SqlSession sqlSession = getSqlSession();
+		
+		int result = foodDao.insertMenu(sqlSession, food);
+		
+		if(result > 0 ) {
+			
+			sqlSession.commit();
+
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return result > 0 ? true : false;
+	}
+	
+	
 
 }

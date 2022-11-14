@@ -75,21 +75,44 @@
 	
 	<insert id="insertMenu" parameterType="com.uni.model.dto.FoodDTO">
         INSERT
-          INTO TBL_MENU A
+          INTO MASTERFOODTABLE A
         (
-          A.MENU_CODE
-        , A.MENU_NAME
-        , A.MENU_PRICE
-        , A.CATEGORY_CODE
-        , A.ORDERABLE_STATUS
+			A.FOOD_ID ,
+			A.FOOD_NAME ,
+			A.RCP_PAT ,
+			A.INFO_ENG ,
+			A.INFO_NA ,
+			A.INFO_CAR ,
+			A.INFO_PRO ,
+			A.INFO_FAT ,
+			A.MANUAL01 ,
+			A.MANUAL02 ,
+			A.MANUAL03 ,
+			A.MANUAL04 ,
+			A.MANUAL05 ,
+			A.MANUAL06 ,
+			A.BAN_YN
+			
         )
         VALUES
         (
-          SEQ_MENU_CODE.NEXTVAL
-        , #{ name }
-        , #{ price }
-        , #{ categoryCode }
-        , 'Y'
+         SEQ_FOOD_ID.NEXTVAL
+          
+        , #{ food_name }
+        , #{ rcp_pat }
+        , #{ info_eng }
+        , #{ info_na }
+        , #{ info_car }
+        , #{ info_pro }
+        , #{ info_fat }
+        , #{ manual01 }
+        , #{ manual02 }
+        , #{ manual03 }
+        , #{ manual04 }
+        , #{ manual05 }
+        , #{ manual06 }
+        , #{ info_na }
+        , 'N'
         )
 	</insert>
 	

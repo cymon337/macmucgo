@@ -28,7 +28,7 @@ public class FoodMenu {
 
 			switch (no) {
 			case 1:
-				//menuController.insertOne(inputFood()); //음식추가 메소드
+				menuController.insertOne(inputFood()); //음식추가 메소드
 				break;
 			case 2:
 				menuController.selectFood(inputFoodName()); // 음식명으로 검색 메소드
@@ -80,9 +80,69 @@ public class FoodMenu {
 		return parameter;
 	}
 
-	private static Object inputFood() {
-		// TODO Auto-generated method stub
-		return null;
+	private static Map<String, String> inputFood() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("음식명을 입력하세요 : ");
+		String name = sc.nextLine();
+		
+		System.out.print("음식종류를 입력하세요 : ");
+		String pat = sc.nextLine();
+		
+		System.out.print("음식의 열량을 입력하세요 : ");
+		String eng = sc.nextLine();
+		
+		System.out.print("나트륨 함량을 입력하세요 : ");
+		String na = sc.nextLine();
+		
+		System.out.print("탄수화물 함량을 입력하세요 : ");
+		String car = sc.nextLine();
+		
+		System.out.print("탄백질 함량을 입력하세요 : ");
+		String pro = sc.nextLine();
+		
+		System.out.print("지방 함량을 입력하세요 : ");
+		String fat = sc.nextLine();
+		
+		System.out.print("메뉴얼01 입력하세요 : ");
+		String man1 = sc.nextLine();
+		
+		System.out.print("메뉴얼02 입력하세요 : ");
+		String man2 = sc.nextLine();
+		
+		System.out.print("메뉴얼03 입력하세요 : ");
+		String man3 = sc.nextLine();
+		
+		System.out.print("메뉴얼04 입력하세요 : ");
+		String man4 = sc.nextLine();
+		
+		System.out.print("메뉴얼05 입력하세요 : ");
+		String man5 = sc.nextLine();
+		
+		System.out.print("메뉴얼06 입력하세요 : ");
+		String man6 = sc.nextLine();
+		
+		System.out.print("블랙리스트 여부(Y,N)를 입력하세요 : ");
+		String ban = sc.nextLine().toUpperCase();
+		
+		
+		Map<String, String> parameter = new HashMap<>();
+		parameter.put("foodName", name);
+		parameter.put("rcpPat", pat);
+		parameter.put("infoEng", eng);
+		parameter.put("infoNa", na);
+		parameter.put("infoCar", car);
+		parameter.put("infoPro", pro);
+		parameter.put("infoFat", fat);
+		parameter.put("manual01", man1);
+		parameter.put("manual02", man2);
+		parameter.put("manual03", man3);
+		parameter.put("manual04", man4);
+		parameter.put("manual05", man5);
+		parameter.put("manual06", man6);
+		parameter.put("ban_YN", ban);
+		
+		return parameter;
 	}
 
 }
