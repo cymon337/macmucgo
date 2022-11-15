@@ -131,42 +131,18 @@
         ]]>
 	</select>
 	
-	
-	
-<!--	
-	<select id="selectMealPlanWeek2" resultMap="mealPlanResultMap">
-     
-        SELECT
-		    A.MP_DATE		 
+	<delete id="deleteMealPlanRange" parameterType="com.uni.model.dto.MealPlanDTO">
+		
+		DELETE 
 		FROM MEALPLAN A
-		JOIN FOOD B ON 
-		WHERE USER_NO = 1
-		AND MP_DATE <![CDATA[>= #{ mpDate }		
-		AND MP_DATE <![CDATA[<]]>= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
-
-
-		AND MP_DATE BETWEEN TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
-		                AND TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
-		                
-      비교연산자 부등호 그냥쓰면 오류  
-       AND BTWEEN #{ mpDate1 } AND #{ mpDate2 }  입력받은 두 날짜 범위 조건
-       
-       SELECT
-		    *
-            
-		FROM MEALPLAN	
-		WHERE USER_NO = 1
-        AND MP_DATE BETWEEN TO_DATE('#{ mpDate1 }', 'YYYY-MM-DD')
-                        AND TO_DATE('#{ mpDate2 }', 'YYYY-MM-DD')
-         
-         				1.   <![CDATA["부등호"]]> 
-         								
-         				2.   <  대체  lt          ex) salary &lt; 10000
-         					 >  대체  gt			ex) salary &gt; 10000
-         					 <= 대체  lte     	 ex) salary &lte; 10000
-        		             >= 대체  gte         ex) salary &gte; 10000    
-       </select>	
--->	
+		WHERE A.USER_NO = 1
+		<![CDATA[
+		  AND A.MP_DATE >= #{ mpDate }		
+		  AND A.MP_DATE <= #{ mpDateEnd }
+        ]]>
+	
+	</delete>
+	
 
 </mapper>
 

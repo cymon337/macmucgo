@@ -28,6 +28,17 @@ public class MealPlanDAO {
 		return sqlSession.selectList("MealPlanMapper.selectMealPlanRange", mpDTO);
 	}
 
+//	public int deleteMenu(SqlSession sqlSession, int mpNo) {
+//		return sqlSession.delete("MealPlanMapper.deleteMenu", mpNo);
+//	}
+
+	public int deleteMealPlanRange(SqlSession sqlSession, MealPlanDTO mpDTO) {
+		System.out.println("delete dao 들어간다~");
+		int a = sqlSession.delete("MealPlanMapper.deleteMealPlanRange", mpDTO);
+		System.out.println("delete sqlSession 나온다~");
+		return a;
+	}
+
 
 
     

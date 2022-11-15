@@ -99,11 +99,9 @@ public class MealPlanController {
 		MealPlanDTO mpDTO = new MealPlanDTO();
 		mpDTO.setMpDate(parameter.get("mpDate"));
 		mpDTO.setMpDateEnd(parameter.get("mpDateEnd"));
-		
-		List<MealPlanDTO> mealPlanList = mealPlanService.deleteMealPlanRange(mpDTO);		
-			
-		if(mealPlanList != null) {
-			mealPlanPrintResult.printMealPlanList(mealPlanList);
+						
+		if(mealPlanService.deleteMealPlanRange(mpDTO)) {
+			mealPlanPrintResult.printSuccessMessage("delete");
 		} else {
 			mealPlanPrintResult.printErrorMessage("delete");
 		}

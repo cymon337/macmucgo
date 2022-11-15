@@ -390,7 +390,7 @@ public class MealPlanView {
 			String no = sc.nextLine();			
 			
 			switch(no) {
-				case "Y" : mealPlanController.deleteMealPlanRange(parameter); break; 	//일정 삭제
+				case "Y" : mealPlanController.deleteMealPlanRange(parameter); return; 	//일정 삭제
 		
 				case "N" : return;
 			
