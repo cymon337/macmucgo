@@ -38,7 +38,7 @@ public class PrintResult {
 	}
 
 	public void printErrorMessage(String errorCode) {// 각 메소드에서 호출시케이스마다 추가하면서 하자
-
+		
 		String errorMessage = "";
 		switch (errorCode) {
 		case "selectList":

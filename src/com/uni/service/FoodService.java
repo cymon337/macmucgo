@@ -18,7 +18,7 @@ public class FoodService {
 		foodDao = new FoodDao();
 	}
 
-	public List<FoodDTO> selectFood(String foodName) {
+	public List<FoodDTO> selectFood(String foodName) { //조회
 
 		SqlSession sqlSession = getSqlSession();
 
@@ -81,6 +81,16 @@ public class FoodService {
 		sqlSession.close();
 
 		return result > 0 ? true : false;
+	}
+
+	public List<FoodDTO> banFood(String foodName) {
+		SqlSession sqlSession = getSqlSession();
+
+		List<FoodDTO> foodList = foodDao.banFood(sqlSession, foodName);
+
+		sqlSession.close();
+
+		return foodList;
 	}
 
 }

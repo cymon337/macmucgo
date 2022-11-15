@@ -44,13 +44,21 @@
   
   <select id="selectFood" parameterType="string" resultMap = "foodResultMap">
         SELECT
+       		A.FOOD_ID ,
 			A.FOOD_NAME ,
 			A.RCP_PAT ,
 			A.INFO_ENG ,
 			A.INFO_NA ,
 			A.INFO_CAR ,
 			A.INFO_PRO ,
-			A.INFO_FAT 
+			A.INFO_FAT ,
+			A.MANUAL01 ,
+			A.MANUAL02 ,
+			A.MANUAL03 ,
+			A.MANUAL04 ,
+			A.MANUAL05 ,
+			A.MANUAL06 ,
+			A.BAN_YN
          FROM MASTERFOODTABLE A
         WHERE A.BAN_YN = 'N' 
         AND A.FOOD_NAME LIKE '%'|| #{foodName}||'%'
@@ -86,20 +94,20 @@
         (
          SEQ_FOOD_ID.NEXTVAL
           
-        , #{ food_name }
-        , #{ rcp_pat }
-        , #{ info_eng }
-        , #{ info_na }
-        , #{ info_car }
-        , #{ info_pro }
-        , #{ info_fat }
+        , #{ foodName }
+        , #{ rcpPat }
+        , #{ infoEng }
+        , #{ infoNa }
+        , #{ infoCar }
+        , #{ infoPro }
+        , #{ infoFat }
         , #{ manual01 }
         , #{ manual02 }
         , #{ manual03 }
         , #{ manual04 }
         , #{ manual05 }
         , #{ manual06 }
-        , 'N'
+        , #{ banYN }
         )
 	</insert>
 	
@@ -129,7 +137,29 @@
           FROM MASTERFOODTABLE A
          WHERE A.FOOD_ID = #{ foodId }
 	</delete>
-
+	
+	
+	 <select id="banFood" parameterType="string" resultMap = "foodResultMap">
+         SELECT
+       		A.FOOD_ID ,
+			A.FOOD_NAME ,
+			A.RCP_PAT ,
+			A.INFO_ENG ,
+			A.INFO_NA ,
+			A.INFO_CAR ,
+			A.INFO_PRO ,
+			A.INFO_FAT ,
+			A.MANUAL01 ,
+			A.MANUAL02 ,
+			A.MANUAL03 ,
+			A.MANUAL04 ,
+			A.MANUAL05 ,
+			A.MANUAL06 ,
+			A.BAN_YN
+         FROM MASTERFOODTABLE A
+        WHERE A.BAN_YN = 'Y' 
+        AND A.FOOD_NAME LIKE '%'|| #{foodName}||'%'
+	</select>
 	
 	
 	

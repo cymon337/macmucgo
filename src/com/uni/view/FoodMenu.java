@@ -19,7 +19,7 @@ public class FoodMenu {
 			System.out.println("2. 음식 조회");
 			System.out.println("3. 음식 수정");
 			System.out.println("4. 음식 삭제");
-			System.out.println("5. 음식 블랙리스트 관리");
+			System.out.println("5. 블랙리스트 음식 조회");
 			System.out.println("0. 프로그램 종료");
 			System.out.print("메뉴관리 번호를 입력하세요 : ");
 			int no = sc.nextInt();
@@ -38,10 +38,10 @@ public class FoodMenu {
 				menuController.deleteFood(inputFoodId()); // 음식 삭제 메소드
 				break;
 			case 5:
-				// menuController.banFood(banFood()); // 음식 블랙리스트관리 페이지 메소드
+				menuController.banFood(inputFoodName()); // 블랙리스트 음식 조회
 				break;
-			case 6:
-				// menuController.shotdown(shotdown()); // 프로그램 종료 메소드
+			case 0:
+				shotdown(); // 프로그램 종료 메소드
 				break;
 			default:
 				System.out.println("잘못된 메뉴를 선택하셨습니다.");
@@ -51,6 +51,18 @@ public class FoodMenu {
 		} while (true);
 
 	}
+
+
+
+
+	private static void shotdown() {
+		System.out.println("\n\n\t프로그램을 종료합니다.");
+        System.exit(0);
+		
+	}
+
+
+
 
 	private static Map<String, String> inputFoodId() {
 		Scanner sc = new Scanner(System.in);

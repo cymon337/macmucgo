@@ -33,4 +33,9 @@ public class FoodDao {
 		return sqlSession.delete("FoodMapper.deleteFood", code);
 	}
 
+	public List<FoodDTO> banFood(SqlSession sqlSession, String foodName) {
+		
+		return sqlSession.selectList("FoodMapper.banFood", foodName);
+	}
+
 }
