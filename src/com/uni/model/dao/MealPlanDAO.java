@@ -13,7 +13,7 @@ public class MealPlanDAO {
     public MealPlanDAO() {
 	}
 
-	public MealPlanAndFoodDTO selectMealPlanDay(SqlSession sqlSession, Date mpDate) {
+	public MealPlanDTO selectMealPlanDay(SqlSession sqlSession, Date mpDate) {
 		
 		
 		return sqlSession.selectOne("MealPlanMapper.selectMealPlanDay", mpDate);

@@ -19,12 +19,12 @@ public class MealPlanService {
         mealPlanDAO = new MealPlanDAO();    //  mealPlanDAO 초기화
     }
 
-    public MealPlanAndFoodDTO selectMealPlanDay(Date mpDate) {
+    public MealPlanDTO selectMealPlanDay(Date mpDate) {
         SqlSession sqlSession = getSqlSession();
 		
 		System.out.println(sqlSession);
 		
-		MealPlanAndFoodDTO mealPlan = mealPlanDAO.selectMealPlanDay(sqlSession, mpDate);
+		MealPlanDTO mealPlan = mealPlanDAO.selectMealPlanDay(sqlSession, mpDate);
 		
 		sqlSession.close();
 				

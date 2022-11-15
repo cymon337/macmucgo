@@ -11,13 +11,13 @@ public class MealPlanPrintResult {
 		
 		System.out.println("mealPlanList.length : " + mealPlanList.size());
 		for (MealPlanDTO mealPlan : mealPlanList) {
-			System.out.println(mealPlan);
+			System.out.println(mealPlan.toStringMealPlanDay());
 		}
 		
 	}	
 
-	public void printMealPlan(MealPlanAndFoodDTO mealPlanAndFood) {
-		System.out.println(mealPlanAndFood);
+	public void printMealPlan(MealPlanDTO mealPlan) {
+		System.out.println(mealPlan.toStringMealPlanDay());
 	}
 	
 	public void printSuccessMessage(String successCode) {

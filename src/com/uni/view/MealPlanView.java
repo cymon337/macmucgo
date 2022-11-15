@@ -56,8 +56,7 @@ public class MealPlanView {
 				System.out.println();
 			}
 			System.out.println("====================이번주 식단일정 조회====================");
-            mealPlanController.selectMealPlanDay(inputDate());
-			System.out.println("7일함수출력");
+//           mealPlanController.selectMealPlanDay(inputDate());			
 			mealPlanController.selectMealPlanWeek(inputDate());
             System.out.println("====================식단일정 등록====================");
 			System.out.println("1. 일간 등록");

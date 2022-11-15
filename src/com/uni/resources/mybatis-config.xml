@@ -13,14 +13,9 @@
 			</dataSource>
 		</environment>
 	</environments>
-<<<<<<< HEAD
-	<mappers>		
-		
+
+	<mappers>				
 		<mapper resource="com/uni/resources/mealPlan-mapper.xml"/>
-		
-=======
-	<mappers>
 		<mapper resource="com/uni/resources/food-mapper.xml"/>
->>>>>>> branch 'master' of https://github.com/cymon337/macmucgo.git
 	</mappers>
 </configuration>

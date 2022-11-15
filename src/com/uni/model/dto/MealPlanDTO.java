@@ -10,32 +10,32 @@ public class MealPlanDTO implements Serializable{
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table
     private Date mpDate;    // MP_DATE meal plan date (RR-MM-DD)
-    private int breakfast1;
-    private int breakfast2;
-	private int breakfast3;
-    private int breakfast4;
-    private int breakfast5;
-    private int breakfast6;
-    private int lunch1;
-    private int lunch2;
-    private int lunch3;
-    private int lunch4;
-    private int lunch5;
-    private int lunch6;
-    private int dinner1;
-    private int dinner2;
-    private int dinner3;
-    private int dinner4;
-    private int dinner5;
-    private int dinner6;
+    private String breakfast1;
+    private String breakfast2;
+	private String breakfast3;
+    private String breakfast4;
+    private String breakfast5;
+    private String breakfast6;
+    private String lunch1;
+    private String lunch2;
+    private String lunch3;
+    private String lunch4;
+    private String lunch5;
+    private String lunch6;
+    private String dinner1;
+    private String dinner2;
+    private String dinner3;
+    private String dinner4;
+    private String dinner5;
+    private String dinner6;
  
 	public MealPlanDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MealPlanDTO(int mpNo, int userNo, Date mpDate, int breakfast1, int breakfast2, int breakfast3,
-			int breakfast4, int breakfast5, int breakfast6, int lunch1, int lunch2, int lunch3, int lunch4, int lunch5,
-			int lunch6, int dinner1, int dinner2, int dinner3, int dinner4, int dinner5, int dinner6) {
+	public MealPlanDTO(int mpNo, int userNo, Date mpDate, String breakfast1, String breakfast2, String breakfast3,
+			String breakfast4, String breakfast5, String breakfast6, String lunch1, String lunch2, String lunch3, String lunch4, String lunch5,
+			String lunch6, String dinner1, String dinner2, String dinner3, String dinner4, String dinner5, String dinner6) {
 		super();
 		this.mpNo = mpNo;
 		this.userNo = userNo;
@@ -84,147 +84,147 @@ public class MealPlanDTO implements Serializable{
 		this.mpDate = mpDate;
 	}
 
-	public int getBreakfast1() {
+	public String getBreakfast1() {
 		return breakfast1;
 	}
 
-	public void setBreakfast1(int breakfast1) {
+	public void setBreakfast1(String breakfast1) {
 		this.breakfast1 = breakfast1;
 	}
 
-	public int getBreakfast2() {
+	public String getBreakfast2() {
 		return breakfast2;
 	}
 
-	public void setBreakfast2(int breakfast2) {
+	public void setBreakfast2(String breakfast2) {
 		this.breakfast2 = breakfast2;
 	}
 
-	public int getBreakfast3() {
+	public String getBreakfast3() {
 		return breakfast3;
 	}
 
-	public void setBreakfast3(int breakfast3) {
+	public void setBreakfast3(String breakfast3) {
 		this.breakfast3 = breakfast3;
 	}
 
-	public int getBreakfast4() {
+	public String getBreakfast4() {
 		return breakfast4;
 	}
 
-	public void setBreakfast4(int breakfast4) {
+	public void setBreakfast4(String breakfast4) {
 		this.breakfast4 = breakfast4;
 	}
 
-	public int getBreakfast5() {
+	public String getBreakfast5() {
 		return breakfast5;
 	}
 
-	public void setBreakfast5(int breakfast5) {
+	public void setBreakfast5(String breakfast5) {
 		this.breakfast5 = breakfast5;
 	}
 
-	public int getBreakfast6() {
+	public String getBreakfast6() {
 		return breakfast6;
 	}
 
-	public void setBreakfast6(int breakfast6) {
+	public void setBreakfast6(String breakfast6) {
 		this.breakfast6 = breakfast6;
 	}
 
-	public int getLunch1() {
+	public String getLunch1() {
 		return lunch1;
 	}
 
-	public void setLunch1(int lunch1) {
+	public void setLunch1(String lunch1) {
 		this.lunch1 = lunch1;
 	}
 
-	public int getLunch2() {
+	public String getLunch2() {
 		return lunch2;
 	}
 
-	public void setLunch2(int lunch2) {
+	public void setLunch2(String lunch2) {
 		this.lunch2 = lunch2;
 	}
 
-	public int getLunch3() {
+	public String getLunch3() {
 		return lunch3;
 	}
 
-	public void setLunch3(int lunch3) {
+	public void setLunch3(String lunch3) {
 		this.lunch3 = lunch3;
 	}
 
-	public int getLunch4() {
+	public String getLunch4() {
 		return lunch4;
 	}
 
-	public void setLunch4(int lunch4) {
+	public void setLunch4(String lunch4) {
 		this.lunch4 = lunch4;
 	}
 
-	public int getLunch5() {
+	public String getLunch5() {
 		return lunch5;
 	}
 
-	public void setLunch5(int lunch5) {
+	public void setLunch5(String lunch5) {
 		this.lunch5 = lunch5;
 	}
 
-	public int getLunch6() {
+	public String getLunch6() {
 		return lunch6;
 	}
 
-	public void setLunch6(int lunch6) {
+	public void setLunch6(String lunch6) {
 		this.lunch6 = lunch6;
 	}
 
-	public int getDinner1() {
+	public String getDinner1() {
 		return dinner1;
 	}
 
-	public void setDinner1(int dinner1) {
+	public void setDinner1(String dinner1) {
 		this.dinner1 = dinner1;
 	}
 
-	public int getDinner2() {
+	public String getDinner2() {
 		return dinner2;
 	}
 
-	public void setDinner2(int dinner2) {
+	public void setDinner2(String dinner2) {
 		this.dinner2 = dinner2;
 	}
 
-	public int getDinner3() {
+	public String getDinner3() {
 		return dinner3;
 	}
 
-	public void setDinner3(int dinner3) {
+	public void setDinner3(String dinner3) {
 		this.dinner3 = dinner3;
 	}
 
-	public int getDinner4() {
+	public String getDinner4() {
 		return dinner4;
 	}
 
-	public void setDinner4(int dinner4) {
+	public void setDinner4(String dinner4) {
 		this.dinner4 = dinner4;
 	}
 
-	public int getDinner5() {
+	public String getDinner5() {
 		return dinner5;
 	}
 
-	public void setDinner5(int dinner5) {
+	public void setDinner5(String dinner5) {
 		this.dinner5 = dinner5;
 	}
 
-	public int getDinner6() {
+	public String getDinner6() {
 		return dinner6;
 	}
 
-	public void setDinner6(int dinner6) {
+	public void setDinner6(String dinner6) {
 		this.dinner6 = dinner6;
 	}
 
@@ -238,6 +238,15 @@ public class MealPlanDTO implements Serializable{
 				+ ", dinner5=" + dinner5 + ", dinner6=" + dinner6 + "]";
 	}
 	
+	public String toStringMealPlanDay() {
+		return mpDate 
+				+ "\n\t" + breakfast1 + ", " + breakfast2 + ", " + breakfast3 
+				+ ", " + breakfast4 + ", " + breakfast5 + ", " + breakfast6 
+				+ "\n\t" + lunch1 + ", " + lunch2 + ", " + lunch3 
+				+ ", " + lunch4 + ", " + lunch5 + ", " + lunch6 
+				+ "\n\t" + dinner1 + ", " + dinner2 + ", " + dinner3
+				+ ", " + dinner4 + ", " + dinner5 + ", " + dinner6;
+	}
 	
 
 

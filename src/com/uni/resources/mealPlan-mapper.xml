@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace= "MealPlanMapper">
-	<!--  
-	<resultMap id="menuAndCategoryResultMap" type="com.uni.common.MenuAndCategoryDTO">
-		<id property="code" column="MENU_CODE"/>
-		<result property="name" column="MENU_NAME"/>
-		<result property="price" column="MENU_PRICE"/>
-		<result property="orderableStatus" column="ORDERABLE_STATUS"/>
-		<association property="category" resultMap="categoryResultMap"/>
-	</resultMap>
-  -->
-	<resultMap id = "mealPlanResultMap" type="com.uni.model.dto.MealPlanAndFoodDTO">
+
+		<resultMap id = "mealPlanStringResultMap" type="com.uni.model.dto.MealPlanDTO">
 	
 		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
 		<!-- DB에서의 기본키 --> 
@@ -18,113 +10,126 @@
 		<!-- DB에서의 일반컬럼들 MEALPLAN TABLE --> 
 		<result property="userNo" column="USER_NO"/>
 		<result property="mpDate" column="MP_DATE"/>
-		<association property="breakfast1" resultMap="foodResultMap"/>
-		<association property="breakfast2" resultMap="foodResultMap"/>
-		<association property="breakfast3" resultMap="foodResultMap"/>
-		<association property="breakfast4" resultMap="foodResultMap"/>
-		<association property="breakfast5" resultMap="foodResultMap"/>
-		<association property="breakfast6" resultMap="foodResultMap"/>
-		<association property="lunch1" resultMap="foodResultMap"/>
-		<association property="lunch2" resultMap="foodResultMap"/>
-		<association property="lunch3" resultMap="foodResultMap"/>
-		<association property="lunch4" resultMap="foodResultMap"/>
-		<association property="lunch5" resultMap="foodResultMap"/>
-		<association property="lunch6" resultMap="foodResultMap"/>
-		<association property="dinner1" resultMap="foodResultMap"/>
-		<association property="dinner2" resultMap="foodResultMap"/>
-		<association property="dinner3" resultMap="foodResultMap"/>
-		<association property="dinner4" resultMap="foodResultMap"/>
-		<association property="dinner5" resultMap="foodResultMap"/>
-		<association property="dinner6" resultMap="foodResultMap"/>
-		
-	</resultMap>	
-	<!-- 
-	<resultMap id="categoryResultMap" type="com.uni.common.CategoryDTO">
-		<id property="code" column="CATEGORY_CODE"/>
-		<result property="name" column="CATEGORY_NAME"/>
-		<result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
-	</resultMap>
-	-->	
-	<resultMap type = "com.uni.model.dto.FoodDTO" id = "foodResultMap">
-	
-		<!-- property : 자바에서 필드 변수 이름, column : DB의 해당 컬럼명 --> 
-		<!-- DB에서의 기본키 --> 
-		<id property="foodId" column = "FOOD_ID"/>
-		
-		<!-- DB에서의 일반컬럼들 --> 
-		<result property ="foodName" column="FOOD_NAME"/>  <!-- dto에는 기본생성자, setter 가 생성되어있어야 한다. -->
-		<result property ="rcpPat" column="RCP_PAT"/>
-		<result property ="infoEng" column="INFO_ENG"/>
-		<result property ="infoNa" column="INFO_NA"/>
-		<result property ="infoCar" column="INFO_CAR"/>
-		<result property ="infoPro" column="INFO_PRO"/>
-		<result property ="infoFat" column="INFO_FAT"/>
-		<result property ="manual01" column="MANUAL01"/>
-		<result property ="manual02" column="MANUAL02"/>
-		<result property ="manual03" column="MANUAL03"/>
-		<result property ="manual04" column="MANUAL04"/>
-		<result property ="manual05" column="MANUAL05"/>
-		<result property ="manual06" column="MANUAL06"/>
-		<result property ="banYN" column="BAN_YN"/>
+		<result property="breakfast1" column="BREAKFAST1"/>
+		<result property="breakfast2" column="BREAKFAST2"/>
+		<result property="breakfast3" column="BREAKFAST3"/>
+		<result property="breakfast4" column="BREAKFAST4"/>
+		<result property="breakfast5" column="BREAKFAST5"/>
+		<result property="breakfast6" column="BREAKFAST6"/>
+		<result property="lunch1" column="LUNCH1"/>
+		<result property="lunch2" column="LUNCH2"/>
+		<result property="lunch3" column="LUNCH3"/>
+		<result property="lunch4" column="LUNCH4"/>
+		<result property="lunch5" column="LUNCH5"/>
+		<result property="lunch6" column="LUNCH6"/>
+		<result property="dinner1" column="DINNER1"/>
+		<result property="dinner2" column="DINNER2"/>
+		<result property="dinner3" column="DINNER3"/>
+		<result property="dinner4" column="DINNER4"/>
+		<result property="dinner5" column="DINNER5"/>
+		<result property="dinner6" column="DINNER6"/>
 
-	</resultMap>
+
+	</resultMap>	
 	
-	
-   	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+	<select id="selectMealPlanDay" resultMap="mealPlanStringResultMap">
+                
         SELECT
-            A.*
-        FROM MEALPLAN A
-        WHERE A.MP_DATE = #{ mpDate }
+		    A.MP_DATE
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST1 ) AS BREAKFAST1
+	        , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST2 ) AS BREAKFAST2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST3 ) AS BREAKFAST3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST4 ) AS BREAKFAST4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST5 ) AS BREAKFAST5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST6 ) AS BREAKFAST6
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH1 ) AS LUNCH1
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH2 ) AS LUNCH2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH3 ) AS LUNCH3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH4 ) AS LUNCH4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH5 ) AS LUNCH5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH6 ) AS LUNCH6
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER1 ) AS DINNER1
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER2 ) AS DINNER2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER3 ) AS DINNER3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER4 ) AS DINNER4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER5 ) AS DINNER5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER6 ) AS DINNER6
+		    
+		FROM MEALPLAN A	
+		WHERE USER_NO = 1
+		  AND A.MP_DATE = #{ mpDate }
+		<!--  
+		AND MP_DATE BETWEEN TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
+		                AND TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
+        -->
 	</select>
-	
-	
-	<select id="selectMealPlanWeek2" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanResultMap">
+
+
+
+	<select id="selectMealPlanWeek" resultMap="mealPlanStringResultMap">
+                
+        SELECT
+		    A.MP_DATE
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST1 ) AS BREAKFAST1
+	        , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST2 ) AS BREAKFAST2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST3 ) AS BREAKFAST3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST4 ) AS BREAKFAST4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST5 ) AS BREAKFAST5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.BREAKFAST6 ) AS BREAKFAST6
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH1 ) AS LUNCH1
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH2 ) AS LUNCH2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH3 ) AS LUNCH3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH4 ) AS LUNCH4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH5 ) AS LUNCH5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.LUNCH6 ) AS LUNCH6
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER1 ) AS DINNER1
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER2 ) AS DINNER2
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER3 ) AS DINNER3
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER4 ) AS DINNER4
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER5 ) AS DINNER5
+		    , (SELECT FOOD_NAME FROM MASTERFOODTABLE WHERE FOOD_ID = A.DINNER6 ) AS DINNER6
+		    
+		FROM MEALPLAN A	
+		WHERE USER_NO = 1
+		<![CDATA[
+		  AND A.MP_DATE >= #{ mpDate }		
+		  AND A.MP_DATE <= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
+        ]]>
+	</select>
+<!--	
+	<select id="selectMealPlanWeek2" resultMap="mealPlanResultMap">
      
         SELECT
-		    *
-		FROM MEALPLAN
+		    A.MP_DATE		 
+		FROM MEALPLAN A
+		JOIN FOOD B ON 
 		WHERE USER_NO = 1
-		AND MP_DATE <![CDATA[>]]>= #{ mpDate }		
+		AND MP_DATE <![CDATA[>= #{ mpDate }		
 		AND MP_DATE <![CDATA[<]]>= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
 
-       <!-- 비교연산자 부등호 그냥쓰면 오류   
+
+		AND MP_DATE BETWEEN TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
+		                AND TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
+		                
+      비교연산자 부등호 그냥쓰면 오류  
+       AND BTWEEN #{ mpDate1 } AND #{ mpDate2 }  입력받은 두 날짜 범위 조건
+       
+       SELECT
+		    *
+            
+		FROM MEALPLAN	
+		WHERE USER_NO = 1
+        AND MP_DATE BETWEEN TO_DATE('#{ mpDate1 }', 'YYYY-MM-DD')
+                        AND TO_DATE('#{ mpDate2 }', 'YYYY-MM-DD')
          
          				1.   <![CDATA["부등호"]]> 
          								
          				2.   <  대체  lt          ex) salary &lt; 10000
          					 >  대체  gt			ex) salary &gt; 10000
          					 <= 대체  lte     	 ex) salary &lte; 10000
-        		             >= 대체  gte         ex) salary &gte; 10000     -->
-        
-	</select>
-	
-	<select id="selectMealPlanDay" parameterType="com.uni.model.dto.MealPlanDTO" resultMap="mealPlanNameResultMap">
-        SELECT
-		    MP_DATE
-		    , FN_GET_FOOD_NAME(BREAKFAST1)
-		    , FN_GET_FOOD_NAME(BREAKFAST2)
-		    , FN_GET_FOOD_NAME(BREAKFAST3)
-		    , FN_GET_FOOD_NAME(BREAKFAST4)
-		    , FN_GET_FOOD_NAME(BREAKFAST5)
-		    , FN_GET_FOOD_NAME(BREAKFAST6)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(LUNCH1)
-		    , FN_GET_FOOD_NAME(DINNER1)
-		    , FN_GET_FOOD_NAME(DINNER1)
-		    , FN_GET_FOOD_NAME(DINNER1)
-		    , FN_GET_FOOD_NAME(DINNER1)
-		    , FN_GET_FOOD_NAME(DINNER1)
-		    , FN_GET_FOOD_NAME(DINNER1)    
-		FROM MEALPLAN
-		WHERE USER_NO = 1
-		AND MP_DATE <![CDATA[>]]>= #{ mpDate }		
-		AND MP_DATE <![CDATA[<]]>= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
-	</select>
-	
+        		             >= 대체  gte         ex) salary &gte; 10000    
+       </select>	
+-->	
 
 </mapper>
 
