@@ -24,6 +24,10 @@ public class MealPlanDAO {
 		return sqlSession.selectList("MealPlanMapper.selectMealPlanWeek", mpDate);
 	}
 
+	public List<MealPlanDTO> selectMealPlanRange(SqlSession sqlSession, MealPlanDTO mpDTO) {
+		return sqlSession.selectList("MealPlanMapper.selectMealPlanRange", mpDTO);
+	}
+
 
 
     

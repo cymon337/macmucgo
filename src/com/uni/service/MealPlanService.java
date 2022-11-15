@@ -42,6 +42,30 @@ public class MealPlanService {
 				
 		return mealPlanList;
 	}
+	
+	public List<MealPlanDTO> selectMealPlanRange(MealPlanDTO mpDTO) {
+		SqlSession sqlSession = getSqlSession();
+		
+		System.out.println(sqlSession);
+		
+		List<MealPlanDTO> mealPlanList = mealPlanDAO.selectMealPlanRange(sqlSession, mpDTO);
+		
+		sqlSession.close();
+				
+		return mealPlanList;
+	}
+	
+	public List<MealPlanDTO> deleteMealPlanRange(MealPlanDTO mpDTO) {
+		SqlSession sqlSession = getSqlSession();
+		
+		System.out.println(sqlSession);
+		
+		List<MealPlanDTO> mealPlanList = mealPlanDAO.selectMealPlanRange(sqlSession, mpDTO);
+		
+		sqlSession.close();
+				
+		return mealPlanList;
+	}
 
     public void printSuccessMessage(String successCode) {
 		
@@ -68,6 +92,10 @@ public class MealPlanService {
 		
 		System.out.println(errorMessage);
 	}
+
+	
+
+	
 
 	
 

@@ -9,7 +9,7 @@ public class MealPlanPrintResult {
 	
 	public void printMealPlanList(List<MealPlanDTO> mealPlanList) {
 		
-		System.out.println("mealPlanList.length : " + mealPlanList.size());
+		System.out.println("등록된 식단일정 : " + mealPlanList.size() + "일");
 		for (MealPlanDTO mealPlan : mealPlanList) {
 			System.out.println(mealPlan.toStringMealPlanDay());
 		}

@@ -9,8 +9,19 @@ public class MealPlanDTO implements Serializable{
     // TB MEALPLAN 
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table
-    private Date mpDate;    // MP_DATE meal plan date (RR-MM-DD)
-    private String breakfast1;
+    private Date mpDate;    // MP_DATE meal plan date (yyyy-MM-dd)
+    
+    private Date mpDateEnd;
+    public Date getMpDateEnd() {
+		return mpDateEnd;
+	}
+
+	public void setMpDateEnd(Date mpDateEnd) {
+		this.mpDateEnd = mpDateEnd;
+	}
+    
+
+	private String breakfast1;
     private String breakfast2;
 	private String breakfast3;
     private String breakfast4;
@@ -83,6 +94,8 @@ public class MealPlanDTO implements Serializable{
 	public void setMpDate(Date mpDate) {
 		this.mpDate = mpDate;
 	}
+	
+	
 
 	public String getBreakfast1() {
 		return breakfast1;
@@ -239,12 +252,12 @@ public class MealPlanDTO implements Serializable{
 	}
 	
 	public String toStringMealPlanDay() {
-		return mpDate 
-				+ "\n\t" + breakfast1 + ", " + breakfast2 + ", " + breakfast3 
+		return mpDate + "\t (식단 :  밥,  국,  반찬1,  반찬2,  반찬3,  후식)"
+				+ "\n\t 아침 : " + breakfast1 + ", " + breakfast2 + ", " + breakfast3 
 				+ ", " + breakfast4 + ", " + breakfast5 + ", " + breakfast6 
-				+ "\n\t" + lunch1 + ", " + lunch2 + ", " + lunch3 
+				+ "\n\t 점심 : " + lunch1 + ", " + lunch2 + ", " + lunch3 
 				+ ", " + lunch4 + ", " + lunch5 + ", " + lunch6 
-				+ "\n\t" + dinner1 + ", " + dinner2 + ", " + dinner3
+				+ "\n\t 저녁 : " + dinner1 + ", " + dinner2 + ", " + dinner3
 				+ ", " + dinner4 + ", " + dinner5 + ", " + dinner6;
 	}
 	
