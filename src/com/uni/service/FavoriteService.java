@@ -3,11 +3,13 @@ package com.uni.service;
 import static com.uni.template.Template.getSqlSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.uni.model.dao.FavoriteDAO;
 import com.uni.model.dto.FavoriteDTO;
+import com.uni.model.dto.MenuDTO;
 
 public class FavoriteService {
 	private final FavoriteDAO myDAO;
@@ -41,6 +43,14 @@ public class FavoriteService {
 		mySession.close();
 		return result > 0 ? true : false;
 	}
+
+	public void deleteOne(Map<String, Integer> map) {
+		SqlSession mySession = getSqlSession();
+		
+		commitTest(mySession, myDAO.deleteOne(mySession, map));
+		
+		mySession.close();
+	}
 	
 	public String getMenu(int favFoodCode) {
 		SqlSession mySession = getSqlSession();
@@ -48,6 +58,29 @@ public class FavoriteService {
 		
 		mySession.close();
 		return result;
+	}
+
+	public MenuDTO getDetail(int menuId) {
+		SqlSession mySession = getSqlSession();
+		MenuDTO menuTmp = myDAO.favoritegetDetail(mySession, menuId);
+		mySession.close();
+		return menuTmp;
+	}
+
+	public List<Integer> createFoodMenu(String pat) {
+		SqlSession mySession = getSqlSession();
+		List<Integer> list = myDAO.createSelectAll(mySession, pat);
+		mySession.close();
+		return list;
+	}
+
+	public boolean createMenu(FavoriteDTO newFav) {
+		SqlSession mySession = getSqlSession();
+		int result = myDAO.createMenu(mySession, newFav);
+		commitTest(mySession, result);
+		
+		mySession.close();
+		return result > 0 ? true : false;
 	}
 	
 	private static void commitTest(SqlSession session, int value) {

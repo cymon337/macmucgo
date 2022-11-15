@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.uni.controller.FavoriteController;
 import com.uni.model.dto.FavoriteDTO;
+import com.uni.model.dto.MenuDTO;
 
 public class FavoritePrintResult {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,7 +40,7 @@ public class FavoritePrintResult {
 
 	public void screenMain(List<FavoriteDTO> list, int LISTSHOW, int currPage) {
 		int listSize = list.size();
-		int lastPage = (listSize - 1) / 10 + 1;
+		int lastPage = (listSize - 1) / LISTSHOW + 1;
 		
 		System.out.println("====================즐겨찾기 메인=====================");
 		System.out.println("총 " + listSize + " 개의 즐겨찾기가 있습니다.");
@@ -72,7 +73,48 @@ public class FavoritePrintResult {
 		}
 	}
 	
-	public void screenDetail(FavoriteDTO menu) {
-		System.out.println("====================즐겨찾기 메인=====================");
+	public void lineDetail(MenuDTO menu, String menuNameTmp) {
+		if(menu != null) {
+			System.out.print(menuNameTmp + " : [" + menu.getFoodName() + "]");
+			System.out.print(" - " + printNutrients(menu));
+		} else {
+			System.out.print(menuNameTmp+ " : [없음]");
+		}
+	    System.out.println();
+	}
+	
+	public String printNutrients(MenuDTO menu) {
+		return "칼로리 : " + menu.getInfoEng() + "kcal, 나트륨 : " + menu.getInfoNa() + "mg, 탄수화물 : " +
+				menu.getInfoCar() + "g, 단백질 : " + menu.getInfoPro() + "g, 지방 : " + menu.getInfoFat() + "g";
+	}
+
+	public void screenDetail(boolean printFirstLine, boolean checkMode, boolean[] isChecked,
+						List<MenuDTO> menuList, int favId) {
+		if(printFirstLine) {
+			System.out.println(favId + " 번 즐겨찾기의 상세 정보입니다.\n");
+		} else {
+			System.out.println();
+		}
+		String[] menuNameTmp = {"밥", "국", "반찬1", "반찬2", "반찬3", "후식"};
+		double[] infoTmp = {0, 0, 0, 0, 0};
+		for(int i = 0; i < 6; i++) {
+			if(checkMode) {
+				System.out.print("[" + (isChecked[i] ? "V" : " ") + "] ");
+			}
+			new FavoritePrintResult().lineDetail(menuList.get(i), menuNameTmp[i]);
+			if(menuList.get(i) == null) continue;
+			infoTmp[0] += menuList.get(i).getInfoEng();
+			infoTmp[1] += menuList.get(i).getInfoNa();
+			infoTmp[2] += menuList.get(i).getInfoCar();
+			infoTmp[3] += menuList.get(i).getInfoPro();
+			infoTmp[4] += menuList.get(i).getInfoFat();
+		}
+		MenuDTO totalMenuTmp = new MenuDTO();
+		totalMenuTmp.setInfoEng(Math.round(infoTmp[0] * 100) / 100);
+		totalMenuTmp.setInfoNa(Math.round(infoTmp[1] * 100) / 100);
+		totalMenuTmp.setInfoCar(Math.round(infoTmp[2] * 100) / 100);
+		totalMenuTmp.setInfoPro(Math.round(infoTmp[3] * 100) / 100);
+		totalMenuTmp.setInfoFat(Math.round(infoTmp[4] * 100) / 100);
+		System.out.println("<총합> " + new FavoritePrintResult().printNutrients(totalMenuTmp));
 	}
 }

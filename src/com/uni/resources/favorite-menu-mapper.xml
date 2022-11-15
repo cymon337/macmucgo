@@ -3,7 +3,6 @@
 <mapper namespace= "FavoriteMenuMapper">
 
 	<resultMap type = "com.uni.model.dto.FavoriteDTO" id = "favoriteResultMap">
-	
 		<id property="favId" column = "FAV_NO"/>
 		<result property ="userId" column="USER_NO"/>
 		<result property ="favFood1" column="FAV_FOOD1"/>
@@ -12,7 +11,18 @@
 		<result property ="favFood4" column="FAV_FOOD4"/>
 		<result property ="favFood5" column="FAV_FOOD5"/>
 		<result property ="favFood6" column="FAV_FOOD6"/>
-
+	</resultMap>
+	
+	<resultMap type = "com.uni.model.dto.MenuDTO" id = "menuResultMap">
+		<id property="foodId" column = "FOOD_ID"/>
+		<result property ="foodName" column="FOOD_NAME"/>
+		<result property ="rcpPat" column="FOOD_RCP_PAT"/>
+		<result property ="infoEng" column="INFO_ENG"/>
+		<result property ="infoNa" column="INFO_NA"/>
+		<result property ="infoCar" column="INFO_CAR"/>
+		<result property ="infoPro" column="INFO_PRO"/>
+		<result property ="infoFat" column="INFO_FAT"/>
+		<result property ="banYN" column="BAN_YN"/>
 	</resultMap>
 	
   	<select id = "selectAllMenu" resultMap = "favoriteResultMap">
@@ -31,12 +41,37 @@
   	 ORDER BY A.FAV_NO
   
   	</select>
+	
+  	<select id = "selectDetail" parameterType="_int" resultMap = "menuResultMap">
+  
+  	SELECT
+	  	   A.FOOD_ID,
+	  	   A.FOOD_NAME,
+	  	   A.RCP_PAT,
+	  	   A.INFO_ENG,
+	  	   A.INFO_NA,
+	  	   A.INFO_CAR,
+	  	   A.INFO_PRO,
+	  	   A.INFO_FAT,
+	  	   A.BAN_YN
+  	  FROM MASTERFOODTABLE A
+  	 WHERE A.FOOD_ID = #{searchId}
+  
+  	</select>
   	
 	<select id="getMenu" parameterType="_int" resultType="string">
 		SELECT
 			   A.FOOD_NAME
 		  FROM MASTERFOODTABLE A
 		 WHERE A.FOOD_ID = #{ menuCode }
+	</select>
+	
+	<select id="checkBlack" parameterType="_int" resultType="_int">
+		SELECT
+			   COUNT(*)
+		  FROM MASTERFOODTABLE A
+		 WHERE A.FOOD_ID = #{ index }
+		   AND A.BAN_YN = 'Y'
 	</select>
 	
   	<insert id="insertFavorite" parameterType="com.uni.model.dto.FavoriteDTO">
@@ -77,45 +112,79 @@
 	<delete id="deleteFavorite" parameterType="_int">
 		DELETE
 		  FROM FAVORITE A
-		 WHERE A.FAV_NO = #{idIdx}
+		 WHERE A.FAV_FOOD1 = -1
+		   AND A.FAV_FOOD2 = -1
+		   AND A.FAV_FOOD3 = -1
+		   AND A.FAV_FOOD4 = -1
+		   AND A.FAV_FOOD5 = -1
+		   AND A.FAV_FOOD6 = -1
 	</delete>
-  <!-- 
-  <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
-  <select id="selectMenuByCode" parameterType="String" resultMap="menuResultMap">
-        SELECT
-               A.MENU_CODE
-             , A.MENU_NAME
-             , A.MENU_PRICE
-             , A.CATEGORY_CODE
-             , A.ORDERABLE_STATUS
-         FROM TBL_MENU A
-        WHERE A.ORDERABLE_STATUS = 'Y' 
-          AND A.MENU_CODE = #{ code }	
-	</select>
 	
-	insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다.
-	파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 에러가 발생한다.
-	파라미터 타입도 생략이 가능하다. 	
-	
-	
-	
-	
-	<update id="updateMenu" parameterType="com.uni.model.dto.FavoriteDTO">
+	<update id="deleteFood" parameterType="Map">
 		UPDATE
-		       TBL_MENU A
-		   SET A.MENU_NAME = #{ name }
-		     , A.MENU_PRICE = #{ price }
-		     , A.CATEGORY_CODE = #{ categoryCode }
-		 WHERE A.MENU_CODE = #{ code }
+		       FAVORITE A
+		 <if test="idx eq 1">
+		   SET A.FAV_FOOD1 = -1
+		 </if>
+		 <if test="idx eq 2">
+		   SET A.FAV_FOOD2 = -1
+		 </if>
+		 <if test="idx eq 3">
+		   SET A.FAV_FOOD3 = -1
+		 </if>
+		 <if test="idx eq 4">
+		   SET A.FAV_FOOD4 = -1
+		 </if>
+		 <if test="idx eq 5">
+		   SET A.FAV_FOOD5 = -1
+		 </if>
+		 <if test="idx eq 6">
+		   SET A.FAV_FOOD6 = -1
+		 </if>
+		 WHERE A.FAV_NO = #{ favId }
 	</update>
 	
-	<delete id="deleteMenu" parameterType="_int">
-        DELETE
-          FROM TBL_MENU A
-         WHERE A.MENU_CODE = #{ code }
-	</delete> -->
+	
+	<select id = "selectAllCreateMenu" parameterType="string" resultType = "_int">
+  	SELECT
+	  	   A.FOOD_ID
+  	  FROM MASTERFOODTABLE A
+  	 WHERE RCP_PAT = #{rat}
+  
+  	</select>
 
-	
-	
-	
+	<insert id="insertMenu" parameterType="com.uni.model.dto.FavoriteDTO">
+	INSERT
+	  INTO FAVORITE A
+	(
+		A.FAV_NO,
+		A.USER_NO,
+		FAV_FOOD1,
+		FAV_FOOD2,
+		FAV_FOOD3,
+		FAV_FOOD4,
+		FAV_FOOD5,
+		FAV_FOOD6,
+		INCLUDE_BLACK
+	)
+	VALUES
+	(
+        SEQ_FAV_NO.NEXTVAL, 
+		#{userId},
+		#{favFood1},
+		#{favFood2},
+		#{favFood3},
+		#{favFood4},
+		#{favFood5},
+		#{favFood6},
+		(
+		  	SELECT
+		  		   COUNT(*)
+		  	  FROM MASTERFOODTABLE
+		  	 WHERE FOOD_ID IN (#{ favFood1 }, #{ favFood2 }, #{ favFood3 },
+		  	   				#{ favFood4 }, #{ favFood5 }, #{ favFood6 })
+		  	   AND BAN_YN = 'Y'
+		)
+	)
+	</insert>
 </mapper>

@@ -3,8 +3,10 @@ package com.uni.controller;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.uni.model.dto.FavoriteDTO;
+import com.uni.model.dto.MenuDTO;
 import com.uni.printResult.FavoritePrintResult;
 import com.uni.service.FavoriteService;
 import com.uni.view.FavoriteMenu;
@@ -46,6 +48,10 @@ public class FavoriteController {
 		}
 		return result;
 	}
+
+	public MenuDTO favoriteGetDetail(int menuId) {
+		return fs.getDetail(menuId);
+	}
 	
 	public List<FavoriteDTO> FavoriteSelectAll() {
 		List<FavoriteDTO> list = fs.favoriteSelectAll();
@@ -57,23 +63,37 @@ public class FavoriteController {
 
 	public void insertFav(FavoriteDTO favoriteDTO) {
 		if(fs.insertFav(favoriteDTO)) {
-			new FavoritePrintResult().checkMSG("식단 등록이 완료되었습니다.");
+			new FavoritePrintResult().checkMSG("즐겨찾기 등록이 완료되었습니다.");
 		} else {
-			new FavoritePrintResult().checkMSG("식단 등록에 실패하였습니다. 다시 시도해주세요.");
+			new FavoritePrintResult().checkMSG("즐겨찾기 등록에 실패하였습니다. 다시 시도해주세요.");
 		}
 	}
 
-	public void deleteFav(List<FavoriteDTO> list, int deleteIdx, int listSize) {
-		if(deleteIdx >= 1 && deleteIdx <= listSize) {
-			int favIdIdx = list.get(deleteIdx - 1).getFavId();
-			//삭제하려는 식단은 다음과 같습니다 #상세조회
-			if(fs.deleteFav(favIdIdx)) {
-				new FavoritePrintResult().checkMSG("식단 삭제가 완료되었습니다.");
-			} else {
-				new FavoritePrintResult().checkMSG("식단 삭제에 실패하였습니다. 다시 시도해주세요.");
-			}
+	public void deleteFav(int favId) {
+		if(fs.deleteFav(favId)) {
+			new FavoritePrintResult().checkMSG("즐겨찾기를 삭제했습니다.");
 		} else {
-			new FavoritePrintResult().checkMSG("해당하는 식단 번호가 없습니다.");
+			new FavoritePrintResult().checkMSG("즐겨찾기 수정이 반영되었습니다.");
+		}
+	}
+
+	public void deleteOne(Map<String, Integer> map) {
+		fs.deleteOne(map);
+	}
+
+	public List<Integer> createFoodMenu(String pat) {
+		List<Integer> list = fs.createFoodMenu(pat);
+		if(list == null) {
+			return new ArrayList<Integer>();
+		}
+		return list;
+	}
+
+	public void favoriteCreateMenu(FavoriteDTO newFav) {
+		if(fs.createMenu(newFav)) {
+			new FavoritePrintResult().checkMSG("즐겨찾기에 메뉴 추가를 하였습니다.");
+		} else {
+			new FavoritePrintResult().checkMSG("즐겨찾기 추가가 반영되지 않았습니다.");
 		}
 	}
 }

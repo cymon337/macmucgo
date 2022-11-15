@@ -108,11 +108,4 @@ public class FavoriteDTO {
 	public void setIncludeBlack(int includeBlack) {
 		this.includeBlack = includeBlack;
 	}
-
-	@Override
-	public String toString() {
-		return "FavoriteDTO [favId=" + favId + ", userId=" + userId + ", favFood1=" + favFood1 + ", favFood2="
-				+ favFood2 + ", favFood3=" + favFood3 + ", favFood4=" + favFood4 + ", favFood5=" + favFood5
-				+ ", favFood6=" + favFood6 + ", includeBlack=" + includeBlack + "]";
-	}
 }
