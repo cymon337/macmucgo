@@ -7,12 +7,15 @@ import java.util.Scanner;
 import com.uni.controller.FoodController;
 
 public class FoodMenu {
+	
 
 	public static void foodMenu() {
 
 		Scanner sc = new Scanner(System.in);
 		FoodController menuController = new FoodController();
-
+		final int LISTSHOW = 10;
+		int currPage = 1;
+		
 		do {
 			System.out.println("=========== 관리자 관리 ===========");
 			System.out.println("1. 음식 추가");
@@ -29,7 +32,7 @@ public class FoodMenu {
 				menuController.insertOne(inputFood()); // 음식추가 메소드
 				break;
 			case 2:
-				menuController.selectFood(inputFoodName()); // 음식명으로 검색 메소드
+				menuController.selectFood(inputFoodName(), LISTSHOW, currPage); // 음식명으로 검색 메소드
 				break;
 			case 3:
 				menuController.updateFood(inputUpdateFood()); // 음식 수정 메소드
@@ -38,7 +41,7 @@ public class FoodMenu {
 				menuController.deleteFood(inputFoodId()); // 음식 삭제 메소드
 				break;
 			case 5:
-				menuController.banFood(inputFoodName()); // 블랙리스트 음식 조회
+				menuController.banFood(inputFoodName(), LISTSHOW, currPage); // 블랙리스트 음식 조회
 				break;
 			case 0:
 				shotdown(); // 프로그램 종료 메소드

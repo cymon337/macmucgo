@@ -17,14 +17,14 @@ public class FoodController {
 		foodService = new FoodService();
 	}
 
-	public void selectFood(Map<String, String> parameter) {
+	public void selectFood(Map<String, String> parameter, int LISTSHOW, int currPage) {
 
 		String name = parameter.get("foodName");
 
 		List<FoodDTO> foodList = foodService.selectFood(name);
 
 		if (foodList.size() > 0) {
-			printResult.printFood(foodList);
+			printResult.printFood(foodList, LISTSHOW, currPage);
 		} else {
 			printResult.printErrorMessage("selectList");
 		}
@@ -127,13 +127,13 @@ public class FoodController {
 
 	}
 
-	public void banFood(Map<String, String> parameter) {
+	public void banFood(Map<String, String> parameter, int LISTSHOW, int currPage) {
 		String name = parameter.get("foodName");
 
 		List<FoodDTO> foodList = foodService.banFood(name);
 
 		if (foodList.size() > 0) {
-			printResult.printFood(foodList);
+			printResult.printFood(foodList, LISTSHOW, currPage);
 		} else {
 			printResult.printErrorMessage("selectList");
 		}
