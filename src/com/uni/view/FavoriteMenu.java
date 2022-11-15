@@ -34,7 +34,7 @@ public class FavoriteMenu {
 				}
 				
 				//식단 화면
-				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
+				SCREENJUMP();	// 30(기본값)줄 줄 바꿈 
 				new FavoritePrintResult().screenMain(list, LISTSHOW, currPage);
 						//메인 화면 진입 시 즐겨찾기 자동 조회
 				
