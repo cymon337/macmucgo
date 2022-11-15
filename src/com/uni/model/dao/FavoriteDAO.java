@@ -22,4 +22,8 @@ public class FavoriteDAO {
 		return mySession.selectOne("FavoriteMenuMapper.getMenu", favFoodCode);
 	}
 
+	public int deleteFav(SqlSession mySession, int favIdIdx) {
+		return mySession.delete("FavoriteMenuMapper.deleteFavorite", favIdIdx);
+	}
+
 }

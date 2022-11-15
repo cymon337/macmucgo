@@ -32,6 +32,13 @@
   
   	</select>
   	
+	<select id="getMenu" parameterType="_int" resultType="string">
+		SELECT
+			   A.FOOD_NAME
+		  FROM MASTERFOODTABLE A
+		 WHERE A.FOOD_ID = #{ menuCode }
+	</select>
+	
   	<insert id="insertFavorite" parameterType="com.uni.model.dto.FavoriteDTO">
         INSERT
           INTO FAVORITE A
@@ -67,12 +74,11 @@
         )
 	</insert>
 	
-	<select id="getMenu" parameterType="_int" resultType="string">
-		SELECT
-			   A.FOOD_NAME
-		  FROM MASTERFOODTABLE A
-		 WHERE A.FOOD_ID = #{ menuCode }
-	</select>
+	<delete id="deleteFavorite" parameterType="_int">
+		DELETE
+		  FROM FAVORITE A
+		 WHERE A.FAV_NO = #{idIdx}
+	</delete>
   <!-- 
   <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
   <select id="selectMenuByCode" parameterType="String" resultMap="menuResultMap">

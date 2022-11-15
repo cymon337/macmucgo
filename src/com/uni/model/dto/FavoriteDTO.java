@@ -14,9 +14,7 @@ public class FavoriteDTO {
 	public FavoriteDTO() {
 	}
 
-	public FavoriteDTO(int favId, int userId, int favFood1, int favFood2, int favFood3, int favFood4, int favFood5,
-			int favFood6, int includeBlack) {
-		this.favId = favId;
+	public FavoriteDTO(int userId, int favFood1, int favFood2, int favFood3, int favFood4, int favFood5, int favFood6) {
 		this.userId = userId;
 		this.favFood1 = favFood1;
 		this.favFood2 = favFood2;
@@ -24,8 +22,20 @@ public class FavoriteDTO {
 		this.favFood4 = favFood4;
 		this.favFood5 = favFood5;
 		this.favFood6 = favFood6;
-		this.includeBlack = includeBlack;
 	}
+
+//	public FavoriteDTO(int favId, int userId, int favFood1, int favFood2, int favFood3, int favFood4, int favFood5,
+//			int favFood6, int includeBlack) {
+//		this.favId = favId;
+//		this.userId = userId;
+//		this.favFood1 = favFood1;
+//		this.favFood2 = favFood2;
+//		this.favFood3 = favFood3;
+//		this.favFood4 = favFood4;
+//		this.favFood5 = favFood5;
+//		this.favFood6 = favFood6;
+//		this.includeBlack = includeBlack;
+//	}
 
 	public int getFavId() {
 		return favId;
