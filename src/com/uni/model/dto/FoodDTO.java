@@ -1,8 +1,6 @@
 package com.uni.model.dto;
 
-import org.apache.ibatis.session.SqlSession;
-
-public class FoodDTO implements java.io.Serializable {
+public class FoodDTO {
 	
 	
 	private	int foodId;
@@ -112,7 +110,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual01() {
 		String temp = "";
-		for(String i : manual01.split("\n") ) {temp += i;}
+		if(manual01 !=null ) for(String i : manual01.split("\n") ) {temp += i;}
 		return temp;
 	}
 
@@ -122,7 +120,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual02() {
 		String temp = "";
-		for(String i : manual02.split("\n") ) {temp += i;}
+		if(manual02 !=null ) for(String i : manual02.split("\n") ) {temp += i;}
 		return temp;
 	}
 
@@ -132,7 +130,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual03() {
 		String temp = "";
-		for(String i : manual03.split("\n") ) {temp += i;}
+		if(manual03 !=null ) for(String i : manual03.split("\n") ) {temp += i;}
 		return temp;
 	}
 
@@ -142,7 +140,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual04() {
 		String temp = "";
-		for(String i : manual04.split("\n") ) {temp += i;}
+		if(manual04 !=null ) for(String i : manual04.split("\n") ) {temp += i;}
 		return temp;
 	}
 
@@ -152,7 +150,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual05() {
 		String temp = "";
-		for(String i : manual05.split("\n") ) {temp += i;}
+		if(manual05 !=null ) for(String i : manual05.split("\n") ) {temp += i;}
 		return temp;
 	}
 
@@ -162,7 +160,7 @@ public class FoodDTO implements java.io.Serializable {
 
 	public String getManual06() {
 		String temp = "";
-		for(String i : manual06.split("\n") ) {temp += i;}
+		if(manual06 !=null ) for(String i : manual06.split("\n") ) {temp += i;}
 		return temp;
 	}
 
