@@ -18,7 +18,7 @@ public class FoodService {
 		foodDao = new FoodDao();
 	}
 
-	public List<FoodDTO> selectFood(String foodName) {
+	public List<FoodDTO> selectFood(String foodName) { //조회
 
 		SqlSession sqlSession = getSqlSession();
 
@@ -69,6 +69,44 @@ public class FoodService {
 		SqlSession sqlSession = getSqlSession();
 
 		int result = foodDao.deleteFood(sqlSession, id);
+
+		if (result > 0) {
+
+			sqlSession.commit();
+
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return result > 0 ? true : false;
+	}
+
+	public List<FoodDTO> banFood(String foodName) {
+		SqlSession sqlSession = getSqlSession();
+
+		List<FoodDTO> foodList = foodDao.banFood(sqlSession, foodName);
+
+		sqlSession.close();
+
+		return foodList;
+	}
+
+	public List<FoodDTO> banFoodAll() {
+		SqlSession sqlSession = getSqlSession();
+
+		List<FoodDTO> foodList = foodDao.banFoodAll(sqlSession);
+
+		sqlSession.close();
+
+		return foodList;
+	}
+
+	public boolean updateBanFood(FoodDTO food) {
+		SqlSession sqlSession = getSqlSession();
+
+		int result = foodDao.updateBanFood(sqlSession, food);
 
 		if (result > 0) {
 
