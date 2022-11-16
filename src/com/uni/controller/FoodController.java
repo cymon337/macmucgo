@@ -33,12 +33,14 @@ public class FoodController {
 	}
 	
 	public void selectByCode(Map<String, Integer> parameter, int LISTSHOW) {
-		int code = parameter.get("foodId");
-		FoodDTO getFood = foodService.selectByCode(code);
+		List<FoodDTO> tmpList = new ArrayList<>();
+		for(int i = 1; i <= 6; i++) {
+			int code = parameter.get("foodId" + i);
+			FoodDTO getFood = foodService.selectByCode(code);
+			if(getFood != null) tmpList.add(getFood);
+		}
 		
-		if(getFood != null) {
-			List<FoodDTO> tmpList = new ArrayList<>();
-			tmpList.add(getFood);
+		if(tmpList.size() > 0) {
 			printResult.printFood(tmpList, LISTSHOW, 1);
 		} else {
 			printResult.printErrorMessage("selectOne");

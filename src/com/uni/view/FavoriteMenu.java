@@ -188,24 +188,13 @@ public class FavoriteMenu {
 	
 	private void favoriteVeryDetail(FavoriteDTO favMenu) {
 		Map<String, Integer> tmpMap = new HashMap<>();
-		if(fc.favoriteGetDetail(favMenu.getFavFood1()) != null) {
-			tmpMap.put("foodId1", favMenu.getFavFood1());
-		}
-		if(fc.favoriteGetDetail(favMenu.getFavFood2()) != null) {
-			tmpMap.put("foodId2", favMenu.getFavFood1());
-		}
-		if(fc.favoriteGetDetail(favMenu.getFavFood3()) != null) {
-			tmpMap.put("foodId3", favMenu.getFavFood1());
-		}
-		if(fc.favoriteGetDetail(favMenu.getFavFood4()) != null) {
-			tmpMap.put("foodId4", favMenu.getFavFood1());
-		}
-		if(fc.favoriteGetDetail(favMenu.getFavFood5()) != null) {
-			tmpMap.put("foodId5", favMenu.getFavFood1());
-		}
-		if(fc.favoriteGetDetail(favMenu.getFavFood6()) != null) {
-			tmpMap.put("foodId6", favMenu.getFavFood1());
-		}
+		
+		tmpMap.put("foodId1", (fc.favoriteGetDetail(favMenu.getFavFood1()) != null ? favMenu.getFavFood1() : -1));
+		tmpMap.put("foodId2", (fc.favoriteGetDetail(favMenu.getFavFood2()) != null ? favMenu.getFavFood2() : -1));
+		tmpMap.put("foodId3", (fc.favoriteGetDetail(favMenu.getFavFood3()) != null ? favMenu.getFavFood3() : -1));
+		tmpMap.put("foodId4", (fc.favoriteGetDetail(favMenu.getFavFood4()) != null ? favMenu.getFavFood4() : -1));
+		tmpMap.put("foodId5", (fc.favoriteGetDetail(favMenu.getFavFood5()) != null ? favMenu.getFavFood5() : -1));
+		tmpMap.put("foodId6", (fc.favoriteGetDetail(favMenu.getFavFood6()) != null ? favMenu.getFavFood6() : -1));
 		new FoodController().selectByCode(tmpMap, LISTSHOW);
 	}
 
