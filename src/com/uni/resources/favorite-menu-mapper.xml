@@ -150,6 +150,7 @@
 	  	   A.FOOD_ID
   	  FROM MASTERFOODTABLE A
   	 WHERE RCP_PAT = #{rat}
+  	   AND BAN_YN = 'N'
   
   	</select>
 
