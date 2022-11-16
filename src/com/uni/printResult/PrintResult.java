@@ -83,7 +83,7 @@ public class PrintResult {
 				System.out.println("==================== 조회결과 =====================");
 				System.out.println("총 " + listSize + " 개의 결과가 있습니다.");
 				System.out.println("(번호) [아이디]  [음식명]  [종류]  [열량]  [탄수화물]  [단백질]  [지방]  [메뉴얼]  [블랙리스트]");
-				
+
 				int pageIdx = (currPage - 1) * LISTSHOW + 1; // 페이지 시작값 (현재페이지 -1 ) * 10 + 1
 				int lineIdx = 1;
 
@@ -112,15 +112,14 @@ public class PrintResult {
 					System.out.println("2. 다음 페이지로 이동");
 					System.out.println("3. 페이지 입력 후 이동");
 				}
-				System.out.println("4. 식단 생성 후 즐겨찾기");
-				System.out.println("5. 즐겨찾기 상세조회");
-				System.out.println("6. 즐겨찾기 삭제");
+
 				System.out.println("0. 메인 메뉴로 돌아가기");
 				System.out.print("번호를 입력하세요 : ");
 				int cmd = sc.nextInt();
 				switch (cmd) {
 				case 1:
 					if (currPage == 1) {
+						System.out.println();
 						System.out.println("================= 첫 페이지입니다. =================");
 					} else {
 						currPage--;
@@ -129,6 +128,7 @@ public class PrintResult {
 					break;
 				case 2:
 					if (currPage >= lastPage) {
+						System.out.println();
 						System.out.println("================ 마지막 페이지입니다. ================");
 					} else {
 						currPage++;

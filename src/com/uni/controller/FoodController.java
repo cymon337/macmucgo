@@ -140,4 +140,32 @@ public class FoodController {
 
 	}
 
+	public void banFoodAll(int LISTSHOW, int currPage) {
+		
+		List<FoodDTO> foodList = foodService.banFoodAll();
+
+		if (foodList.size() > 0) {
+			printResult.printFood(foodList, LISTSHOW, currPage);
+		} else {
+			printResult.printErrorMessage("selectList");
+		}
+		
+	}
+
+	public void updateBanFood(Map<String, String> parameter) {
+		int id = Integer.parseInt(parameter.get("foodId"));
+		String ban = parameter.get("banYN");
+
+		FoodDTO food = new FoodDTO();
+		food.setFoodId(id);
+		food.setBanYN(ban);
+
+		if (foodService.updateBanFood(food)) {
+			printResult.printSuccessMessage("update");
+		} else {
+			printResult.printErrorMessage("update");
+		}
+		
+	}
+
 }

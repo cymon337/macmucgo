@@ -47,15 +47,18 @@
 		A.INFO_PRO ,
 		A.INFO_FAT ,
 		A.MANUAL01 ,
-		A.MANUAL02 ,
+		A.MANUAL02
+		,
 		A.MANUAL03 ,
 		A.MANUAL04 ,
 		A.MANUAL05 ,
 		A.MANUAL06 ,
 		A.BAN_YN
-		FROM MASTERFOODTABLE A
+		FROM
+		MASTERFOODTABLE A
 		WHERE A.BAN_YN = 'N'
-		AND A.FOOD_NAME LIKE '%'|| #{foodName}||'%'
+		AND A.FOOD_NAME LIKE '%'||
+		#{foodName}||'%'
 		ORDER BY A.FOOD_NAME
 	</select>
 
@@ -92,12 +95,14 @@
 		SEQ_FOOD_ID.NEXTVAL
 
 		, #{ foodName }
-		, #{ rcpPat }
+		, #{
+		rcpPat }
 		, #{ infoEng }
 		, #{ infoNa }
 		, #{ infoCar }
 		, #{ infoPro }
-		, #{ infoFat }
+		, #{
+		infoFat }
 		, #{ manual01 }
 		, #{ manual02 }
 		, #{ manual03 }
@@ -119,20 +124,24 @@
 		A.INFO_NA = #{infoNa},
 		A.INFO_CAR = #{infoCar},
 		A.INFO_PRO = #{infoPro},
-		A.INFO_FAT = #{infoFat},
+		A.INFO_FAT =
+		#{infoFat},
 		A.MANUAL01 = #{manual01},
 		A.MANUAL02 = #{manual02},
 		A.MANUAL03 = #{manual03},
 		A.MANUAL04 = #{manual04},
-		A.MANUAL05 = #{manual05},
+		A.MANUAL05 =
+		#{manual05},
 		A.MANUAL06 = #{manual06},
 		A.BAN_YN = #{banYN}
-		WHERE A.FOOD_ID = #{ foodId }
+		WHERE
+		A.FOOD_ID = #{ foodId }
 	</update>
 
 	<delete id="deleteFood" parameterType="_int">
 		DELETE
-		FROM MASTERFOODTABLE A
+		FROM MASTERFOODTABLE
+		A
 		WHERE A.FOOD_ID = #{ foodId }
 	</delete>
 
@@ -149,17 +158,57 @@
 		A.INFO_PRO ,
 		A.INFO_FAT ,
 		A.MANUAL01 ,
-		A.MANUAL02 ,
+		A.MANUAL02
+		,
 		A.MANUAL03 ,
 		A.MANUAL04 ,
 		A.MANUAL05 ,
 		A.MANUAL06 ,
 		A.BAN_YN
-		FROM MASTERFOODTABLE A
+		FROM
+		MASTERFOODTABLE A
 		WHERE A.BAN_YN = 'Y'
-		AND A.FOOD_NAME LIKE '%'|| #{foodName}||'%'
+		AND A.FOOD_NAME LIKE '%'||
+		#{foodName}||'%'
 		ORDER BY A.FOOD_NAME
 	</select>
+
+	<select id="banFoodAll" parameterType="string"
+		resultMap="foodResultMap">
+		SELECT
+		A.FOOD_ID ,
+		A.FOOD_NAME ,
+		A.RCP_PAT ,
+		A.INFO_ENG ,
+		A.INFO_NA ,
+		A.INFO_CAR ,
+		A.INFO_PRO ,
+		A.INFO_FAT ,
+		A.MANUAL01 ,
+		A.MANUAL02
+		,
+		A.MANUAL03 ,
+		A.MANUAL04 ,
+		A.MANUAL05 ,
+		A.MANUAL06 ,
+		A.BAN_YN
+		FROM
+		MASTERFOODTABLE A
+		WHERE A.BAN_YN = 'Y'
+		ORDER BY A.FOOD_NAME
+	</select>
+
+	<update id="updateBanFood"
+		parameterType="com.uni.model.dto.FoodDTO">
+		UPDATE
+		MASTERFOODTABLE A
+		SET
+		A.BAN_YN = #{banYN}
+		WHERE
+		A.FOOD_ID = #{ foodId }
+
+	</update>
+
 
 
 

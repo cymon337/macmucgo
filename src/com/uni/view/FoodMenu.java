@@ -7,7 +7,6 @@ import java.util.Scanner;
 import com.uni.controller.FoodController;
 
 public class FoodMenu {
-	
 
 	public static void foodMenu() {
 
@@ -15,14 +14,16 @@ public class FoodMenu {
 		FoodController menuController = new FoodController();
 		final int LISTSHOW = 10;
 		int currPage = 1;
-		
+
 		do {
 			System.out.println("=========== 관리자 관리 ===========");
 			System.out.println("1. 음식 추가");
 			System.out.println("2. 음식 조회");
 			System.out.println("3. 음식 수정");
 			System.out.println("4. 음식 삭제");
-			System.out.println("5. 블랙리스트 음식 조회");
+			System.out.println("5. 블랙리스트 음식명 조회");
+			System.out.println("6. 블랙리스트 조회");
+			System.out.println("7. 블랙리스트 수정");
 			System.out.println("0. 프로그램 종료");
 			System.out.print("메뉴관리 번호를 입력하세요 : ");
 			int no = sc.nextInt();
@@ -38,10 +39,18 @@ public class FoodMenu {
 				menuController.updateFood(inputUpdateFood()); // 음식 수정 메소드
 				break;
 			case 4:
-				menuController.deleteFood(inputFoodId()); // 음식 삭제 메소드
+				menuController.deleteFood(deleteFoodId()); // 음식 삭제 메소드
 				break;
 			case 5:
 				menuController.banFood(inputFoodName(), LISTSHOW, currPage); // 블랙리스트 음식 조회
+				break;
+
+			case 6:
+				menuController.banFoodAll(LISTSHOW, currPage); // 블랙리스트 전체조회
+				break;
+
+			case 7:
+				menuController.updateBanFood(updateBan()); // 블랙리스트 수정
 				break;
 			case 0:
 				shotdown(); // 프로그램 종료 메소드
@@ -55,19 +64,30 @@ public class FoodMenu {
 
 	}
 
+	private static Map<String, String> updateBan() {
+		Scanner sc = new Scanner(System.in);
 
+		System.out.print("수정할 음식아이디를 입력하세요 : ");
+		String id = sc.nextLine();
 
+		System.out.print("블랙리스트 여부(Y,N)를 입력하세요 : ");
+		String ban = sc.nextLine().toUpperCase();
+
+		Map<String, String> parameter = new HashMap<>();
+		parameter.put("foodId", id);
+
+		parameter.put("banYN", ban);
+
+		return parameter;
+	}
 
 	private static void shotdown() {
 		System.out.println("\n\n\t프로그램을 종료합니다.");
-        System.exit(0);
-		
+		System.exit(0);
+
 	}
 
-
-
-
-	private static Map<String, String> inputFoodId() {
+	private static Map<String, String> deleteFoodId() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("삭제할 음식아이디를 입력하세요 : ");
 		String id = sc.nextLine();
@@ -80,7 +100,7 @@ public class FoodMenu {
 
 	private static Map<String, String> inputUpdateFood() {
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.print("수정할 음식아이디를 입력하세요 : ");
 		String id = sc.nextLine();
 

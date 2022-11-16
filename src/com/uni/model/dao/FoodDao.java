@@ -38,4 +38,12 @@ public class FoodDao {
 		return sqlSession.selectList("FoodMapper.banFood", foodName);
 	}
 
+	public List<FoodDTO> banFoodAll(SqlSession sqlSession) {
+		return sqlSession.selectList("FoodMapper.banFoodAll");
+	}
+
+	public int updateBanFood(SqlSession sqlSession, FoodDTO food) {
+		return sqlSession.update("FoodMapper.updateBanFood", food);
+	}
+
 }

@@ -93,4 +93,32 @@ public class FoodService {
 		return foodList;
 	}
 
+	public List<FoodDTO> banFoodAll() {
+		SqlSession sqlSession = getSqlSession();
+
+		List<FoodDTO> foodList = foodDao.banFoodAll(sqlSession);
+
+		sqlSession.close();
+
+		return foodList;
+	}
+
+	public boolean updateBanFood(FoodDTO food) {
+		SqlSession sqlSession = getSqlSession();
+
+		int result = foodDao.updateBanFood(sqlSession, food);
+
+		if (result > 0) {
+
+			sqlSession.commit();
+
+		} else {
+			sqlSession.rollback();
+		}
+
+		sqlSession.close();
+
+		return result > 0 ? true : false;
+	}
+
 }
