@@ -29,6 +29,17 @@ public class FoodService {
 		return foodList;
 	}
 
+
+	public FoodDTO selectByCode(int code) {
+
+		SqlSession sqlSession = getSqlSession();
+
+		FoodDTO getFood = foodDao.selectByCode(sqlSession, code);
+
+		sqlSession.close();
+
+		return getFood;
+	}
 	public boolean insertOne(FoodDTO food) {
 		SqlSession sqlSession = getSqlSession();
 
@@ -120,5 +131,6 @@ public class FoodService {
 
 		return result > 0 ? true : false;
 	}
+
 
 }

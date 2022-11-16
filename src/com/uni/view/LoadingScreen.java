@@ -70,7 +70,7 @@ public class LoadingScreen {
 		double tmpRotateX = Math.random() * 360;
 		//double tmpRotateY = Math.random() * 360;
 		double tmpRotateZ = Math.random() * 360;
-		int count = -20;
+		int count = -30;
 		int idx = 0;
 		while(count < 99999999) {
 			tmpRotateX += 2.6;
@@ -90,9 +90,9 @@ public class LoadingScreen {
 			}
 			sb = new StringBuilder();
 			for(int i = 0; i < 8; i++) {
-				rotateX(i, Math.sin(degreeToRadian(tmpRotateX)) * 0.12);
+				rotateX(i, Math.sin(degreeToRadian(tmpRotateX)) * 0.085);
 				rotateY(i, numToDegree(12));
-				rotateZ(i, Math.sin(degreeToRadian(tmpRotateZ)) * 0.075);
+				rotateZ(i, Math.sin(degreeToRadian(tmpRotateZ)) * 0.037);
 			}
 			for(int i = 0; i < 8; i++) {
 				positionToScreen(i, dot[i][0], dot[i][1], dot[i][2]);
@@ -159,7 +159,7 @@ public class LoadingScreen {
 			
 			//System.out.println(sb);
 			
-			int countTrigger = 20;
+			int countTrigger = 70;
 			String msg1 = "test1";
 			String msg2 = "test2";
 			if(idx < 6) {
@@ -202,9 +202,9 @@ public class LoadingScreen {
 			sb.append(msg1 + "\n");
 			sb.append(msg2);
 			System.out.println(sb);
-			count += 1;
+			count += 2;
 			try {
-				Thread.sleep(50);
+				Thread.sleep(33);
 			} catch (InterruptedException e) {
 				new FavoritePrintResult().warnMSG("InterruptedException", "문제가 발생했습니다. 다시 시도해주세요.");
 				//e.printStackTrace();

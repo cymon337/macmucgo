@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.uni.controller.FavoriteController;
+import com.uni.controller.FoodController;
 import com.uni.model.dto.FavoriteDTO;
 import com.uni.model.dto.FavoriteMenuDTO;
 import com.uni.printResult.FavoritePrintResult;
@@ -17,6 +18,7 @@ public class FavoriteMenu {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private FavoriteController fc = new FavoriteController();
 	private final int userId = 1;
+	private final int LISTSHOW = 10;
 	
 	private final void SCREENJUMP() {
 		for(int i = 0; i < 30; i++) {
@@ -26,7 +28,6 @@ public class FavoriteMenu {
 	
 	//favorite main screen
 	public void favoriteMainMenu() {
-		final int LISTSHOW = 10;
 		int currPage = 1;	//현재 페이지는 작업 이후에도 1페이지로 초기화 되지 않게 저장.
 
 		do {
@@ -153,9 +154,12 @@ public class FavoriteMenu {
 				System.out.println("==================================================");
 				System.out.println("1. 즐겨찾기 내용 재생성 및 삭제");
 				System.out.println("2. " + favId + "번 즐겨찾기 삭제");
+				System.out.println("3. 음식 정보 자세히 보기");
 				System.out.println("0. 즐겨찾기 메뉴로 돌아가기");
 				System.out.print("번호를 입력하세요 : ");
 				int cmd = Integer.parseInt(br.readLine());
+				Map<String, Integer> tmpMap = new HashMap<>();
+				
 				switch(cmd) {
 				case 1 :
 					favoriteDetailUpdateMenu(true, favMenu, favId);
@@ -163,6 +167,10 @@ public class FavoriteMenu {
 				case 2 :
 					favoriteDetailDeleteMenu(favMenu, isUsed, favId);
 					return;
+				case 3 :
+					favoriteVeryDetail(favMenu);
+					
+					break;
 				case 0 :
 					return;
 				default :
@@ -178,6 +186,29 @@ public class FavoriteMenu {
 		} while(true);
 	}
 	
+	private void favoriteVeryDetail(FavoriteDTO favMenu) {
+		Map<String, Integer> tmpMap = new HashMap<>();
+		if(fc.favoriteGetDetail(favMenu.getFavFood1()) != null) {
+			tmpMap.put("foodId1", favMenu.getFavFood1());
+		}
+		if(fc.favoriteGetDetail(favMenu.getFavFood2()) != null) {
+			tmpMap.put("foodId2", favMenu.getFavFood1());
+		}
+		if(fc.favoriteGetDetail(favMenu.getFavFood3()) != null) {
+			tmpMap.put("foodId3", favMenu.getFavFood1());
+		}
+		if(fc.favoriteGetDetail(favMenu.getFavFood4()) != null) {
+			tmpMap.put("foodId4", favMenu.getFavFood1());
+		}
+		if(fc.favoriteGetDetail(favMenu.getFavFood5()) != null) {
+			tmpMap.put("foodId5", favMenu.getFavFood1());
+		}
+		if(fc.favoriteGetDetail(favMenu.getFavFood6()) != null) {
+			tmpMap.put("foodId6", favMenu.getFavFood1());
+		}
+		new FoodController().selectByCode(tmpMap, LISTSHOW);
+	}
+
 	private void favoriteDetailUpdateMenu(boolean isExist, FavoriteDTO favMenu, int favId) {
 		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		if(favMenu == null) {
