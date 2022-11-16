@@ -16,7 +16,7 @@ public class FoodService {
 		foodDao = new FoodDao();
 	}
 
-	public List<FoodDTO> selectFood(String foodName) { //조회
+	public List<FoodDTO> selectFood(String foodName) { // 조회
 
 		SqlSession sqlSession = getSqlSession();
 
@@ -25,6 +25,17 @@ public class FoodService {
 		sqlSession.close();
 
 		return foodList;
+	}
+
+	public FoodDTO selectByCode(int code) {
+
+		SqlSession sqlSession = getSqlSession();
+
+		FoodDTO getFood = foodDao.selectByCode(sqlSession, code);
+
+		sqlSession.close();
+
+		return getFood;
 	}
 
 	public boolean insertOne(FoodDTO food) {
