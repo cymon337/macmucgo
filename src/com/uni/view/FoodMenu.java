@@ -1,24 +1,23 @@
 package com.uni.view;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.uni.controller.FoodController;
-import com.uni.printResult.FavoritePrintResult;
 
 public class FoodMenu {
-	static Scanner sc = new Scanner(System.in);
+	
 	static FoodController fc = new FoodController();
 
 	public static void foodMenu() {
-
+		
 		final int LISTSHOW = 10;
 		int currPage = 1;
 
 		do {
+			Scanner sc = new Scanner(System.in);
 			try {
 				System.out.println("=========== 관리자 관리 ===========");
 				System.out.println("1. 음식 추가");
