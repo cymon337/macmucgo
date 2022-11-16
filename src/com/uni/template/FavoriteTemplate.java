@@ -15,6 +15,7 @@ public class FavoriteTemplate {
 	public static SqlSession getSqlSession() {
 		if(sqlSessionFactory == null) {
 			String resource = "com/uni/resources/favorite-mybatis-config.xml";
+			///// 템플릿 맞추기 config 파일 및 mapper 설정 확인
 			InputStream inputStream;
 			try {
 				inputStream = Resources.getResourceAsStream(resource);
