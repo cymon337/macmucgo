@@ -1,11 +1,8 @@
 package com.uni.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.uni.controller.FavoriteController;
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
 import com.uni.printResult.FavoritePrintResult;
 
 public class LoadingScreen {

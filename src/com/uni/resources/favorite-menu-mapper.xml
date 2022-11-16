@@ -13,7 +13,7 @@
 		<result property ="favFood6" column="FAV_FOOD6"/>
 	</resultMap>
 	
-	<resultMap type = "com.uni.model.dto.MenuDTO" id = "menuResultMap">
+	<resultMap type = "com.uni.model.dto.FavoriteMenuDTO" id = "menuResultMap">
 		<id property="foodId" column = "FOOD_ID"/>
 		<result property ="foodName" column="FOOD_NAME"/>
 		<result property ="rcpPat" column="FOOD_RCP_PAT"/>

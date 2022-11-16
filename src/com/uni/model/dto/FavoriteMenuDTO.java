@@ -1,6 +1,6 @@
 package com.uni.model.dto;
 
-public class MenuDTO {
+public class FavoriteMenuDTO {
 	private	int foodId;
 	private	String foodName;
 	private String rcpPat;
@@ -11,9 +11,9 @@ public class MenuDTO {
 	private	double infoFat;
 	private	String banYN;
 	
-	public MenuDTO() {}
+	public FavoriteMenuDTO() {}
 
-	public MenuDTO(int foodId, String foodName, String rcpPat, double infoEng, double infoNa, double infoCar,
+	public FavoriteMenuDTO(int foodId, String foodName, String rcpPat, double infoEng, double infoNa, double infoCar,
 			double infoPro, double infoFat, String banYN) {
 		this.foodId = foodId;
 		this.foodName = foodName;

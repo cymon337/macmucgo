@@ -1,6 +1,6 @@
 package com.uni.service;
 
-import static com.uni.template.Template.getSqlSession;
+import static com.uni.template.FavoriteTemplate.getSqlSession;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.uni.model.dao.FavoriteDAO;
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
+import com.uni.model.dto.FavoriteMenuDTO;
 
 public class FavoriteService {
 	private final FavoriteDAO myDAO;
@@ -60,9 +60,9 @@ public class FavoriteService {
 		return result;
 	}
 
-	public MenuDTO getDetail(int menuId) {
+	public FavoriteMenuDTO getDetail(int menuId) {
 		SqlSession mySession = getSqlSession();
-		MenuDTO menuTmp = myDAO.favoritegetDetail(mySession, menuId);
+		FavoriteMenuDTO menuTmp = myDAO.favoritegetDetail(mySession, menuId);
 		mySession.close();
 		return menuTmp;
 	}

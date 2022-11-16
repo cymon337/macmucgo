@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.uni.controller.FavoriteController;
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
+import com.uni.model.dto.FavoriteMenuDTO;
 
 public class FavoritePrintResult {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -73,7 +73,7 @@ public class FavoritePrintResult {
 		}
 	}
 	
-	public void lineDetail(boolean simpleMode, MenuDTO menu, String menuNameTmp) {
+	public void lineDetail(boolean simpleMode, FavoriteMenuDTO menu, String menuNameTmp) {
 		if(menu != null) {
 			System.out.print(menuNameTmp + " : [" + menu.getFoodName() + "]");
 			if(!simpleMode) System.out.print(" - " + printNutrients(menu));
@@ -83,13 +83,13 @@ public class FavoritePrintResult {
 	    System.out.println();
 	}
 	
-	public String printNutrients(MenuDTO menu) {
+	public String printNutrients(FavoriteMenuDTO menu) {
 		return "칼로리 : " + menu.getInfoEng() + "kcal, 나트륨 : " + menu.getInfoNa() + "mg, 탄수화물 : " +
 				menu.getInfoCar() + "g, 단백질 : " + menu.getInfoPro() + "g, 지방 : " + menu.getInfoFat() + "g";
 	}
 
 	public void screenDetail(boolean printFirstLine, boolean checkMode, boolean simpleMode,
-						boolean[] isChecked, List<MenuDTO> menuList, int favId) {
+						boolean[] isChecked, List<FavoriteMenuDTO> menuList, int favId) {
 		if(printFirstLine) {
 			System.out.println(favId + " 번 즐겨찾기의 상세 정보입니다.\n");
 		} else {
@@ -112,7 +112,7 @@ public class FavoritePrintResult {
 			}
 		}
 		if(!simpleMode) {
-			MenuDTO totalMenuTmp = new MenuDTO();
+			FavoriteMenuDTO totalMenuTmp = new FavoriteMenuDTO();
 			totalMenuTmp.setInfoEng(Math.round(infoTmp[0] * 100) / 100);
 			totalMenuTmp.setInfoNa(Math.round(infoTmp[1] * 100) / 100);
 			totalMenuTmp.setInfoCar(Math.round(infoTmp[2] * 100) / 100);

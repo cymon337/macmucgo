@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
+import com.uni.model.dto.FavoriteMenuDTO;
 
 public class FavoriteDAO {
 	public FavoriteDAO() {
@@ -33,7 +33,7 @@ public class FavoriteDAO {
 		return mySession.update("FavoriteMenuMapper.deleteFood", map);
 	}
 
-	public MenuDTO favoritegetDetail(SqlSession mySession, int menuId) {
+	public FavoriteMenuDTO favoritegetDetail(SqlSession mySession, int menuId) {
 		return mySession.selectOne("FavoriteMenuMapper.selectDetail", menuId);
 	}
 

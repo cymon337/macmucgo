@@ -8,13 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class Template {
+public class FavoriteTemplate {
 	
 	private static SqlSessionFactory sqlSessionFactory;
 	
 	public static SqlSession getSqlSession() {
 		if(sqlSessionFactory == null) {
-			String resource = "com/uni/resources/mybatis-config.xml";
+			String resource = "com/uni/resources/favorite-mybatis-config.xml";
 			InputStream inputStream;
 			try {
 				inputStream = Resources.getResourceAsStream(resource);

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
+import com.uni.model.dto.FavoriteMenuDTO;
 import com.uni.printResult.FavoritePrintResult;
 import com.uni.service.FavoriteService;
 import com.uni.view.FavoriteMenu;
@@ -49,7 +49,7 @@ public class FavoriteController {
 		return result;
 	}
 
-	public MenuDTO favoriteGetDetail(int menuId) {
+	public FavoriteMenuDTO favoriteGetDetail(int menuId) {
 		return fs.getDetail(menuId);
 	}
 	

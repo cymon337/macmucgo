@@ -10,7 +10,7 @@ import java.util.Map;
 
 import com.uni.controller.FavoriteController;
 import com.uni.model.dto.FavoriteDTO;
-import com.uni.model.dto.MenuDTO;
+import com.uni.model.dto.FavoriteMenuDTO;
 import com.uni.printResult.FavoritePrintResult;
 
 public class FavoriteMenu {
@@ -138,7 +138,7 @@ public class FavoriteMenu {
 	}
 	
 	private void favoriteDetailMenu(FavoriteDTO favMenu, int favId) {
-		List<MenuDTO> menuList = new ArrayList<>();
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {favMenu.getFavFood1(), favMenu.getFavFood2(), favMenu.getFavFood3(),
 							favMenu.getFavFood4(), favMenu.getFavFood5(), favMenu.getFavFood6()}) {
 			menuList.add(fc.favoriteGetDetail(i));
@@ -179,7 +179,7 @@ public class FavoriteMenu {
 	}
 	
 	private void favoriteDetailUpdateMenu(boolean isExist, FavoriteDTO favMenu, int favId) {
-		List<MenuDTO> menuList = new ArrayList<>();
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		if(favMenu == null) {
 			for(int i = 0; i < 6; i++) {
 				menuList.add(null);
@@ -226,7 +226,7 @@ public class FavoriteMenu {
 						}
 						do {
 							if(!isExist) {
-								favoriteDetailMakeMenu(true, favMenu, favId, userId, isChecked);;
+								favoriteDetailMakeMenu(true, favMenu, favId, userId, isChecked);
 								return;
 							}
 							System.out.println("-------------------------------------");
@@ -262,14 +262,14 @@ public class FavoriteMenu {
 	}
 
 	private void favoriteDetailDeleteMenu(FavoriteDTO favMenu, boolean[] isChecked, int favId) {
-		List<MenuDTO> menuList = new ArrayList<>();
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {favMenu.getFavFood1(), favMenu.getFavFood2(), favMenu.getFavFood3(),
 							favMenu.getFavFood4(), favMenu.getFavFood5(), favMenu.getFavFood6()}) {
-			MenuDTO menu = fc.favoriteGetDetail(i);
+			FavoriteMenuDTO menu = fc.favoriteGetDetail(i);
 			if(menu != null) {
 				menuList.add(menu);
 			} else {
-				menuList.add(new MenuDTO());
+				menuList.add(new FavoriteMenuDTO());
 			}
 		}
 		do {
@@ -311,7 +311,7 @@ public class FavoriteMenu {
 	private void favoriteDetailMakeMenu(boolean isNew, FavoriteDTO favMenu,
 						int targetFavId, int targetUserId, boolean[] isChecked) {
 		if(favMenu == null) favMenu = new FavoriteDTO(-1, -1, -1, -1, -1, -1, -1);
-		List<MenuDTO> menuList = new ArrayList<>();
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		if(isNew) {
 			for(int i = 0; i < 6; i++) {
 				menuList.add(null);
@@ -319,7 +319,7 @@ public class FavoriteMenu {
 		} else {
 			for(int i : new int[] {favMenu.getFavFood1(), favMenu.getFavFood2(), favMenu.getFavFood3(),
 								favMenu.getFavFood4(), favMenu.getFavFood5(), favMenu.getFavFood6()}) {
-				MenuDTO menu = fc.favoriteGetDetail(i);
+				FavoriteMenuDTO menu = fc.favoriteGetDetail(i);
 				menuList.add(menu);
 			}
 		}
@@ -363,10 +363,10 @@ public class FavoriteMenu {
 	
 	private void CreatedMenuAdd(boolean isNew, FavoriteDTO newFav, boolean[] isChecked, int favId, int UserId) {
 		//newFav를 챙겨 "생성한 메뉴는 다음과 같다, 바로 등록할거냐 즐찾 추가할거냐 묻기
-		List<MenuDTO> menuList = new ArrayList<>();
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {newFav.getFavFood1(), newFav.getFavFood2(), newFav.getFavFood3(),
 							newFav.getFavFood4(), newFav.getFavFood5(), newFav.getFavFood6()}) {
-			MenuDTO menu = fc.favoriteGetDetail(i);
+			FavoriteMenuDTO menu = fc.favoriteGetDetail(i);
 			if(menu != null) {
 				menuList.add(menu);
 			} else {
