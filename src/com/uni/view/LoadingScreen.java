@@ -1,5 +1,13 @@
 package com.uni.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.uni.controller.FavoriteController;
+import com.uni.model.dto.FavoriteDTO;
+import com.uni.model.dto.MenuDTO;
+import com.uni.printResult.FavoritePrintResult;
+
 public class LoadingScreen {
 	static double[][] dot;
 	static double[][] dotScreen;
@@ -44,7 +52,7 @@ public class LoadingScreen {
 		return num / 360 * (Math.PI * 2);
 	}
 	
-	public static void main(String[] args) throws Exception {
+	public void loadMain(FavoriteDTO result, List<List<Integer>> foodList, boolean[] isChecked) {
 		//[점 index][x, y, z] => [8][3]
 		StringBuilder sb;
 		double size = 5.5;
@@ -63,26 +71,31 @@ public class LoadingScreen {
 		eye = new double[] {20.0, 20.0, -1.0};
 		map = new boolean[60][80];
 		double tmpRotateX = Math.random() * 360;
-		double tmpRotateY = Math.random() * 360;
+		//double tmpRotateY = Math.random() * 360;
 		double tmpRotateZ = Math.random() * 360;
-		int count = 0;
+		int count = -20;
+		int idx = 0;
 		while(count < 99999999) {
 			tmpRotateX += 2.6;
-			tmpRotateY += 0;
+			//tmpRotateY += 0;
 			tmpRotateZ += 2.05;
 			if(tmpRotateX > 360) tmpRotateX -= 360;
-			if(tmpRotateY > 360) tmpRotateY -= 360;
+			//if(tmpRotateY > 360) tmpRotateY -= 360;
 			if(tmpRotateZ > 360) tmpRotateZ -= 360;
 			for(int i = 0; i < 50; i++) {
 				for(int j = 0; j < 80; j++) {
-					map[i][j] = false;
+					try {
+						map[i][j] = false;
+					} catch(ArrayIndexOutOfBoundsException e) {
+					} catch(NegativeArraySizeException e) {
+					}
 				}
 			}
 			sb = new StringBuilder();
 			for(int i = 0; i < 8; i++) {
-				rotateX(i, Math.sin(degreeToRadian(tmpRotateX)) * 0.05);
-				rotateY(i, numToDegree(-15.5));
-				rotateZ(i, Math.sin(degreeToRadian(tmpRotateY)) * 0.034);
+				rotateX(i, Math.sin(degreeToRadian(tmpRotateX)) * 0.12);
+				rotateY(i, numToDegree(12));
+				rotateZ(i, Math.sin(degreeToRadian(tmpRotateZ)) * 0.075);
 			}
 			for(int i = 0; i < 8; i++) {
 				positionToScreen(i, dot[i][0], dot[i][1], dot[i][2]);
@@ -128,7 +141,11 @@ public class LoadingScreen {
 					int posY = (int) Math.round(currY);
 					currX += dx;
 					currY += dy;
-					map[30 + posY][25 + posX + 20] = true;
+					try {
+						map[30 + posY][25 + posX + 20] = true;
+					} catch(ArrayIndexOutOfBoundsException e) {
+					} catch(NegativeArraySizeException e) {
+					}
 				}
 				
 			}
@@ -143,9 +160,58 @@ public class LoadingScreen {
 				if(i >= tmpLine + 2 && tmpLine > 0) break;
 			}
 			
+			//System.out.println(sb);
+			
+			int countTrigger = 20;
+			String msg1 = "test1";
+			String msg2 = "test2";
+			if(idx < 6) {
+				if(count <= 0) {
+					msg1 = "    랜덤 생성을 시작합니다";
+					msg2 = "    ";
+					for(int i = 1; i <= countTrigger; i++) {
+						msg2 +="□";
+					}
+				} else {	//	밥
+					msg1 = "    랜덤 생성 진행중... (" + (idx + 1) + " / 6)";
+					msg2 = "    ";
+					if(!isChecked[idx]) {
+						for(int i = 1; i <= countTrigger; i++) {
+							msg2 +="□";
+						}
+						if(count >= (countTrigger >> 1)) {
+							idx++;
+							count = 0;
+						}
+					} else {
+						for(int i = 1; i <= countTrigger; i++) {
+							msg2 += (i <= count) ? "■" : "□";
+						}
+						if(count >= countTrigger) {
+							idx++;
+							count = 0;
+						}
+					}
+				}
+			} else {
+				msg1 = "    랜덤 생성이 완료되었습니다.";
+				msg2 = "    ";
+				for(int i = 1; i <= countTrigger; i++) {
+					msg2 +="□";
+				}
+				if(count >= 20) return;
+			}
+
+			sb.append(msg1 + "\n");
+			sb.append(msg2);
 			System.out.println(sb);
-			System.out.println(count++ + "=============================================");
-			Thread.sleep(33);
+			count += 1;
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				new FavoritePrintResult().warnMSG("InterruptedException", "문제가 발생했습니다. 다시 시도해주세요.");
+				//e.printStackTrace();
+			}
 		}
 	}
 }

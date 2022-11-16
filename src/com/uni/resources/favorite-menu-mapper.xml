@@ -187,4 +187,24 @@
 		)
 	)
 	</insert>
+	
+	<update id="updateMenu" parameterType="com.uni.model.dto.FavoriteDTO">
+	UPDATE
+		   FAVORITE A
+	   SET FAV_FOOD1 = #{favFood1},
+	   	   FAV_FOOD2 = #{favFood2},
+	   	   FAV_FOOD3 = #{favFood3},
+	   	   FAV_FOOD4 = #{favFood4},
+	   	   FAV_FOOD5 = #{favFood5},
+	   	   FAV_FOOD6 = #{favFood6},
+	   	   INCLUDE_BLACK = (
+							  	SELECT
+							  		   COUNT(*)
+							  	  FROM MASTERFOODTABLE
+							  	 WHERE FOOD_ID IN (#{ favFood1 }, #{ favFood2 }, #{ favFood3 },
+							  	   				#{ favFood4 }, #{ favFood5 }, #{ favFood6 })
+							  	   AND BAN_YN = 'Y'
+						   )
+	 WHERE FAV_NO = #{favId}
+	</update>
 </mapper>

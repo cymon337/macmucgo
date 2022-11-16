@@ -89,11 +89,19 @@ public class FavoriteController {
 		return list;
 	}
 
-	public void favoriteCreateMenu(FavoriteDTO newFav) {
-		if(fs.createMenu(newFav)) {
-			new FavoritePrintResult().checkMSG("즐겨찾기에 메뉴 추가를 하였습니다.");
+	public void favoriteCreateMenu(boolean isNew, FavoriteDTO newFav) {
+		if(isNew) {
+			if(fs.createMenu(newFav)) {
+				new FavoritePrintResult().checkMSG("즐겨찾기에 메뉴 추가를 하였습니다.");
+			} else {
+				new FavoritePrintResult().checkMSG("즐겨찾기 추가가 반영되지 않았습니다.");
+			}
 		} else {
-			new FavoritePrintResult().checkMSG("즐겨찾기 추가가 반영되지 않았습니다.");
+			if(fs.updateMenu(newFav)) {
+				new FavoritePrintResult().checkMSG("즐겨찾기 메뉴를 수정하였습니다.");
+			} else {
+				new FavoritePrintResult().checkMSG("즐겨찾기 수정이 반영되지 않았습니다.");
+			}
 		}
 	}
 }

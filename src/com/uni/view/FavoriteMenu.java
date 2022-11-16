@@ -149,7 +149,7 @@ public class FavoriteMenu {
 			try {
 				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
 				System.out.println("====================상세정보 조회=====================");
-				new FavoritePrintResult().screenDetail(true, false, notUse, menuList, favId);
+				new FavoritePrintResult().screenDetail(true, false, false, notUse, menuList, favId);
 				System.out.println("==================================================");
 				System.out.println("1. 즐겨찾기 내용 재생성 및 삭제");
 				System.out.println("2. " + favId + "번 즐겨찾기 삭제");
@@ -195,7 +195,7 @@ public class FavoriteMenu {
 			try {
 				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
 				System.out.println("====================즐겨찾기 수정=====================");
-				new FavoritePrintResult().screenDetail(isExist, true, isChecked, menuList, favId);
+				new FavoritePrintResult().screenDetail(isExist, true, false, isChecked, menuList, favId);
 				System.out.println("==================================================");
 				System.out.println("수정할 목록을 체크합니다.");
 				System.out.println("1. 체크 목록에 밥 " + (isChecked[0] ? "제거" : "추가") + "하기");
@@ -276,7 +276,7 @@ public class FavoriteMenu {
 			try {
 				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
 				System.out.println("====================즐겨찾기 삭제=====================");
-				new FavoritePrintResult().screenDetail(true, true, isChecked, menuList, favId);
+				new FavoritePrintResult().screenDetail(true, true, false, isChecked, menuList, favId);
 				System.out.println("==================================================");
 				System.out.print("체크된 목록을 삭제하시겠습니까? (y/n) ");
 				String cmd = br.readLine();
@@ -310,6 +310,7 @@ public class FavoriteMenu {
 	//새로 생성인가?, 즐겨찾기 객체, 결과물 집어넣을 즐겨찾기 번호 Index, 체크된거 불러오기
 	private void favoriteDetailMakeMenu(boolean isNew, FavoriteDTO favMenu,
 						int targetFavId, int targetUserId, boolean[] isChecked) {
+		if(favMenu == null) favMenu = new FavoriteDTO(-1, -1, -1, -1, -1, -1, -1);
 		List<MenuDTO> menuList = new ArrayList<>();
 		if(isNew) {
 			for(int i = 0; i < 6; i++) {
@@ -326,13 +327,23 @@ public class FavoriteMenu {
 			try {
 				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
 				System.out.println("=====================식단 생성=======================");
-				new FavoritePrintResult().screenDetail(!isNew, true, isChecked, menuList, targetFavId);
+				new FavoritePrintResult().screenDetail(!isNew, true, false, isChecked, menuList, targetFavId);
 				System.out.println("==================================================");
 				System.out.print("체크된 목록을 생성하시겠습니까? (y/n) ");
 				String cmd = br.readLine();
 				if(cmd.toLowerCase().equals("y")) {
-					FavoriteDTO newFav = new CreateFoodList().createFoodMenu(targetUserId, isChecked);
-					CreatedMenuAdd(newFav, isChecked, targetFavId, targetUserId);
+					FavoriteDTO newFav = new FavoriteDTO();
+					newFav = new CreateFoodList().createFoodMenu(targetUserId, isChecked);
+
+					newFav.setFavId(favMenu.getFavId());
+					if(!isChecked[0]) newFav.setFavFood1(favMenu.getFavFood1());
+					if(!isChecked[1]) newFav.setFavFood2(favMenu.getFavFood2());
+					if(!isChecked[2]) newFav.setFavFood3(favMenu.getFavFood3());
+					if(!isChecked[3]) newFav.setFavFood4(favMenu.getFavFood4());
+					if(!isChecked[4]) newFav.setFavFood5(favMenu.getFavFood5());
+					if(!isChecked[5]) newFav.setFavFood6(favMenu.getFavFood6());
+					
+					CreatedMenuAdd(isNew, newFav, isChecked, targetFavId, targetUserId);
 					return;
 				} else if(cmd.toLowerCase().equals("n")) {
 					return;
@@ -350,7 +361,7 @@ public class FavoriteMenu {
 		} while(true);
 	}
 	
-	private void CreatedMenuAdd(FavoriteDTO newFav, boolean[] isChecked, int favId, int UserId) {
+	private void CreatedMenuAdd(boolean isNew, FavoriteDTO newFav, boolean[] isChecked, int favId, int UserId) {
 		//newFav를 챙겨 "생성한 메뉴는 다음과 같다, 바로 등록할거냐 즐찾 추가할거냐 묻기
 		List<MenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {newFav.getFavFood1(), newFav.getFavFood2(), newFav.getFavFood3(),
@@ -366,20 +377,20 @@ public class FavoriteMenu {
 			try {
 				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
 				System.out.println("======================메뉴 생성=======================");
-				new FavoritePrintResult().screenDetail(false, false, isChecked, menuList, favId);
+				new FavoritePrintResult().screenDetail(!isNew, false, false, isChecked, menuList, favId);
 				System.out.println("==================================================");
-				System.out.println("1. 즐겨찾기 목록에 추가");
-				System.out.println("2. 즐겨찾기 목록에 추가 후 일정에 등록하기");
-				System.out.println("3. 일정에만 등록하기");
+				System.out.println("1. 즐겨찾기 목록" + (isNew ? "에 추가" : " 수정"));
+				System.out.println("2. 즐겨찾기 목록" + (isNew ? "에 추가" : " 수정") + " 후 일정에 등록하기");
+				System.out.println("3. " + (isNew ? "" : "수정하지 않고 ") +"일정에만 등록하기");
 				System.out.println("0. 진행 내용을 저장하지 않고 돌아가기");
 				System.out.print("번호를 입력하세요 : ");
 				int cmd = Integer.parseInt(br.readLine());
 				switch(cmd) {
 				case 1 :
-					fc.favoriteCreateMenu(newFav);
+					fc.favoriteCreateMenu(isNew, newFav);
 					return;
 				case 2 :
-					fc.favoriteCreateMenu(newFav);
+					fc.favoriteCreateMenu(isNew, newFav);
 					return;
 				case 3 :
 					return;

@@ -82,6 +82,15 @@ public class FavoriteService {
 		mySession.close();
 		return result > 0 ? true : false;
 	}
+
+	public boolean updateMenu(FavoriteDTO newFav) {
+		SqlSession mySession = getSqlSession();
+		int result = myDAO.updateMenu(mySession, newFav);
+		commitTest(mySession, result);
+		
+		mySession.close();
+		return result > 0 ? true : false;
+	}
 	
 	private static void commitTest(SqlSession session, int value) {
 		if(value > 0) {

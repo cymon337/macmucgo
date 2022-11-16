@@ -45,9 +45,7 @@ public class FavoriteDAO {
 		return mySession.insert("FavoriteMenuMapper.insertMenu", newFav);
 	}
 
-	@Override
-	public String toString() {
-		return "FavoriteDAO [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+	public int updateMenu(SqlSession mySession, FavoriteDTO newFav) {
+		return mySession.update("FavoriteMenuMapper.updateMenu", newFav);
 	}
 }
