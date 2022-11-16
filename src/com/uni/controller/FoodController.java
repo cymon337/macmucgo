@@ -32,20 +32,20 @@ public class FoodController {
 
 	}
 
-	
 	public void selectByCode(Map<String, Integer> parameter, int LISTSHOW) {
 		int code = parameter.get("foodId");
 		FoodDTO getFood = foodService.selectByCode(code);
-		
-		if(getFood != null) {
+
+		if (getFood != null) {
 			List<FoodDTO> tmpList = new ArrayList<>();
 			tmpList.add(getFood);
 			printResult.printFood(tmpList, LISTSHOW, 1);
 		} else {
 			printResult.printErrorMessage("selectOne");
 		}
-		
+
 	}
+
 	public void insertOne(Map<String, String> parameter) {
 
 		String name = parameter.get("foodName");
@@ -156,7 +156,7 @@ public class FoodController {
 	}
 
 	public void banFoodAll(int LISTSHOW, int currPage) {
-		
+
 		List<FoodDTO> foodList = foodService.banFoodAll();
 
 		if (foodList.size() > 0) {
@@ -164,7 +164,7 @@ public class FoodController {
 		} else {
 			printResult.printErrorMessage("selectList");
 		}
-		
+
 	}
 
 	public void updateBanFood(Map<String, String> parameter) {
@@ -180,14 +180,14 @@ public class FoodController {
 		} else {
 			printResult.printErrorMessage("update");
 		}
-		
+
 	}
 
 	public boolean searchId(int id) {
 		FoodDTO foodDTO = foodService.selectByCode(id);
-		 
+
 		return !(foodDTO == null);
-		
+
 	}
 
 }
