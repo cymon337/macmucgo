@@ -53,7 +53,7 @@ public class AppMacmucgo {
 					case 0 : return;  
 					
 					default : System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
-				}
+				}				
 				
 			} while(true);
 			
