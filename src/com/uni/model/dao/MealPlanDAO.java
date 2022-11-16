@@ -33,10 +33,10 @@ public class MealPlanDAO {
 //	}
 
 	public int deleteMealPlanRange(SqlSession sqlSession, MealPlanDTO mpDTO) {
-		System.out.println("delete dao 들어간다~");
-		int a = sqlSession.delete("MealPlanMapper.deleteMealPlanRange", mpDTO);
-		System.out.println("delete sqlSession 나온다~");
-		return a;
+		
+		int deleteResult= sqlSession.delete("MealPlanMapper.deleteMealPlanRange", mpDTO);
+		
+		return deleteResult;	// sql메서드 바로 리턴했을때 캐스트오류뜸 
 	}
 
 
