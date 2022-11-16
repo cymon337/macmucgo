@@ -1,8 +1,6 @@
 package com.uni.model.dto;
 
-import org.apache.ibatis.session.SqlSession;
-
-public class FoodDTO implements java.io.Serializable {
+public class FoodDTO {
 	
 	
 	private	int foodId;
@@ -111,7 +109,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual01() {
-		return manual01;
+		String temp = "";
+		if(manual01 !=null ) for(String i : manual01.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual01(String manual01) {
@@ -119,7 +119,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual02() {
-		return manual02;
+		String temp = "";
+		if(manual02 !=null ) for(String i : manual02.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual02(String manual02) {
@@ -127,7 +129,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual03() {
-		return manual03;
+		String temp = "";
+		if(manual03 !=null ) for(String i : manual03.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual03(String manual03) {
@@ -135,7 +139,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual04() {
-		return manual04;
+		String temp = "";
+		if(manual04 !=null ) for(String i : manual04.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual04(String manual04) {
@@ -143,7 +149,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual05() {
-		return manual05;
+		String temp = "";
+		if(manual05 !=null ) for(String i : manual05.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual05(String manual05) {
@@ -151,7 +159,9 @@ public class FoodDTO implements java.io.Serializable {
 	}
 
 	public String getManual06() {
-		return manual06;
+		String temp = "";
+		if(manual06 !=null ) for(String i : manual06.split("\n") ) {temp += i;}
+		return temp;
 	}
 
 	public void setManual06(String manual06) {
@@ -169,11 +179,14 @@ public class FoodDTO implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return foodName + ", " + rcpPat + ", " + infoEng
+		
+		return foodId + ", " + foodName + ", " + rcpPat + ", " + infoEng
 				+ ", " + infoNa + ", " + infoCar + ", " + infoPro + ", " + infoFat
 				+ ", " + manual01 + ", " + manual02 + ", " + manual03 + ", "
 				+ manual04 + ", " + manual05 + ", " + manual06 + ", " + banYN;
 	}
+	
+	
 	
 	
 	

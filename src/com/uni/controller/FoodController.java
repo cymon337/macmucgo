@@ -1,42 +1,62 @@
 package com.uni.controller;
 
-import com.uni.model.dto.FoodDTO;
-import com.uni.printResult.PrintResult;
-import com.uni.service.FoodService;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+import com.uni.model.dto.FoodDTO;
+import com.uni.printResult.PrintResult;
+import com.uni.service.FoodService;
 
 public class FoodController {
 
 	private final PrintResult printResult;
 	private final FoodService foodService;
-	
+
 	public FoodController() {
 		printResult = new PrintResult();
 		foodService = new FoodService();
 	}
 
-	public void selectFood(Map<String, String> parameter ) {
-		
-		String name = parameter.get("foodName");
-		
-		List<FoodDTO> foodList = foodService.selectFood(name);
-		
+	public void selectFood(Map<String, String> parameter, int LISTSHOW, int currPage) {
 
-		if (foodList != null) {
-			printResult.printFood(foodList);
+		String name = parameter.get("foodName");
+
+		List<FoodDTO> foodList = foodService.selectFood(name);
+
+		if (foodList.size() > 0) {
+			printResult.printFood(foodList, LISTSHOW, currPage);
 		} else {
-			printResult.printErrorMessage("selectFood");
+			printResult.printErrorMessage("selectList");
 		}
 
-		
+	}
+
+	public void selectByCode(Map<String, Integer> parameter, int LISTSHOW) {
+		List<FoodDTO> tmpList = new ArrayList<>();
+		for(int i = 1; i <= 6; i++) {
+			int code = parameter.get("foodId" + i);
+			FoodDTO getFood = foodService.selectByCode(code);
+			if(getFood != null) tmpList.add(getFood);
+		}
+
+		if (tmpList.size() > 0) {
+			printResult.printFood(tmpList, LISTSHOW, 1);
+		} else {
+			printResult.printErrorMessage("selectOne");
+		}
+
+	}
+
+	public boolean searchId(int id) {
+		FoodDTO foodDTO = foodService.selectByCode(id);
+
+		return !(foodDTO == null);
+
 	}
 
 	public void insertOne(Map<String, String> parameter) {
-		
+
 		String name = parameter.get("foodName");
 		String pat = parameter.get("rcpPat");
 		double eng = Double.parseDouble(parameter.get("infoEng"));
@@ -51,7 +71,7 @@ public class FoodController {
 		String man05 = parameter.get("manual05");
 		String man06 = parameter.get("manual06");
 		String ban = parameter.get("banYN");
-		
+
 		FoodDTO food = new FoodDTO();
 		food.setFoodName(name);
 		food.setRcpPat(pat);
@@ -67,8 +87,8 @@ public class FoodController {
 		food.setManual05(man05);
 		food.setManual06(man06);
 		food.setBanYN(ban);
-		
-		if(foodService.insertOne(food)) {
+
+		if (foodService.insertOne(food)) {
 			printResult.printSuccessMessage("insert");
 		} else {
 			printResult.printErrorMessage("insert");
@@ -76,9 +96,8 @@ public class FoodController {
 
 	}
 
-	
 	public void updateFood(Map<String, String> parameter) {
-		
+
 		int id = Integer.parseInt(parameter.get("foodId"));
 		String name = parameter.get("foodName");
 		String pat = parameter.get("rcpPat");
@@ -94,7 +113,7 @@ public class FoodController {
 		String man05 = parameter.get("manual05");
 		String man06 = parameter.get("manual06");
 		String ban = parameter.get("banYN");
-		
+
 		FoodDTO food = new FoodDTO();
 		food.setFoodId(id);
 		food.setFoodName(name);
@@ -111,35 +130,66 @@ public class FoodController {
 		food.setManual05(man05);
 		food.setManual06(man06);
 		food.setBanYN(ban);
-		
-		if(foodService.updateFood(food)) {
+
+		if (foodService.updateFood(food)) {
 			printResult.printSuccessMessage("update");
 		} else {
 			printResult.printErrorMessage("update");
 		}
-		
-		
+
 	}
 
 	public void deleteFood(Map<String, String> parameter) {
-		
+
 		int id = Integer.parseInt(parameter.get("foodId"));
-		
-		if(foodService.deleteFood(id)) {
+
+		if (foodService.deleteFood(id)) {
 			printResult.printSuccessMessage("delete");
 		} else {
 			printResult.printErrorMessage("delete");
 		}
-		
-		
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	public void banFood(Map<String, String> parameter, int LISTSHOW, int currPage) {
+		String name = parameter.get("foodName");
+
+		List<FoodDTO> foodList = foodService.banFood(name);
+
+		if (foodList.size() > 0) {
+			printResult.printFood(foodList, LISTSHOW, currPage);
+		} else {
+			printResult.printErrorMessage("selectList");
+		}
+
+	}
+
+	public void banFoodAll(int LISTSHOW, int currPage) {
+
+		List<FoodDTO> foodList = foodService.banFoodAll();
+
+		if (foodList.size() > 0) {
+			printResult.printFood(foodList, LISTSHOW, currPage);
+		} else {
+			printResult.printErrorMessage("selectList");
+		}
+
+	}
+
+	public void updateBanFood(Map<String, String> parameter) {
+		int id = Integer.parseInt(parameter.get("foodId"));
+		String ban = parameter.get("banYN");
+
+		FoodDTO food = new FoodDTO();
+		food.setFoodId(id);
+		food.setBanYN(ban);
+
+		if (foodService.updateBanFood(food)) {
+			printResult.printSuccessMessage("update");
+		} else {
+			printResult.printErrorMessage("update");
+		}
+
+	}
 
 }
