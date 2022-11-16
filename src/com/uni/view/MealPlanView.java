@@ -17,7 +17,7 @@ import com.uni.model.dto.MealPlanDTO;
 public class MealPlanView {
 
     MealPlanController mealPlanController = new MealPlanController();
-	private static int printlnNum = 30;
+	private static int printlnNum = 50;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 	//  식단일정 main
