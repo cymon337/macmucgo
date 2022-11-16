@@ -18,6 +18,12 @@ public class FoodDao {
 		return sqlSession.selectList("FoodMapper.selectFood", foodName);
 	}
 
+	public FoodDTO selectByCode(SqlSession sqlSession, int code) {
+
+		return sqlSession.selectOne("FoodMapper.selectByCode", code);
+	}
+
+
 	public int insertMenu(SqlSession sqlSession, FoodDTO menu) {
 
 		return sqlSession.insert("FoodMapper.insertMenu", menu);
@@ -45,5 +51,4 @@ public class FoodDao {
 	public int updateBanFood(SqlSession sqlSession, FoodDTO food) {
 		return sqlSession.update("FoodMapper.updateBanFood", food);
 	}
-
 }

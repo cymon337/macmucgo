@@ -61,7 +61,29 @@
 		#{foodName}||'%'
 		ORDER BY A.FOOD_NAME
 	</select>
-
+	
+	<select id="selectByCode" parameterType="_int"
+		resultMap="foodResultMap">
+		SELECT
+		       A.FOOD_ID ,
+		       A.FOOD_NAME ,
+		       A.RCP_PAT ,
+		       A.INFO_ENG ,
+		       A.INFO_NA ,
+		       A.INFO_CAR ,
+		       A.INFO_PRO ,
+		       A.INFO_FAT ,
+		       A.MANUAL01 ,
+		       A.MANUAL02 ,
+		       A.MANUAL03 ,
+		       A.MANUAL04 ,
+		       A.MANUAL05 ,
+		       A.MANUAL06 ,
+		       A.BAN_YN
+		  FROM MASTERFOODTABLE A
+		 WHERE A.FOOD_ID = #{code}
+	</select>
+	
 	<!-- insert, update, delete의 경우 resultType은 작성하지 않는다. 기본 _int로 수행 결과를 리턴한다. -->
 	<!-- 파라미터로 전달된 dto의 필드 이름으로 값을 바인딩 해 주어야 한다. getter를 이용하며 getter가 없는 경우도 
 		에러가 발생한다. -->

@@ -4,6 +4,7 @@ import com.uni.model.dto.FoodDTO;
 import com.uni.printResult.PrintResult;
 import com.uni.service.FoodService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,22 @@ public class FoodController {
 			printResult.printErrorMessage("selectList");
 		}
 
+	}
+	
+	public void selectByCode(Map<String, Integer> parameter, int LISTSHOW) {
+		List<FoodDTO> tmpList = new ArrayList<>();
+		for(int i = 1; i <= 6; i++) {
+			int code = parameter.get("foodId" + i);
+			FoodDTO getFood = foodService.selectByCode(code);
+			if(getFood != null) tmpList.add(getFood);
+		}
+		
+		if(tmpList.size() > 0) {
+			printResult.printFood(tmpList, LISTSHOW, 1);
+		} else {
+			printResult.printErrorMessage("selectOne");
+		}
+		
 	}
 
 	public void insertOne(Map<String, String> parameter) {
