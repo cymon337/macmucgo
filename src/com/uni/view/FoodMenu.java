@@ -11,7 +11,7 @@ public class FoodMenu {
 	
 	static FoodController fc = new FoodController();
 
-	public static void foodMenu() {
+	public void foodMenu() {
 		
 		final int LISTSHOW = 10;
 		int currPage = 1;
@@ -64,6 +64,7 @@ public class FoodMenu {
 				case 0:
 					shotdown(); // 프로그램 종료 메소드
 					break;
+//		**************			프로그램 종료 말고 메인메뉴이동으로 변경할것
 				default:
 					System.out.println("잘못된 메뉴를 선택하셨습니다.");
 					break;
