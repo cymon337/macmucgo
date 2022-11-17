@@ -8,11 +8,11 @@ import java.util.Scanner;
 import com.uni.controller.FoodController;
 
 public class FoodMenu {
-	
+
 	static FoodController fc = new FoodController();
 
 	public void foodMenu() {
-		
+
 		final int LISTSHOW = 10;
 		int currPage = 1;
 
@@ -27,7 +27,7 @@ public class FoodMenu {
 				System.out.println("5. 블랙리스트 음식명 조회");
 				System.out.println("6. 블랙리스트 조회");
 				System.out.println("7. 블랙리스트 수정");
-				System.out.println("0. 프로그램 종료");
+				System.out.println("0. 메인메뉴로 가기");
 				System.out.print("메뉴관리 번호를 입력하세요 : ");
 				int no = sc.nextInt();
 
