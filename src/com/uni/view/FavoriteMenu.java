@@ -59,14 +59,26 @@ public class FavoriteMenu {
 				switch(cmd) {
 				case 1 :
 					//이전 페이지
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
 					currPage = fc.favoriteMainPrevPage(currPage);
 					break;
 				case 2 :
 					//다음 페이지
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
 					currPage = fc.favoriteMainNextPage(currPage, lastPage);
 					break;
 				case 3 :
 					//입력한 페이지로 이동
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
 					System.out.print("이동할 페이지 번호를 입력하세요 : ");
 					int gotoPage = Integer.parseInt(br.readLine());
 					currPage = fc.favoriteMainGotoPage(currPage, gotoPage, lastPage);
@@ -138,6 +150,90 @@ public class FavoriteMenu {
 		} while(true);
 	}
 	
+	public FavoriteDTO favoriteMenuChoose() {
+		int currPage = 1;
+		do {
+			try {
+				List<FavoriteDTO> list = fc.FavoriteSelectAll();
+				int listSize = list.size();
+				int lastPage = (listSize - 1) / LISTSHOW + 1;
+				if(currPage > lastPage) { // 리스트 삭제로 페이지 감소 시 없어진 페이지 참조 방지
+					currPage = lastPage;
+				}
+				
+				//식단 화면
+				SCREENJUMP();	// 30(기본값)줄 줄 바꿈 
+				new FavoritePrintResult().screenMain(list, LISTSHOW, currPage);
+						//메인 화면 진입 시 즐겨찾기 자동 조회
+				
+				//번호 화면
+				if(listSize > 0) {
+					System.out.println("1. 이전 페이지로 이동");
+					System.out.println("2. 다음 페이지로 이동");
+					System.out.println("3. 페이지 입력 후 이동");
+					System.out.println("4. 식단 선택하기");
+				}
+				System.out.println("0. 메인 메뉴로 돌아가기");
+				System.out.print("번호를 입력하세요 : ");
+				int cmd = Integer.parseInt(br.readLine());
+				switch(cmd) {
+				case 1 :
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
+					//이전 페이지
+					currPage = fc.favoriteMainPrevPage(currPage);
+					break;
+				case 2 :
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
+					//다음 페이지
+					currPage = fc.favoriteMainNextPage(currPage, lastPage);
+					break;
+				case 3 :
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
+					//입력한 페이지로 이동
+					System.out.print("이동할 페이지 번호를 입력하세요 : ");
+					int gotoPage = Integer.parseInt(br.readLine());
+					currPage = fc.favoriteMainGotoPage(currPage, gotoPage, lastPage);
+					break;
+				case 4 :
+					if(listSize == 0) {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+						break;
+					}
+					
+					System.out.print("선택하실 식단의 번호를 입력하세요 : ");
+					int cmd2 = Integer.parseInt(br.readLine());
+					if(cmd2 > 0 && cmd2 <= list.size()) {
+						return list.get(cmd2 - 1);
+					} else {
+						new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+					}
+					break;
+					//fc.insertFav(new FavoriteDTO(1, -1, -1, 1060, 1061, -1, -1));
+				case 0 :
+					new FavoritePrintResult().checkMSG("이전 화면으로 돌아갑니다.");
+					return null;
+				default :
+					new FavoritePrintResult().checkMSG("잘못 입력하셨습니다.");
+				}
+			} catch (IOException e) {
+				new FavoritePrintResult().warnMSG("IOException", "문제가 발생하였습니다. 다시 시도해주세요.");
+				//e.printStackTrace();
+			} catch (NumberFormatException e) {
+				new FavoritePrintResult().warnMSG("NumberFormatException", "문제가 발생했습니다. 다시 시도해주세요.");
+				//e.printStackTrace();
+			}
+		} while(true);
+	}
+	
 	private void favoriteDetailMenu(FavoriteDTO favMenu, int favId) {
 		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {favMenu.getFavFood1(), favMenu.getFavFood2(), favMenu.getFavFood3(),
@@ -158,7 +254,6 @@ public class FavoriteMenu {
 				System.out.println("0. 즐겨찾기 메뉴로 돌아가기");
 				System.out.print("번호를 입력하세요 : ");
 				int cmd = Integer.parseInt(br.readLine());
-				Map<String, Integer> tmpMap = new HashMap<>();
 				
 				switch(cmd) {
 				case 1 :
@@ -281,6 +376,62 @@ public class FavoriteMenu {
 		} while(true);
 	}
 
+	public FavoriteDTO instantMenuCreate(int memberId) {
+		List<FavoriteMenuDTO> menuList = new ArrayList<>();
+		for(int i = 0; i < 6; i++) {
+			menuList.add(null);
+		}
+		boolean[] isChecked = {false, false, false, false, false, false};
+		do {
+			try {
+				SCREENJUMP();	// 30(기본값)줄 줄 바꿈
+				System.out.println("======================메뉴 생성======================");
+				new FavoritePrintResult().screenDetail(false, true, true, isChecked, menuList, -1);
+				System.out.println("==================================================");
+				System.out.println("수정할 목록을 체크합니다.");
+				System.out.println("1. 체크 목록에 밥 " + (isChecked[0] ? "제거" : "추가") + "하기");
+				System.out.println("2. 체크 목록에 국 " + (isChecked[1] ? "제거" : "추가") + "하기");
+				System.out.println("3. 체크 목록에 반찬1 " + (isChecked[2] ? "제거" : "추가") + "하기");
+				System.out.println("4. 체크 목록에 반찬2 " + (isChecked[3] ? "제거" : "추가") + "하기");
+				System.out.println("5. 체크 목록에 반찬3 " + (isChecked[4] ? "제거" : "추가") + "하기");
+				System.out.println("6. 체크 목록에 후식 " + (isChecked[5] ? "제거" : "추가") + "하기");
+				System.out.println("7. 체크를 마치고 다음 단계로 넘어가기");
+				System.out.println("0. 이전 화면으로 돌아가기");
+				System.out.print("번호를 입력하세요 : ");
+				int cmd = Integer.parseInt(br.readLine());
+				if(cmd >= 1 && cmd <= 6) {
+					isChecked[cmd - 1] = !isChecked[cmd - 1];
+				} else {
+					switch(cmd) {
+					case 7 :
+						boolean checkTest = false;
+						for(int i = 0; i < 6; i++) {
+							if(isChecked[i]) {
+								checkTest = true;
+								break;
+							}
+						}
+						if(!checkTest) {
+							new FavoritePrintResult().checkMSG("적어도 하나는 체크해야 합니다.");
+							break;
+						}
+						return new CreateFoodList().createFoodMenu(memberId, isChecked);
+					case 0 :
+						return null;
+					default :
+						new FavoritePrintResult().checkMSG("잘못 입력하였습니다. 다시 입력하세요.");
+					}
+				}
+			} catch (IOException e) {
+				new FavoritePrintResult().warnMSG("IOException", "문제가 발생하였습니다. 다시 시도해주세요.");
+				// e.printStackTrace();
+			} catch (NumberFormatException e) {
+				new FavoritePrintResult().warnMSG("NumberFormatException", "문제가 발생했습니다. 다시 시도해주세요.");
+				// e.printStackTrace();
+			}
+		} while(true);
+	}
+	
 	private void favoriteDetailDeleteMenu(FavoriteDTO favMenu, boolean[] isChecked, int favId) {
 		List<FavoriteMenuDTO> menuList = new ArrayList<>();
 		for(int i : new int[] {favMenu.getFavFood1(), favMenu.getFavFood2(), favMenu.getFavFood3(),
@@ -400,19 +551,12 @@ public class FavoriteMenu {
 				new FavoritePrintResult().screenDetail(!isNew, false, false, isChecked, menuList, favId);
 				System.out.println("==================================================");
 				System.out.println("1. 즐겨찾기 목록" + (isNew ? "에 추가" : " 수정"));
-				System.out.println("2. 즐겨찾기 목록" + (isNew ? "에 추가" : " 수정") + " 후 일정에 등록하기");
-				System.out.println("3. " + (isNew ? "" : "수정하지 않고 ") +"일정에만 등록하기");
 				System.out.println("0. 진행 내용을 저장하지 않고 돌아가기");
 				System.out.print("번호를 입력하세요 : ");
 				int cmd = Integer.parseInt(br.readLine());
 				switch(cmd) {
 				case 1 :
 					fc.favoriteCreateMenu(isNew, newFav);
-					return;
-				case 2 :
-					fc.favoriteCreateMenu(isNew, newFav);
-					return;
-				case 3 :
 					return;
 				case 0 :
 					return;
@@ -429,15 +573,3 @@ public class FavoriteMenu {
 		} while(true);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,6 +2,7 @@ package com.uni.model.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -26,6 +27,10 @@ public class MealPlanDAO {
 
 	public List<MealPlanDTO> selectMealPlanRange(SqlSession sqlSession, MealPlanDTO mpDTO) {
 		return sqlSession.selectList("MealPlanMapper.selectMealPlanRange", mpDTO);
+	}
+
+	public int insertMealPlan(SqlSession sqlSession, Map<String, Object> tmpMap) {
+		return sqlSession.insert("MealPlanMapper.insertMealPlan", tmpMap);
 	}
 
 //	public int deleteMenu(SqlSession sqlSession, int mpNo) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.javassist.SerialVersionUID;
 
-public class MealPlanAndFoodDTO implements Serializable{
+public class MealPlanAndFoodDTO{
     // TB MEALPLAN 
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table

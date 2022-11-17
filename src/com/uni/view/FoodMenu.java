@@ -62,9 +62,8 @@ public class FoodMenu {
 					fc.updateBanFood(updateBan()); // 블랙리스트 수정
 					break;
 				case 0:
-					shotdown(); // 프로그램 종료 메소드
-					break;
-//		**************			프로그램 종료 말고 메인메뉴이동으로 변경할것
+					return;
+
 				default:
 					System.out.println("잘못된 메뉴를 선택하셨습니다.");
 					break;
@@ -93,12 +92,6 @@ public class FoodMenu {
 		parameter.put("banYN", ban);
 
 		return parameter;
-	}
-
-	private static void shotdown() {
-		System.out.println("\n\n\t프로그램을 종료합니다.");
-		System.exit(0);
-
 	}
 
 	private static Map<String, String> deleteFoodId() {
