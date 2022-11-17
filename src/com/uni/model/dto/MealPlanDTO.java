@@ -27,19 +27,48 @@ public class MealPlanDTO{
     private String breakfast4;
     private String breakfast5;
     private String breakfast6;
+    
+    public void setBreakFastAsFav(FavoriteDTO favoriteDTO) {
+		this.breakfast1 = Integer.toString(favoriteDTO.getFavFood1());
+		this.breakfast2 = Integer.toString(favoriteDTO.getFavFood2());
+		this.breakfast3 = Integer.toString(favoriteDTO.getFavFood3());
+		this.breakfast4 = Integer.toString(favoriteDTO.getFavFood4());
+		this.breakfast5 = Integer.toString(favoriteDTO.getFavFood5());
+		this.breakfast6 = Integer.toString(favoriteDTO.getFavFood6());
+	}
+    
     private String lunch1;
     private String lunch2;
     private String lunch3;
     private String lunch4;
     private String lunch5;
     private String lunch6;
+    
+    public void setLunchAsFav(FavoriteDTO favoriteDTO) {
+		this.lunch1 = Integer.toString(favoriteDTO.getFavFood1());
+		this.lunch2 = Integer.toString(favoriteDTO.getFavFood2());
+		this.lunch3 = Integer.toString(favoriteDTO.getFavFood3());
+		this.lunch4 = Integer.toString(favoriteDTO.getFavFood4());
+		this.lunch5 = Integer.toString(favoriteDTO.getFavFood5());
+		this.lunch6 = Integer.toString(favoriteDTO.getFavFood6());
+	}
+    
     private String dinner1;
     private String dinner2;
     private String dinner3;
     private String dinner4;
     private String dinner5;
     private String dinner6;
- 
+    
+    public void setDinnerAsFav(FavoriteDTO favoriteDTO) {
+		this.dinner1 = Integer.toString(favoriteDTO.getFavFood1());
+		this.dinner2 = Integer.toString(favoriteDTO.getFavFood2());
+		this.dinner3 = Integer.toString(favoriteDTO.getFavFood3());
+		this.dinner4 = Integer.toString(favoriteDTO.getFavFood4());
+		this.dinner5 = Integer.toString(favoriteDTO.getFavFood5());
+		this.dinner6 = Integer.toString(favoriteDTO.getFavFood6());
+	}
+    
 	public MealPlanDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -69,6 +98,8 @@ public class MealPlanDTO{
 		this.dinner4 = dinner4;
 		this.dinner5 = dinner5;
 		this.dinner6 = dinner6;
+		
+		
 	}
 
 	public int getMpNo() {

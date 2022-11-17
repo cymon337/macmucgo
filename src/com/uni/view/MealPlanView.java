@@ -23,6 +23,9 @@ public class MealPlanView {
 
     private static MealPlanController mealPlanController = new MealPlanController();
 	private static int printlnNum = 50;
+	
+	
+	
 	private static final int memberId = 1;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -108,7 +111,7 @@ public class MealPlanView {
 			mealPlanController.selectMealPlanWeek(parameter);
             System.out.println("====================식단일정 등록====================");
 			System.out.println("1. 일간 등록");
-			System.out.println("2. 주간 등록");
+			System.out.println("2. 날짜범위 등록");
 			System.out.println();
 			System.out.println("0. 식단일정 메인으로 돌아가 GO");
 			System.out.print("번호를 입력하세요 : ");
@@ -118,7 +121,7 @@ public class MealPlanView {
 			switch(no) {
 				case 1 : insertMealPlanDay(); break;
 
-				case 2 : insertMealPlanWeek(); break;
+				case 2 : insertMealPlanRange(parameter); break;
 
 				case 0 : return;
 								
@@ -159,14 +162,16 @@ public class MealPlanView {
 			sc.nextLine();
 			System.out.println();
 			
-			if(insertType == 0) continue;
 			
 			//0 : 아침, 1 : 점심, 2 : 저녁 -> 아래 mealWhen[] 참고
 			//MealPlanAndFoodDTO mealTarget = new MealPlanAndFoodDTO();
 			
 			FavoriteDTO favTarget = new FavoriteDTO();
-			favTarget = new FavoriteDTO(1, 11, 12, 13, 14, 15, 16);
-			if(insertType == 1) {
+
+			if(insertType == 0) {
+				favTarget = new FavoriteDTO(memberId, -1, -1, -1, -1, -1, -1);
+			}
+			else if(insertType == 1) {
 				favTarget = new FavoriteMenu().favoriteMenuChoose();
 			} else if(insertType == 2) {
 				favTarget = new FavoriteMenu().instantMenuCreate(memberId);
@@ -254,26 +259,43 @@ public class MealPlanView {
 		insertMealPlanView();
 	}
 
-	// 1.2 식단일정 주간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록
-	private void insertMealPlanWeek() {
+	// 1.2 식단일정 주간등록 -날짜 입력하여 즐겨찾기 리스트 or 랜덤으로 식단등록
+	private void insertMealPlanRange(Map<String, Date> parameter) {
 
-        Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);		
 		
-		String mealWhenWeek = "아침"; 
-
-		System.out.print("날짜를 입력하세요 (YYYY-MM-DD) : ");
-		String mpDate = sc.nextLine();
-
 		do {
+			
 			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
+						
+			
+			System.out.println("====================식단일정 조회====================");
+			parameter = inputDateRange();
+			mealPlanController.selectMealPlanRange(parameter);
+			System.out.println("=====================================================");
+			System.out.println("1. 즐겨찾기에서 등록");
+			System.out.println("2. 랜덤식단 등록");
 			System.out.println();
-
-
-
-
-		} while (true);
+			System.out.println("0. 이전메뉴로 돌아가GO");
+			System.out.println();
+			System.out.print("번호를 입력하세요 : ");
+			String no = sc.nextLine();
+			
+			System.out.println();		
+			
+			switch(no) {
+				case "1" : mealPlanController.insertMealPlanRangeFavList(parameter); break; 	//즐겨찾기 등록
+		
+				case "2" : mealPlanController.insertMealPlanRangeRandom(parameter); break; 	//랜덤식단 등록
+				
+				case "3" : return;
+			
+				default : System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
+			}
+			
+		} while(true);
 
 
 	}
