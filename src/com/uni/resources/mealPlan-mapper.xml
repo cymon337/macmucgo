@@ -65,6 +65,7 @@
 		AND MP_DATE BETWEEN TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
 		                AND TO_DATE('#{ mpDate }', 'YYYY-MM-DD')
         -->
+        ORDER BY MP_DATE
 	</select>
 
 
@@ -98,6 +99,7 @@
 		  AND A.MP_DATE >= #{ mpDate }		
 		  AND A.MP_DATE <= (TO_DATE('${ mpDate }','YYYY-MM-DD') + INTERVAL '6' DAY)
         ]]>
+        ORDER BY MP_DATE
 	</select>
 	
 	<select id="selectMealPlanRange" resultMap="mealPlanStringResultMap">
@@ -129,7 +131,65 @@
 		  AND A.MP_DATE >= #{ mpDate }		
 		  AND A.MP_DATE <= #{ mpDateEnd }
         ]]>
+        ORDER BY MP_DATE
 	</select>
+	
+	<select id="MealPlanDTOToInt" parameterType="com.uni.model.dto.FoodDTO">
+		
+	</select>
+	
+	<insert id="insertMealPlan" parameterType="java.util.HashMap">
+        
+        INSERT
+          INTO MEALPLAN A
+        (
+        	A.MP_NO,
+        	A.USER_NO,
+        	A.MP_DATE,
+        	A.BREAKFAST1,
+        	A.BREAKFAST2,
+        	A.BREAKFAST3,
+        	A.BREAKFAST4,
+        	A.BREAKFAST5,
+        	A.BREAKFAST6,
+        	A.LUNCH1,
+        	A.LUNCH2,
+        	A.LUNCH3,
+        	A.LUNCH4,
+        	A.LUNCH5,
+        	A.LUNCH6,
+        	A.DINNER1,
+        	A.DINNER2,
+        	A.DINNER3,
+        	A.DINNER4,
+        	A.DINNER5,
+        	A.DINNER6
+        )
+        VALUES
+        (
+        	SEQ_MP_NO.NEXTVAL,
+          	#{ userNo }, 
+          	#{ mpDate,jdbcType=DATE }, 
+          	#{ breakfast1 },
+          	#{ breakfast2 },
+          	#{ breakfast3 },
+          	#{ breakfast4 },
+          	#{ breakfast5 },
+          	#{ breakfast6 },
+          	#{ lunch1 },
+          	#{ lunch2 },
+          	#{ lunch3 },
+          	#{ lunch4 },
+          	#{ lunch5 },
+          	#{ lunch6 },
+          	#{ dinner1 },
+          	#{ dinner2 },
+          	#{ dinner3 },
+          	#{ dinner4 },
+          	#{ dinner5 },
+          	#{ dinner6 }
+        )
+	</insert>
 	
 	<delete id="deleteMealPlanRange" parameterType="com.uni.model.dto.MealPlanDTO">
 		

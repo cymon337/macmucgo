@@ -6,6 +6,7 @@ import static com.uni.template.Template.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.uni.model.dao.MealPlanDAO;
 import com.uni.model.dto.MealPlanAndFoodDTO;
@@ -22,8 +23,6 @@ public class MealPlanService {
     public MealPlanDTO selectMealPlanDay(Date mpDate) {
         SqlSession sqlSession = getSqlSession();
 		
-		System.out.println(sqlSession);
-		
 		MealPlanDTO mealPlan = mealPlanDAO.selectMealPlanDay(sqlSession, mpDate);
 		
 		sqlSession.close();
@@ -33,8 +32,6 @@ public class MealPlanService {
 	
 	public List<MealPlanDTO> selectMealPlanWeek(Date mpDate) {
 		SqlSession sqlSession = getSqlSession();
-		
-		System.out.println(sqlSession);
 		
 		List<MealPlanDTO> mealPlanList = mealPlanDAO.selectMealPlanWeek(sqlSession, mpDate);
 		
@@ -46,19 +43,31 @@ public class MealPlanService {
 	public List<MealPlanDTO> selectMealPlanRange(MealPlanDTO mpDTO) {
 		SqlSession sqlSession = getSqlSession();
 		
-		System.out.println(sqlSession);
-		
 		List<MealPlanDTO> mealPlanList = mealPlanDAO.selectMealPlanRange(sqlSession, mpDTO);
 		
 		sqlSession.close();
 				
 		return mealPlanList;
 	}
+
+	public boolean insertMealPlan(Map<String, Object> tmpMap) {
+		SqlSession sqlSession = getSqlSession();
+		
+		int result = mealPlanDAO.insertMealPlan(sqlSession, tmpMap);
+		System.out.println("result : " + result);
+		if(result > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result > 0? true: false;
+	}
 	
 	public boolean deleteMealPlanRange(MealPlanDTO mpDTO) {
 		SqlSession sqlSession = getSqlSession();
-		
-		System.out.println(sqlSession);
 		
 		int result = mealPlanDAO.deleteMealPlanRange(sqlSession, mpDTO);
 		System.out.println("result : " + result);

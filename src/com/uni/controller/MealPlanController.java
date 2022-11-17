@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.uni.model.dto.MealPlanAndFoodDTO;
 import com.uni.model.dto.MealPlanDTO;
 import com.uni.printResult.MealPlanPrintResult;
 import com.uni.service.MealPlanService;
@@ -95,6 +96,14 @@ public class MealPlanController {
 		
 	}
 
+	public void insertMealPlan(Map<String, Object> tmpMap) {
+		if(mealPlanService.insertMealPlan(tmpMap)) {
+			mealPlanPrintResult.printSuccessMessage("insert");
+		} else {
+			mealPlanPrintResult.printErrorMessage("insert");
+		}
+	}
+
 	public void deleteMealPlanRange(Map<String, Date> parameter) {
 		MealPlanDTO mpDTO = new MealPlanDTO();
 		mpDTO.setMpDate(parameter.get("mpDate"));
@@ -107,10 +116,4 @@ public class MealPlanController {
 		}
 		
 	}
-
-
-
-    
-
-
 }
