@@ -8,11 +8,11 @@ import java.util.Scanner;
 import com.uni.controller.FoodController;
 
 public class FoodMenu {
-	
+
 	static FoodController fc = new FoodController();
 
 	public void foodMenu() {
-		
+
 		final int LISTSHOW = 10;
 		int currPage = 1;
 
