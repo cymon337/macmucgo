@@ -2,27 +2,32 @@ package com.uni.view;
 
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.uni.controller.MealPlanController;
+import com.uni.model.dto.FavoriteDTO;
+import com.uni.model.dto.FoodDTO;
+import com.uni.model.dto.MealPlanAndFoodDTO;
 import com.uni.model.dto.MealPlanDTO;
 
 
 public class MealPlanView {
 
-    MealPlanController mealPlanController = new MealPlanController();
+    private static MealPlanController mealPlanController = new MealPlanController();
 	private static int printlnNum = 50;
+	private static final int memberId = 1;
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 	//  식단일정 main
     public void mealPlanView() {
-
 		Scanner sc = new Scanner(System.in);
 
 		do {
@@ -52,7 +57,7 @@ public class MealPlanView {
 		} while(true);
         
     }
-
+//    InputMismatchException
     
 
 	// 날짜 입력 공용메서드
@@ -115,7 +120,7 @@ public class MealPlanView {
 
 				case 2 : insertMealPlanWeek(); break;
 
-				case 0 : mealPlanView(); break;
+				case 0 : return;
 								
 				default : System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
 			}
@@ -131,63 +136,122 @@ public class MealPlanView {
 
 		Scanner sc = new Scanner(System.in);
 		
-		String mealWhen = "아침"; 
+		int mealIndex = 0;	//0 : 아침, 1 : 점심, 2 : 저녁 -> 아래 mealWhen[] 참고
+		String[] mealWhen = {"아침", "점심", "저녁"}; 
+		MealPlanAndFoodDTO tmpMPDTO = new MealPlanAndFoodDTO();
 
 		System.out.print("날짜를 입력하세요 (YYYY-MM-DD) : ");
 		String mpDate = sc.nextLine();
+		Date inputDate = Date.valueOf(mpDate);
 
 		do {
 			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
 				System.out.println();
 			}
-			System.out.println("====================(" + mpDate + ")" + mealWhen + "식단 등록====================");
+			System.out.println("====================(" + mpDate + ")" + mealWhen[mealIndex] + "식단 등록====================");
 			System.out.println("1. 즐겨찾기에서 등록");
 			System.out.println("2. 랜덤식단 등록");
 			System.out.println();
-			System.out.println("0. " + mealWhen + " SKIP~");
+			System.out.println("0. " + mealWhen[mealIndex] + " SKIP~");
 			System.out.println();
 			System.out.print("번호를 입력하세요 : ");
-			int no = sc.nextInt();
+			int insertType = sc.nextInt();
 			sc.nextLine();
 			System.out.println();
 			
-			// 아침 점심 저녁 출력문 순차 변환
-			if( no == 1 || no == 2 || no == 0 )	{
-				switch(mealWhen) {
-					case "아침" :
-						// 
-						System.out.println(mealWhen + "등록완료!");
-						mealWhen = "점심"; 						
-					break;
-
-					case "점심" : 
-
-						System.out.println(mealWhen + "등록완료!"); 
-						mealWhen = "저녁";						
-					break;
-
-					case "저녁" : 
-
-						System.out.println(mealWhen + "등록완료!");
-						mealWhen = "아침"; 		
-
-						// 등록 완료된 식단 출력
-						System.out.println("====================등록완료====================");
-
-						// DAY 식단 출력 함수 호출
-						
-						//1. 식단일정 등록 으로
-						System.out.print("식단일정 등록 메인화면으로 이동합니다... Press ENTER");
-						String enter = sc.nextLine();
-						insertMealPlanView();
-					break;				
-				}
-			}		
-					
+			if(insertType == 0) continue;
 			
-		} while(true);
+			//0 : 아침, 1 : 점심, 2 : 저녁 -> 아래 mealWhen[] 참고
+			//MealPlanAndFoodDTO mealTarget = new MealPlanAndFoodDTO();
+			
+			FavoriteDTO favTarget = new FavoriteDTO();
+			favTarget = new FavoriteDTO(1, 11, 12, 13, 14, 15, 16);
+			if(insertType == 1) {
+				favTarget = new FavoriteMenu().favoriteMenuChoose();
+			} else if(insertType == 2) {
+				favTarget = new FavoriteMenu().instantMenuCreate(memberId);
+			}
+			if(favTarget == null) continue;
+			// 1 -> 즐겨찾기 화면 이동, 선택 시 해당 객체 return;
+			// 2 -> 랜덤식단 돌리고(매개변수로 옵션 추가) 바로 등록
+			FoodDTO[] foodTmp = new FoodDTO[6];
+			for(int i = 0; i < 6; i++) {
+				foodTmp[i] = new FoodDTO();
+			}
+			
+			foodTmp[0].setFoodId(favTarget.getFavFood1());
+			foodTmp[1].setFoodId(favTarget.getFavFood2());
+			foodTmp[2].setFoodId(favTarget.getFavFood3());
+			foodTmp[3].setFoodId(favTarget.getFavFood4());
+			foodTmp[4].setFoodId(favTarget.getFavFood5());
+			foodTmp[5].setFoodId(favTarget.getFavFood6());
+			
+			switch(mealIndex) {
+			case 0 :
+				tmpMPDTO.setBreakfast1(foodTmp[0]);
+				tmpMPDTO.setBreakfast2(foodTmp[1]);
+				tmpMPDTO.setBreakfast3(foodTmp[2]);
+				tmpMPDTO.setBreakfast4(foodTmp[3]);
+				tmpMPDTO.setBreakfast5(foodTmp[4]);
+				tmpMPDTO.setBreakfast6(foodTmp[5]);
+				break;
+			case 1 :
+				tmpMPDTO.setLunch1(foodTmp[0]);
+				tmpMPDTO.setLunch2(foodTmp[1]);
+				tmpMPDTO.setLunch3(foodTmp[2]);
+				tmpMPDTO.setLunch4(foodTmp[3]);
+				tmpMPDTO.setLunch5(foodTmp[4]);
+				tmpMPDTO.setLunch6(foodTmp[5]);
+				break;
+			case 2 :
+				tmpMPDTO.setDinner1(foodTmp[0]);
+				tmpMPDTO.setDinner2(foodTmp[1]);
+				tmpMPDTO.setDinner3(foodTmp[2]);
+				tmpMPDTO.setDinner4(foodTmp[3]);
+				tmpMPDTO.setDinner5(foodTmp[4]);
+				tmpMPDTO.setDinner6(foodTmp[5]);
+				break;
+			}
+			for (int i = 0; i <= printlnNum; i++) {		// 페이지넘기기 printlnNum
+				System.out.println();
+			}
+			System.out.println(mealWhen[mealIndex] + "등록완료!");
+			mealIndex++;
+		} while(mealIndex < 3);
+		
+		Map<String, Object> tmpMap = new HashMap<>();
 
+		tmpMap.put("userNo", memberId);
+		tmpMap.put("mpDate", inputDate);
+		tmpMap.put("breakfast1", tmpMPDTO.getBreakfast1().getFoodId());
+		tmpMap.put("breakfast2", tmpMPDTO.getBreakfast2().getFoodId());
+		tmpMap.put("breakfast3", tmpMPDTO.getBreakfast3().getFoodId());
+		tmpMap.put("breakfast4", tmpMPDTO.getBreakfast4().getFoodId());
+		tmpMap.put("breakfast5", tmpMPDTO.getBreakfast5().getFoodId());
+		tmpMap.put("breakfast6", tmpMPDTO.getBreakfast6().getFoodId());
+		tmpMap.put("lunch1", tmpMPDTO.getLunch1().getFoodId());
+		tmpMap.put("lunch2", tmpMPDTO.getLunch2().getFoodId());
+		tmpMap.put("lunch3", tmpMPDTO.getLunch3().getFoodId());
+		tmpMap.put("lunch4", tmpMPDTO.getLunch4().getFoodId());
+		tmpMap.put("lunch5", tmpMPDTO.getLunch5().getFoodId());
+		tmpMap.put("lunch6", tmpMPDTO.getLunch6().getFoodId());
+		tmpMap.put("dinner1", tmpMPDTO.getDinner1().getFoodId());
+		tmpMap.put("dinner2", tmpMPDTO.getDinner2().getFoodId());
+		tmpMap.put("dinner3", tmpMPDTO.getDinner3().getFoodId());
+		tmpMap.put("dinner4", tmpMPDTO.getDinner4().getFoodId());
+		tmpMap.put("dinner5", tmpMPDTO.getDinner5().getFoodId());
+		tmpMap.put("dinner6", tmpMPDTO.getDinner6().getFoodId());
+		
+		mealPlanController.insertMealPlan(tmpMap);
+		// 등록 완료된 식단 출력
+		System.out.println("====================등록완료====================");
 
+		// DAY 식단 출력 함수 호출
+					
+		//1. 식단일정 등록 으로
+		System.out.print("식단일정 등록 메인화면으로 이동합니다... Press ENTER");
+		sc.nextLine();
+		insertMealPlanView();
 	}
 
 	// 1.2 식단일정 주간등록 -날짜 입력하여 아침 점심 저녁 입력, 즐겨찾기 리스트 or 랜덤으로 식단등록

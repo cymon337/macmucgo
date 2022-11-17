@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.apache.ibatis.javassist.SerialVersionUID;
 
-public class MealPlanDTO implements Serializable{
+public class MealPlanDTO{
     // TB MEALPLAN 
     private int mpNo;       // PK MP_NO
     private int userNo;     // FK USER_NO from member table

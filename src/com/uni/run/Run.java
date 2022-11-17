@@ -8,7 +8,7 @@ public class Run {
 	public static void main(String[] args) {
 		new FavoriteMenu().favoriteMainMenu();
 		
-		FoodMenu.foodMenu();
+		new FoodMenu().foodMenu();
 
 	}
 
