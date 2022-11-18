@@ -35,11 +35,13 @@ public class AppMacmucgo {
 					System.out.println();
 				}
 				System.out.println("====================막 먹 GO GO GO====================");
+				System.out.println();
+				System.out.println();
 				System.out.println("1. 음식관리메뉴 (관리자 전용 메뉴)");
 				System.out.println("2. 즐겨찾기");
 				System.out.println("3. 식단일정");
 				System.out.println();
-				System.out.println("0. 메인 메뉴로 가기");
+				System.out.println("0. 프로그램 종료");
 				System.out.print("번호를 입력하세요 : ");
 				int no = sc.nextInt();
 				
@@ -50,7 +52,15 @@ public class AppMacmucgo {
 
 					case 3 : mealPlanView.mealPlanView(); break;
 					
-					case 0 : return;  
+					case 0 : 
+						System.out.println("막먹GO 종료합니다~~!");
+						System.out.println("	막먹GO 종료합니다~~!");
+						System.out.println("		막먹GO 종료합니다~~!");
+						System.out.println("			막먹GO 종료합니다~~!");
+						System.out.println("				막먹GO 종료합니다~~!");
+						System.out.println("					막먹GO 종료합니다~~!");						
+						
+						return;  
 					
 					default : System.out.println("잘못된 메뉴를 선택하셨습니다."); break;
 				}				
