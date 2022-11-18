@@ -120,8 +120,9 @@ public class FoodMenu {
 		System.out.println("수정할 음식아이디를 입력하세요 : ");
 		id = sc.nextLine();
 
-		if (fc.searchId(Integer.parseInt(id))) {
-			
+		if (!fc.searchId(Integer.parseInt(id))) {
+			return null;
+
 
 		}
 

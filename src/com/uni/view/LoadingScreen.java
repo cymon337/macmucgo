@@ -89,6 +89,9 @@ public class LoadingScreen {
 				}
 			}
 			sb = new StringBuilder();
+			for(int i = 0; i < 30; i++) {
+				sb.append("\n");
+			}
 			for(int i = 0; i < 8; i++) {
 				rotateX(i, Math.sin(degreeToRadian(tmpRotateX)) * 0.085);
 				rotateY(i, numToDegree(12));
