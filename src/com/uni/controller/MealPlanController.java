@@ -231,7 +231,7 @@ public class MealPlanController {
 							mpDTOList.add(mpDTO);
 							selectMpDate = plusDate(selectMpDate);
 							System.out.println(mpDTO.toStringMealPlanDay());
-							if(mpDateEnd.after(selectMpDate)) {
+							if(mpDateEnd.equals(selectMpDate)) {
 								if(mealPlanService.insertMealPlanRange(mpDTOList)) {
 									mealPlanPrintResult.printSuccessMessage("insert");
 								} else {
