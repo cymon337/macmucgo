@@ -6,10 +6,13 @@ import com.uni.view.FoodMenu;
 public class Run {
 
 	public static void main(String[] args) {
-		new FavoriteMenu().favoriteMainMenu();
-		
-		new FoodMenu().foodMenu();
+		do {
+			
+			new FavoriteMenu().favoriteMainMenu();
+			
+			new FoodMenu().foodMenu();
 
+		} while(true);
 	}
 
 }
