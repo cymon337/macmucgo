@@ -121,7 +121,7 @@ public class FoodMenu {
 		id = sc.nextLine();
 
 		if (fc.searchId(Integer.parseInt(id))) {
-			return null;
+			
 
 		}
 
