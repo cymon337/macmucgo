@@ -82,6 +82,11 @@ public class MealPlanService {
 		return result > 0? true: false;
 	}
 
+	public boolean insertMealPlanRange(List<MealPlanDTO> mpDTOList) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 //    public void printSuccessMessage(String successCode) {
 //		
 //		String successMessage = "";
